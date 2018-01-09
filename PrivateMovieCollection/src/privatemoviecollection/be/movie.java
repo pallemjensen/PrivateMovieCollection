@@ -20,7 +20,7 @@ String fileLink;
 long lastView;
 
     
-public movie(int id, String movieName, double imdbRating, double privateRating, String fileLink, Date lastView)
+public movie(int id, String movieName, double imdbRating, double privateRating, String fileLink, long lastView)
 {    
 }
 
