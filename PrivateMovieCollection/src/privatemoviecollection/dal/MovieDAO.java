@@ -65,7 +65,7 @@ public class MovieDAO {
             while (rs.next()) {
                 movie currentMovie = new movie();
                 currentMovie.setId(rs.getInt("movie_id"));
-                currentMovie.setName(rs.getString("movie_title"));
+                currentMovie.setMovieName(rs.getString("movie_title"));
                 currentMovie.setImdbRating(rs.getDouble("imdb_movie_rating"));
                 currentMovie.setPrivateRating(rs.getDouble("private_movie_rating"));
                 currentMovie.setFileLink(rs.getString("filelink"));

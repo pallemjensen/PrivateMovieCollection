@@ -39,11 +39,11 @@ public movie(int id, String movieName, double imdbRating, double privateRating, 
         this.id = id;
     }
 
-    public String getName() {
+    public String getMovieName() {
         return movieName;
     }
 
-    public void setName(String movieName) {
+    public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
 
