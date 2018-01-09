@@ -31,8 +31,7 @@ public class PMCModel {
             = FXCollections.observableArrayList();
 
     public void addNewMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
-        movie newMovie
-                = bllManager.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+        movie newMovie = bllManager.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);    
         movies.add(newMovie);
     }
 
@@ -66,5 +65,9 @@ public class PMCModel {
         } catch (SQLException ex) {
             Logger.getLogger(PMCModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public ObservableList<category> getCategories(){
+        return categories;
     }
 }
