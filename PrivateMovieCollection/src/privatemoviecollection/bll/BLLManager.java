@@ -18,17 +18,16 @@ import privatemoviecollection.dal.MovieDAO;
  * @author pmj
  */
 public class BLLManager {
-    
+
     MovieDAO movieDAO = new MovieDAO();
 
     public movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
-    movie newMovie = movieDAO.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
-    return newMovie;
+        movie newMovie = movieDAO.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+        return newMovie;
     }
 
     public List<movie> getAllMovies() throws SQLServerException, SQLException {
         return movieDAO.getAllMovies();
     }
-    
-    
+
 }

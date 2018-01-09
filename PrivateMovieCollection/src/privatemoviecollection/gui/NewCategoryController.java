@@ -10,15 +10,18 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author Anders
+ * @author palle
  */
-public class EditMovieRatingController implements Initializable {
+public class NewCategoryController implements Initializable {
+
+    private PMCModel pmcModel;
+    @FXML
+    private TextField txtAddNewCategory;
 
     /**
      * Initializes the controller class.
@@ -29,12 +32,14 @@ public class EditMovieRatingController implements Initializable {
     }
 
     @FXML
-    private void btnSubmit(ActionEvent event) {
+    private void btnSaveNewCategory(ActionEvent event) {
     }
 
     @FXML
-    private void btnCancel(ActionEvent event) {
-        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+    private void btnCancelNewCategory(ActionEvent event) {
     }
 
+    public void setUp(PMCModel model) {
+        pmcModel = model;
+    }
 }
