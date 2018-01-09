@@ -66,6 +66,10 @@ public class AddMovieController implements Initializable {
 
     @FXML
     private void btnSaveMovie(ActionEvent event) {
+    if(newMoviePath == null){
+        txtMovieFilePath.setText("Please chose movie!");
+    }
+    else{
     String movieName = txtMovieTitle.getText();
     String imdbRatingAsString = txtMovieImdbRating.getText();
     Double imdbRating = Double.valueOf(imdbRatingAsString);
@@ -76,6 +80,7 @@ public class AddMovieController implements Initializable {
     long lastView = date.getTime();
     pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
     ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+    }
     }
 
     @FXML
