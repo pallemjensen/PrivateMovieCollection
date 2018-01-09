@@ -32,14 +32,6 @@ public class PrivateMovieCollectionController implements Initializable {
     }    
 
     @FXML
-    private void btnSearch(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnClearSearch(ActionEvent event) {
-    }
-
-    @FXML
     private void btnAddCategory(ActionEvent event) {
     }
 
@@ -66,6 +58,14 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnDeleteCategory(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnFilter(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnClearFilter(ActionEvent event) {
     }
     
 }

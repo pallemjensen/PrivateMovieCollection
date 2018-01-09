@@ -25,5 +25,4 @@ public category(String category_name){
         this.name = name;
     }
 
-
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="548.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.PrivateMovieCollectionController">
+<AnchorPane id="AnchorPane" prefHeight="548.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.PrivateMovieCollectionController">
    <children>
       <TableView layoutX="50.0" layoutY="107.0" prefHeight="359.0" prefWidth="207.0">
         <columns>
@@ -23,8 +23,8 @@
         </columns>
       </TableView>
       <TextField layoutX="284.0" layoutY="65.0" prefHeight="26.0" prefWidth="348.0" />
-      <Button layoutX="640.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnSearch" prefHeight="26.0" prefWidth="84.0" text="Search" />
-      <Button layoutX="732.0" layoutY="66.0" mnemonicParsing="false" onAction="#btnClearSearch" prefHeight="26.0" prefWidth="84.0" text="Clear Search" />
+      <Button layoutX="640.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="26.0" prefWidth="84.0" text="Filter" />
+      <Button layoutX="732.0" layoutY="66.0" mnemonicParsing="false" onAction="#btnClearFilter" prefHeight="26.0" prefWidth="84.0" text="Clear filter" />
       <Button layoutX="50.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnAddCategory" prefHeight="25.0" prefWidth="104.0" text="Add Category" />
       <Button layoutX="284.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnAddMovie" prefHeight="26.0" prefWidth="97.0" text="Add Movie" />
       <Button layoutX="284.0" layoutY="510.0" mnemonicParsing="false" onAction="#btnDeleteMovie" prefHeight="25.0" prefWidth="97.0" text="Delete Movie" />
