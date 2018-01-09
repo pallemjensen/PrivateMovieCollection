@@ -5,6 +5,7 @@
  */
 package privatemoviecollection.gui;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -12,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -19,6 +22,9 @@ import javafx.scene.control.TextField;
  * @author pmj
  */
 public class AddMovieController implements Initializable {
+        
+    private PMCModel pmcModel;
+    private Stage stage;
 
     @FXML
     private TextField txtMovieTitle;
@@ -36,6 +42,7 @@ public class AddMovieController implements Initializable {
     private Button btnSaveMovie;
     @FXML
     private Button btnCancelAddMovie;
+    String newMoviePath = null;
 
     /**
      * Initializes the controller class.
@@ -47,6 +54,15 @@ public class AddMovieController implements Initializable {
 
     @FXML
     private void btnChooseMovie(ActionEvent event) {
+    FileChooser chooser = new FileChooser();
+    chooser.getExtensionFilters().clear();
+    FileChooser.ExtensionFilter filterMp4 = new FileChooser.ExtensionFilter("select your media(*.mp4)", "*.mp4");
+    FileChooser.ExtensionFilter filterMpeg4 = new FileChooser.ExtensionFilter("select your media(*.mpeg4)", "*.mpeg4");
+    chooser.getExtensionFilters().add(filterMp4);
+    chooser.getExtensionFilters().add(filterMpeg4);
+    File file = chooser.showOpenDialog(this.stage);
+    newMoviePath = file.getAbsolutePath();
+    txtMovieFilePath.setText(newMoviePath);
     }
 
     @FXML
@@ -55,6 +71,10 @@ public class AddMovieController implements Initializable {
 
     @FXML
     private void btnCancelAddMovie(ActionEvent event) {
+    }
+    
+    public void setUp(PMCModel model) {
+       this.pmcModel = model;
     }
     
 }

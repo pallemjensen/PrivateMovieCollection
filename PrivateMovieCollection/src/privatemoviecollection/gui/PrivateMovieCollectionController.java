@@ -63,6 +63,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnAddMovie(ActionEvent event) {
+        
     }
 
     @FXML
