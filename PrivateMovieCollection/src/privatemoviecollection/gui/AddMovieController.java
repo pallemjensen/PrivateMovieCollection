@@ -44,13 +44,15 @@ public class AddMovieController implements Initializable {
     @FXML
     private Button btnCancelAddMovie;
     String newMoviePath = null;
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        txtMovieImdbRating.setText("0.0");
+        txtMoviePersonalRating.setText("0.0");
     }    
 
     @FXML
