@@ -29,3 +29,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/PrivateMovieCollection/nbproject/private/
