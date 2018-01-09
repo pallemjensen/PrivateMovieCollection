@@ -5,6 +5,11 @@
  */
 package privatemoviecollection.bll;
 
+import privatemoviecollection.be.category;
+import privatemoviecollection.be.movie;
+import privatemoviecollection.dal.CategoryDAO;
+import privatemoviecollection.dal.MovieDAO;
+
 /**
  *
  * @author pmj

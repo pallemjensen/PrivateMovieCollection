@@ -10,5 +10,20 @@ package privatemoviecollection.be;
  * @author pmj
  */
 public class category {
+    String name;
+  
     
+//Constructor for category object with paramter category_name
+public category(String category_name){  
+}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 }
