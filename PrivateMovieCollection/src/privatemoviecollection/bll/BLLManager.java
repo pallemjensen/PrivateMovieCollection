@@ -16,4 +16,11 @@ import privatemoviecollection.dal.MovieDAO;
  */
 public class BLLManager {
     
+    MovieDAO movieDAO = new MovieDAO();
+
+    public movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
+    movie newMovie = movieDAO.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+    return newMovie;
+    }
+    
 }

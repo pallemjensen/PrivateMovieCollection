@@ -24,4 +24,10 @@ public class PMCModel {
     private final ObservableList<category> categories
             = FXCollections.observableArrayList();
     
+    public void addNewMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView){
+        movie newMovie =
+        bllManager.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+        movies.add(newMovie);
+    }
+    
 }

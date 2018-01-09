@@ -67,6 +67,7 @@ public class AddMovieController implements Initializable {
 
     @FXML
     private void btnSaveMovie(ActionEvent event) {
+    
     }
 
     @FXML
@@ -74,7 +75,7 @@ public class AddMovieController implements Initializable {
     }
     
     public void setUp(PMCModel model) {
-       this.pmcModel = model;
+       pmcModel = model;
     }
     
 }
