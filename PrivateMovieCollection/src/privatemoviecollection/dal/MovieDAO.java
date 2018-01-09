@@ -37,7 +37,7 @@ public class MovieDAO {
             statement.setString(4, fileLink);
             statement.setLong(5, lastView);
 
-            if (statement.executeUpdate() == 1);
+            if (statement.executeUpdate() == 1)
             {
                 ResultSet rs = statement.getGeneratedKeys();
                 rs.next();

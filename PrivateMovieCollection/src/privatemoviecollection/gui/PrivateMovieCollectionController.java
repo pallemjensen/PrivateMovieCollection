@@ -58,6 +58,7 @@ public class PrivateMovieCollectionController implements Initializable {
         movieUserRatingColumn.setCellValueFactory(
                 new PropertyValueFactory("privateRating"));
         TVMovies.setItems(pmcModel.getMovies());
+        TVCategories.setItems(pmcModel.getCategories());
     }
 
     @FXML
@@ -118,6 +119,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnLoadCategories(ActionEvent event) {
+        pmcModel.loadCategories();
     }
 
 }

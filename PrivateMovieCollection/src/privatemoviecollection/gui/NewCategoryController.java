@@ -6,7 +6,10 @@
 package privatemoviecollection.gui;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,7 +35,10 @@ public class NewCategoryController implements Initializable {
     }
 
     @FXML
-    private void btnSaveNewCategory(ActionEvent event) {
+    private void btnSaveNewCategory(ActionEvent event) throws SQLException {
+            String categoryName = txtAddNewCategory.getText();
+            pmcModel.createCategory(categoryName);
+        
     }
 
     @FXML

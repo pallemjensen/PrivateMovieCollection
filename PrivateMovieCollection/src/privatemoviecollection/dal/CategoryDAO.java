@@ -31,6 +31,7 @@ public class CategoryDAO {
         
         PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         stmt.setString(1, categoryName);
+        
         if (stmt.executeUpdate() == 1)
         {
             ResultSet rs = stmt.getGeneratedKeys();
