@@ -12,6 +12,7 @@ package privatemoviecollection.be;
 public class category {
 
     String categoryName;
+    private int id;
 
 //Constructor for category object with paramter category_name
     public category(String categoryName) {
@@ -19,11 +20,11 @@ public class category {
     }
 
     public category(int id, String categoryName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.id = id;
+        this.categoryName = categoryName;
     }
 
-    public category() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public category() {   
     }
 
     public String getcategoryName() {

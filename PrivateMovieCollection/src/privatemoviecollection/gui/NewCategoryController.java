@@ -13,7 +13,9 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -38,11 +40,12 @@ public class NewCategoryController implements Initializable {
     private void btnSaveNewCategory(ActionEvent event) throws SQLException {
             String categoryName = txtAddNewCategory.getText();
             pmcModel.createCategory(categoryName);
-        
+     ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();   
     }
 
     @FXML
     private void btnCancelNewCategory(ActionEvent event) {
+   ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
 
     public void setUp(PMCModel model) {

@@ -27,7 +27,7 @@ public class CategoryDAO {
     public category createCategory(String categoryName) throws SQLException {
         
         try(Connection con = cm.getConnection()){
-        String sql = "INSERT INTO Category VALUES(?):";
+        String sql = "INSERT INTO Category VALUES(?);";
         
         PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         stmt.setString(1, categoryName);

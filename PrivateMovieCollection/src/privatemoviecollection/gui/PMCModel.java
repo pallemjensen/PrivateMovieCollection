@@ -57,14 +57,10 @@ public class PMCModel {
         return bllManager.getAllCategories();
     }
 
-    public void loadCategories() {
-        try {
+    public void loadCategories() throws SQLException {
             List<category> loadedCategories = bllManager.getAllCategories();
             categories.clear();
             categories.addAll(loadedCategories);
-        } catch (SQLException ex) {
-            Logger.getLogger(PMCModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public ObservableList<category> getCategories() {
