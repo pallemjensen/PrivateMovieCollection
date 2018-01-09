@@ -36,7 +36,7 @@
       <Button layoutX="510.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnEditMovieRating" prefHeight="26.0" prefWidth="111.0" text="Edit movie rating" />
       <Button layoutX="723.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnPlay" prefHeight="48.0" prefWidth="111.0" text="Play" />
       <Button layoutX="50.0" layoutY="509.0" mnemonicParsing="false" onAction="#btnDeleteCategory" prefHeight="26.0" prefWidth="104.0" text="Delete Category" />
-      <Button layoutX="370.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnLoadMovies" prefHeight="25.0" prefWidth="132.0" text="Load movies" />
+      <Button layoutX="429.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnLoadMovies" prefHeight="25.0" prefWidth="104.0" text="Load all movies" />
       <Button layoutX="566.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnLoadCategories" prefHeight="25.0" prefWidth="132.0" text="Load categories" />
    </children>
 </AnchorPane>
