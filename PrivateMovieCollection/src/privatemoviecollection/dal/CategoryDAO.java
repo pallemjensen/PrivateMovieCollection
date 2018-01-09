@@ -5,11 +5,14 @@
  */
 package privatemoviecollection.dal;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import privatemoviecollection.be.category;
 import privatemoviecollection.be.movie;
 
@@ -38,6 +41,22 @@ public class CategoryDAO {
         }
         }
         return null;
+    }
+    
+    public List<category> getAllCategories() throws SQLServerException, SQLException {
+        List<category> categories = new ArrayList<>();
+
+        try (Connection con = cm.getConnection()) {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Category");
+
+            while (rs.next()) {
+                category currentCategory = new category();
+                currentCategory.setcategoryName(rs.getString("category_name"));
+                categories.add(currentCategory);
+            }
+        }
+        return categories;
     }
 
 }
