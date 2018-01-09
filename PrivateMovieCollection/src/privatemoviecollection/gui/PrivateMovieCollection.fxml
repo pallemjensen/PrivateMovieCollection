@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="548.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.PrivateMovieCollectionController">
+<AnchorPane id="AnchorPane" prefHeight="548.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.PrivateMovieCollectionController">
    <children>
       <TableView layoutX="50.0" layoutY="107.0" prefHeight="359.0" prefWidth="207.0">
         <columns>
@@ -25,17 +25,16 @@
       <TextField layoutX="284.0" layoutY="65.0" prefHeight="26.0" prefWidth="348.0" />
       <Button layoutX="640.0" layoutY="65.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="84.0" text="Search" />
       <Button layoutX="732.0" layoutY="66.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="84.0" text="Clear Search" />
-      <Button layoutX="161.0" layoutY="475.0" mnemonicParsing="false" text="Edit Category" />
-      <Button layoutX="50.0" layoutY="475.0" mnemonicParsing="false" text="Add Category" />
-      <Button layoutX="50.0" layoutY="508.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Add Movie" />
-      <Button layoutX="270.0" layoutY="509.0" mnemonicParsing="false" text="Delete Movie" />
+      <Button layoutX="50.0" layoutY="475.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Add Category" />
+      <Button layoutX="284.0" layoutY="475.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Add Movie" />
+      <Button layoutX="284.0" layoutY="510.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Delete Movie" />
       <Label alignment="CENTER" layoutX="260.0" layoutY="14.0" prefHeight="37.0" prefWidth="374.0" text="Private Movie Collection">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Button layoutX="161.0" layoutY="509.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Edit Movie" />
+      <Button layoutX="510.0" layoutY="475.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Edit movie rating" />
       <Button layoutX="723.0" layoutY="474.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="111.0" text="Play" />
-      <Button layoutX="270.0" layoutY="475.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="Delete Category" />
+      <Button layoutX="50.0" layoutY="509.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="Delete Category" />
    </children>
 </AnchorPane>
