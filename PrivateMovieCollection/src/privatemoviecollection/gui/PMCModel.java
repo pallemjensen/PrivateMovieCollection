@@ -34,9 +34,17 @@ public class PMCModel {
         movie newMovie = bllManager.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
         movies.add(newMovie);
     }
+    
+    public category createCategory(String categoryName) throws SQLException {
+        return bllManager.createCategory(categoryName);
+    }
 
     public List<movie> getAllMovies() throws SQLServerException, SQLException {
-        return bllManager.getAllMovies();
+        return bllManager.getAllMovies(); 
+    }
+    
+     public List<category> getAllCategories() throws SQLServerException, SQLException {
+        return bllManager.getAllCategories();
     }
 
     public void loadMovies() throws SQLException {
@@ -44,23 +52,15 @@ public class PMCModel {
         movies.clear();
         movies.addAll(loadedMovies);
     }
-
-    public ObservableList<movie> getMovies() {
-        return movies;
-    }
-
-    public category createCategory(String categoryName) throws SQLException {
-        return bllManager.createCategory(categoryName);
-    }
-
-    public List<category> getAllCategories() throws SQLServerException, SQLException {
-        return bllManager.getAllCategories();
-    }
-
-    public void loadCategories() throws SQLException {
+    
+     public void loadCategories() throws SQLException {
             List<category> loadedCategories = bllManager.getAllCategories();
             categories.clear();
             categories.addAll(loadedCategories);
+    }
+
+    public ObservableList<movie> getMovies() {
+        return movies;
     }
 
     public ObservableList<category> getCategories() {

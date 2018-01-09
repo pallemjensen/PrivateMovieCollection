@@ -38,8 +38,8 @@ public class NewCategoryController implements Initializable {
 
     @FXML
     private void btnSaveNewCategory(ActionEvent event) throws SQLException {
-            String categoryName = txtAddNewCategory.getText();
-            pmcModel.createCategory(categoryName);
+    String categoryName = txtAddNewCategory.getText();
+    pmcModel.createCategory(categoryName);
      ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();   
     }
 
