@@ -29,7 +29,6 @@ public ConnectionManager() {
         ds.setPortNumber(1433);
     }
 
-
     /**
      * @return our connection
      * @throws SQLServerException
