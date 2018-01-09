@@ -28,6 +28,7 @@ import privatemoviecollection.be.movie;
  * @author Anders
  */
 public class PrivateMovieCollectionController implements Initializable {
+
     private final PMCModel pmcModel = new PMCModel();
 
     @FXML
@@ -48,7 +49,7 @@ public class PrivateMovieCollectionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       categoryColumn.setCellValueFactory(
+        categoryColumn.setCellValueFactory(
                 new PropertyValueFactory("categoryName"));
         movieTitleColumn.setCellValueFactory(
                 new PropertyValueFactory("movieName"));
@@ -56,11 +57,18 @@ public class PrivateMovieCollectionController implements Initializable {
                 new PropertyValueFactory("imdbRating"));
         movieUserRatingColumn.setCellValueFactory(
                 new PropertyValueFactory("privateRating"));
-     TVMovies.setItems(pmcModel.getMovies());
-    }    
+        TVMovies.setItems(pmcModel.getMovies());
+    }
 
     @FXML
-    private void btnAddCategory(ActionEvent event) {
+    private void btnAddCategory(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("NewCategory.fxml"));
+        Parent root = (Parent) fxmlLoader1.load();
+        NewCategoryController ncc = fxmlLoader1.getController();
+        ncc.setUp(pmcModel);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -105,11 +113,11 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnLoadMovies(ActionEvent event) throws SQLException {
-    pmcModel.loadMovies();
+        pmcModel.loadMovies();
     }
 
     @FXML
     private void btnLoadCategories(ActionEvent event) {
     }
-    
+
 }

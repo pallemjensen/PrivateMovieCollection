@@ -9,19 +9,19 @@ import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 
-
-
 /**
- *@ Class for constructing a connector we can use when we want to connect to our DB throughout our application.
+ * @ Class for constructing a connector we can use when we want to connect to
+ * our DB throughout our application.
  * @author pmj
  */
 public class ConnectionManager {
-    private final SQLServerDataSource ds = new SQLServerDataSource(); 
+
+    private final SQLServerDataSource ds = new SQLServerDataSource();
 
     /**
      * Connection constructor with connector parameters.
      */
-public ConnectionManager() {
+    public ConnectionManager() {
         ds.setDatabaseName("PrivateMovieCollection");
         ds.setUser("CS2017A_28");
         ds.setPassword("Ellap060174");
@@ -33,8 +33,7 @@ public ConnectionManager() {
      * @return our connection
      * @throws SQLServerException
      */
-public Connection getConnection() throws SQLServerException
-    {
+    public Connection getConnection() throws SQLServerException {
         return ds.getConnection();
     }
 }

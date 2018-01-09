@@ -10,12 +10,17 @@ package privatemoviecollection.be;
  * @author pmj
  */
 public class category {
+
     String categoryName;
-  
-    
+
 //Constructor for category object with paramter category_name
-public category(String categoryName){  
-}
+    public category(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public category(int id, String categoryName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public String getcategoryName() {
         return categoryName;

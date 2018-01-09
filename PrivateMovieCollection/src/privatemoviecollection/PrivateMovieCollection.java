@@ -20,16 +20,15 @@ import javafx.stage.Stage;
  * @author pmj
  */
 public class PrivateMovieCollection extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-    FXMLLoader fxloader = new FXMLLoader(getClass().getResource("gui/PrivateMovieCollection.fxml"));
-    Parent root = fxloader.load();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+        FXMLLoader fxloader = new FXMLLoader(getClass().getResource("gui/PrivateMovieCollection.fxml"));
+        Parent root = fxloader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
-    
 
     /**
      * @param args the command line arguments
@@ -37,5 +36,4 @@ public class PrivateMovieCollection extends Application {
 //    public static void main(String[] args) {
 //        launch(args);
 //    }
-    
 }
