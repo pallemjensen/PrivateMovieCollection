@@ -28,7 +28,7 @@
       <Button layoutX="50.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnAddCategory" prefHeight="25.0" prefWidth="104.0" text="Add Category" />
       <Button layoutX="284.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnAddMovie" prefHeight="26.0" prefWidth="97.0" text="Add Movie" />
       <Button layoutX="284.0" layoutY="510.0" mnemonicParsing="false" onAction="#btnDeleteMovie" prefHeight="25.0" prefWidth="97.0" text="Delete Movie" />
-      <Label alignment="CENTER" layoutX="260.0" layoutY="14.0" prefHeight="37.0" prefWidth="374.0" text="Private Movie Collection">
+      <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="37.0" prefWidth="374.0" text="Private Movie Collection">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -36,5 +36,7 @@
       <Button layoutX="510.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnEditMovieRating" prefHeight="26.0" prefWidth="111.0" text="Edit movie rating" />
       <Button layoutX="723.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnPlay" prefHeight="48.0" prefWidth="111.0" text="Play" />
       <Button layoutX="50.0" layoutY="509.0" mnemonicParsing="false" onAction="#btnDeleteCategory" prefHeight="26.0" prefWidth="104.0" text="Delete Category" />
+      <Button layoutX="429.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnLoadMovies" prefHeight="25.0" prefWidth="104.0" text="Load all movies" />
+      <Button layoutX="566.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnLoadCategories" prefHeight="25.0" prefWidth="132.0" text="Load categories" />
    </children>
 </AnchorPane>

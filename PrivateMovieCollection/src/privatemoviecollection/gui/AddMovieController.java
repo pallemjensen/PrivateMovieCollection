@@ -7,6 +7,7 @@ package privatemoviecollection.gui;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,14 +68,25 @@ public class AddMovieController implements Initializable {
 
     @FXML
     private void btnSaveMovie(ActionEvent event) {
+    String movieName = txtMovieTitle.getText();
+    String imdbRatingAsString = txtMovieImdbRating.getText();
+    Double imdbRating = Double.valueOf(imdbRatingAsString);
+    String privateRatingAsString = txtMoviePersonalRating.getText();
+    Double privateRating = Double.valueOf(privateRatingAsString);
+    String fileLink = newMoviePath;
+    Date date = new Date();
+    long lastView = date.getTime();
+    pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+    ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
 
     @FXML
     private void btnCancelAddMovie(ActionEvent event) {
+    ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
     
     public void setUp(PMCModel model) {
-       this.pmcModel = model;
+       pmcModel = model;
     }
     
 }

@@ -5,8 +5,6 @@
  */
 package privatemoviecollection.be;
 
-import java.util.Date;
-
 /**
  *
  * @author pmj
@@ -21,8 +19,17 @@ long lastView;
 
     
 public movie(int id, String movieName, double imdbRating, double privateRating, String fileLink, long lastView)
-{    
+{   
+    this.id = id;
+    this.movieName = movieName;
+    this.imdbRating = imdbRating;
+    this.privateRating = privateRating;
+    this.fileLink = fileLink;
+    this.lastView = lastView;
 }
+
+    public movie() {
+    }
 
     public int getId() {
         return id;
@@ -32,11 +39,11 @@ public movie(int id, String movieName, double imdbRating, double privateRating, 
         this.id = id;
     }
 
-    public String getName() {
+    public String getMovieName() {
         return movieName;
     }
 
-    public void setName(String movieName) {
+    public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
 
