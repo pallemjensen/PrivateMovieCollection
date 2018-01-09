@@ -5,6 +5,9 @@
  */
 package privatemoviecollection.gui;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.sql.SQLException;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import privatemoviecollection.be.category;
@@ -29,5 +32,21 @@ public class PMCModel {
         bllManager.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
         movies.add(newMovie);
     }
+
+    public List<movie> getAllMovies() throws SQLServerException, SQLException {
+        return bllManager.getAllMovies(); 
+    }
+    
+    public void loadMovies() throws SQLException
+    {
+        List<movie> loadedMovies = bllManager.getAllMovies();
+        movies.clear();
+        movies.addAll(loadedMovies);
+    }
+
+    public ObservableList<movie> getMovies() {
+        return movies;
+    }
+    
     
 }

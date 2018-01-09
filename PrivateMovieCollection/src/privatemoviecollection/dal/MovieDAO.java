@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import privatemoviecollection.be.movie;
@@ -50,5 +52,27 @@ public class MovieDAO {
            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
        }
        return null;
-    }   
+    }  
+    
+    public List<movie> getAllMovies() throws SQLServerException, SQLException{
+        List<movie> movies = new ArrayList<>();
+        
+        try (Connection con = cm.getConnection())
+        {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * Movie");
+            
+            while (rs.next()) {
+                movie currentMovie = new movie();
+                currentMovie.setId(rs.getInt("movie_id"));
+                currentMovie.setName(rs.getString("movie_title"));
+                currentMovie.setImdbRating(rs.getDouble("imdb_movie_rating"));
+                currentMovie.setPrivateRating(rs.getDouble("private_movie_rating"));
+                currentMovie.setFileLink(rs.getString("filelink"));
+                currentMovie.setLastView(rs.getLong("lastview"));
+                movies.add(currentMovie);
+            }
+        }
+     return movies;   
+    }
 }
