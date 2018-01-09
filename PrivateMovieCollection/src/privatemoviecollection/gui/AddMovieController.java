@@ -57,10 +57,8 @@ public class AddMovieController implements Initializable {
     private void btnChooseMovie(ActionEvent event) {
     FileChooser chooser = new FileChooser();
     chooser.getExtensionFilters().clear();
-    FileChooser.ExtensionFilter filterMp4 = new FileChooser.ExtensionFilter("select your media(*.mp4)", "*.mp4");
-    FileChooser.ExtensionFilter filterMpeg4 = new FileChooser.ExtensionFilter("select your media(*.mpeg4)", "*.mpeg4");
-    chooser.getExtensionFilters().add(filterMp4);
-    chooser.getExtensionFilters().add(filterMpeg4);
+    FileChooser.ExtensionFilter filterMp4_mpeg4 = new FileChooser.ExtensionFilter("select media( .mp4 or .mpeg4)", "*.mp4", "*.mpeg4");
+    chooser.getExtensionFilters().add(filterMp4_mpeg4);
     File file = chooser.showOpenDialog(this.stage);
     newMoviePath = file.getAbsolutePath();
     txtMovieFilePath.setText(newMoviePath);
