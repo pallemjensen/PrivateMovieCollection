@@ -5,6 +5,8 @@
  */
 package privatemoviecollection.dal;
 
+import privatemoviecollection.be.category;
+import privatemoviecollection.be.movie;
 /**
  *
  * @author pmj

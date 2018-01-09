@@ -13,14 +13,14 @@ import java.util.Date;
  */
 public class movie {
 private int id;
-private String name;
+private String movieName;
 double imdbRating;
 double privateRating;
 String fileLink;
 long lastView;
 
     
-public movie(int id, String name, double imdbRating, double privateRating, String fileLink, Date lastView)
+public movie(int id, String movieName, double imdbRating, double privateRating, String fileLink, Date lastView)
 {    
 }
 
@@ -33,11 +33,11 @@ public movie(int id, String name, double imdbRating, double privateRating, Strin
     }
 
     public String getName() {
-        return name;
+        return movieName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String movieName) {
+        this.movieName = movieName;
     }
 
     public double getImdbRating() {

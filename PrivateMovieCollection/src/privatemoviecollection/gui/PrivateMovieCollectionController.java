@@ -14,7 +14,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import privatemoviecollection.be.category;
+import privatemoviecollection.be.movie;
 
 /**
  * FXML Controller class
@@ -23,12 +28,33 @@ import javafx.stage.Stage;
  */
 public class PrivateMovieCollectionController implements Initializable {
 
+    @FXML
+    private TableView<category> TVCategories;
+    @FXML
+    private TableColumn<category, String> categoryColumn;
+    @FXML
+    private TableView<movie> TVMovies;
+    @FXML
+    private TableColumn<movie, String> movieTitleColumn;
+    @FXML
+    private TableColumn<movie, Double> movieImdbColumn;
+    @FXML
+    private TableColumn<movie, Double> movieUserRatingColumn;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       categoryColumn.setCellValueFactory(
+                new PropertyValueFactory("categoryName"));
+        movieTitleColumn.setCellValueFactory(
+                new PropertyValueFactory("movieName"));
+        movieImdbColumn.setCellValueFactory(
+                new PropertyValueFactory("imdbRating"));
+        movieUserRatingColumn.setCellValueFactory(
+                new PropertyValueFactory("privateRating"));
+
     }    
 
     @FXML
