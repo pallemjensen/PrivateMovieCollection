@@ -60,7 +60,7 @@ public class MovieDAO {
         try (Connection con = cm.getConnection())
         {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * Movie");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Movie");          
             
             while (rs.next()) {
                 movie currentMovie = new movie();

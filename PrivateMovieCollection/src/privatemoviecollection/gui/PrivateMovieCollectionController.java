@@ -7,6 +7,7 @@ package privatemoviecollection.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +56,7 @@ public class PrivateMovieCollectionController implements Initializable {
                 new PropertyValueFactory("imdbRating"));
         movieUserRatingColumn.setCellValueFactory(
                 new PropertyValueFactory("privateRating"));
-
+     TVMovies.setItems(pmcModel.getMovies());
     }    
 
     @FXML
@@ -100,6 +101,15 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnClearFilter(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnLoadMovies(ActionEvent event) throws SQLException {
+    pmcModel.loadMovies();
+    }
+
+    @FXML
+    private void btnLoadCategories(ActionEvent event) {
     }
     
 }

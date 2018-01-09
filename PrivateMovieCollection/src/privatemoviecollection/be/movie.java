@@ -5,8 +5,6 @@
  */
 package privatemoviecollection.be;
 
-import java.util.Date;
-
 /**
  *
  * @author pmj
@@ -21,11 +19,16 @@ long lastView;
 
     
 public movie(int id, String movieName, double imdbRating, double privateRating, String fileLink, long lastView)
-{    
+{   
+    this.id = id;
+    this.movieName = movieName;
+    this.imdbRating = imdbRating;
+    this.privateRating = privateRating;
+    this.fileLink = fileLink;
+    this.lastView = lastView;
 }
 
     public movie() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId() {
