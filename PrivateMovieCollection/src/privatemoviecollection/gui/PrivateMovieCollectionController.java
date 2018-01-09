@@ -27,6 +27,7 @@ import privatemoviecollection.be.movie;
  * @author Anders
  */
 public class PrivateMovieCollectionController implements Initializable {
+    private final PMCModel pmcModel = new PMCModel();
 
     @FXML
     private TableView<category> TVCategories;
@@ -62,8 +63,14 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnAddMovie(ActionEvent event) {
-        
+    private void btnAddMovie(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("addMovie.fxml"));
+        Parent root = (Parent) fxmlLoader1.load();
+        AddMovieController amc = fxmlLoader1.getController();
+        amc.setUp(pmcModel);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
