@@ -8,7 +8,11 @@ package privatemoviecollection.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -136,7 +140,17 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnFilterOnMovieTitle(ActionEvent event) {
+    private void btnFilterOnMovieTitle(ActionEvent event) throws SQLException {
+        List<Movie> allMovies = pmcModel.getAllMovies();
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
+        String filter = txtTitleFilter.getText();
+        for (Movie allMovy : allMovies) {
+        if (allMovy.getMovieName().toLowerCase().trim().contains(filter.toLowerCase().trim()) == true)
+        {
+            filteredMovies.add(allMovy);   
+        }
+        TVMovies.setItems(filteredMovies);
+        }
     }
 
     @FXML
