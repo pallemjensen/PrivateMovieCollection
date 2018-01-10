@@ -23,16 +23,28 @@ public class EditMovieRatingController implements Initializable {
 
     @FXML
     private TextField txtRating;
+    
+    private PMCModel pmcModel;
     private final String startValue = "0.0";
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        txtRating.setText(startValue);
+        
+    }
+    
+    public void setUp(PMCModel model) {
+       pmcModel = model;
     }
 
+    public void setValue(Double value){
+        txtRating.setText(value.toString());
+    }
+    
     @FXML
     private void btnSubmit(ActionEvent event) {
         
