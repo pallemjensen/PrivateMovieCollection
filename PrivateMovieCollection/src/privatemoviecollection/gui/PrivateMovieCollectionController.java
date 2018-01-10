@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -129,6 +128,7 @@ public class PrivateMovieCollectionController implements Initializable {
     private void btnDeleteCategory(ActionEvent event) throws SQLException {
         Category category = TVCategories.getSelectionModel().getSelectedItem();
         pmcModel.remove(category);
+        System.out.println("" + category.getId());
         pmcModel.loadCategories();
     }
 
@@ -144,18 +144,6 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnLoadMovies(ActionEvent event) throws SQLException {
         List<Movie> allMovies = pmcModel.getAllMovies();
-        Date today = new Date();
-        long todayMilli = today.getTime();
-        long twoYears = 6307200000000l;
-        int i = 6;
-        for (Movie allMovy : allMovies) {
-            if(allMovy.getImdbRating() < 6 || allMovy.getLastView())
-            
-        }
-        
-        
-        
-        
         pmcModel.loadMovies();
     }
 
