@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import privatemoviecollection.be.Movie;
 
 /**
  * FXML Controller class
@@ -25,6 +26,7 @@ public class EditMovieRatingController implements Initializable {
     private TextField txtRating;
     
     private PMCModel pmcModel;
+    private Movie movie;
     private int id;
 
     
@@ -48,6 +50,10 @@ public class EditMovieRatingController implements Initializable {
     
     public void setValue(Double value){
         txtRating.setText(value.toString());
+    }
+    
+    public void setMovie(Movie movie){
+        this.movie = movie;
     }
     
     @FXML
