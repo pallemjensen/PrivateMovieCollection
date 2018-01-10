@@ -88,7 +88,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnAddMovie(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("addMovie.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("AddMovie.fxml"));
         Parent root = (Parent) fxmlLoader1.load();
         AddMovieController amc = fxmlLoader1.getController();
         amc.setUp(pmcModel);
