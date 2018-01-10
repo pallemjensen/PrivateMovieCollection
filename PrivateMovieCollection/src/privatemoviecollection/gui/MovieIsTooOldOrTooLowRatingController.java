@@ -20,7 +20,8 @@ import privatemoviecollection.be.Movie;
  * @author pmj
  */
 public class MovieIsTooOldOrTooLowRatingController implements Initializable {
-
+    private PMCModel pmcModel;
+    
     @FXML
     private TableView<Movie> TVOldOrBadMovies;
     @FXML
@@ -37,7 +38,8 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     @FXML
     private void btnConfirmWarning(ActionEvent event) {
     }
-
-    void setUp(PMCModel pmcModel) {
-    }     
+    
+    public void setUp(PMCModel model) {
+        pmcModel = model;
+    }
 }
