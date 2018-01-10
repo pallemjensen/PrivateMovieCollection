@@ -72,6 +72,11 @@ public class PMCModel {
     public void remove(Category category) {
         bllManager.remove(category);
     }
+
+    public void editPersonalRating(int id, double value) {
+        bllManager.editPersonalRating(id, value);
+                
+    }
     
     
 }

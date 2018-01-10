@@ -25,8 +25,9 @@ public class EditMovieRatingController implements Initializable {
     private TextField txtRating;
     
     private PMCModel pmcModel;
-    private final String startValue = "0.0";
+    private int id;
 
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -41,13 +42,18 @@ public class EditMovieRatingController implements Initializable {
        pmcModel = model;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public void setValue(Double value){
         txtRating.setText(value.toString());
     }
     
     @FXML
     private void btnSubmit(ActionEvent event) {
-        
+        double value = Double.parseDouble(txtRating.getText());
+        pmcModel.editPersonalRating(id, value);
     }
 
     @FXML

@@ -106,6 +106,7 @@ public class PrivateMovieCollectionController implements Initializable {
         EditMovieRatingController emrc = fxmlLoader1.getController();
         emrc.setUp(pmcModel);
         emrc.setValue(TVMovies.getSelectionModel().getSelectedItem().getPrivateRating());
+        emrc.setId(TVMovies.getSelectionModel().getSelectedItem().getId());
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();

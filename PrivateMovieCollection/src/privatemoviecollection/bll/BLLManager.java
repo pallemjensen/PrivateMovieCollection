@@ -46,6 +46,10 @@ public class BLLManager {
     public void remove(Category category){
         categoryDAO.remove(category);
     }
+
+    public void editPersonalRating(int id, double value) {
+        movieDAO.editPersonalRating(id, value);
+    }
     
     
     
