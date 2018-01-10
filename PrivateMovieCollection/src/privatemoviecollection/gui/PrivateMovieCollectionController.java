@@ -5,6 +5,8 @@
  */
 package privatemoviecollection.gui;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -53,6 +55,8 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private TextField txtImdbFilter;
 
+    private Desktop desktop = Desktop.getDesktop();
+    
     /**
      * Initializes the controller class.
      */
@@ -114,7 +118,11 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnPlay(ActionEvent event) {
+    private void btnPlay(ActionEvent event) throws IOException {
+        if(TVMovies.getSelectionModel().getSelectedItem() != null){
+            File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
+            desktop.open(file);
+        }
     }
 
     @FXML
