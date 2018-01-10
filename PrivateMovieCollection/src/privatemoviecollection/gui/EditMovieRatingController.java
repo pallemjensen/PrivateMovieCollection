@@ -23,13 +23,14 @@ public class EditMovieRatingController implements Initializable {
 
     @FXML
     private TextField txtRating;
+    private final String startValue = "0.0";
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        txtRating.setText(startValue);
     }
 
     @FXML
