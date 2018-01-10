@@ -147,16 +147,15 @@ public class PrivateMovieCollectionController implements Initializable {
         Date today = new Date();
         long todayMilli = today.getTime();
         long twoYears = 6307200000000l;
-        int i = 6;
+        final double i = 6;
         for (Movie allMovy : allMovies) {
-            if(allMovy.getImdbRating() < 6 || allMovy.getLastView())
-            
+            if ((todayMilli-(allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i)) )
+                    {
+                        //todo
+                    }
+            else
+                pmcModel.loadMovies();
         }
-        
-        
-        
-        
-        pmcModel.loadMovies();
     }
 
     @FXML
