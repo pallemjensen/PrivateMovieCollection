@@ -10,6 +10,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import privatemoviecollection.be.Movie;
 
 /**
  * FXML Controller class
@@ -17,6 +20,11 @@ import javafx.fxml.Initializable;
  * @author pmj
  */
 public class MovieIsTooOldOrTooLowRatingController implements Initializable {
+
+    @FXML
+    private TableView<Movie> TVOldOrBadMovies;
+    @FXML
+    private TableColumn<Movie, String> oldOrBadColoumn;
 
     /**
      * Initializes the controller class.
@@ -27,11 +35,8 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     }    
 
     @FXML
-    private void confirmDeletionOfOldOrLowMovie(ActionEvent event) {
+    private void btnConfirmWarning(ActionEvent event) {
     }
 
-    @FXML
-    private void cancelDeletionOfOldOrLowMovie(ActionEvent event) {
-    }
     
 }
