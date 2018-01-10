@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import privatemoviecollection.be.Movie;
 
 /**
@@ -32,7 +33,8 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    oldOrBadColoumn.setCellValueFactory(
+                new PropertyValueFactory("movieName"));
     }    
 
     @FXML
