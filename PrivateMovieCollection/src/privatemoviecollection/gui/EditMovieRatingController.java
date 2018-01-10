@@ -47,7 +47,6 @@ public class EditMovieRatingController implements Initializable {
     private void btnSubmit(ActionEvent event) {
         double value = Double.parseDouble(txtRating.getText());
         int id = movie.getId();
-        movie.setPrivateRating(value);
         pmcModel.editPersonalRating(id, value);
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
