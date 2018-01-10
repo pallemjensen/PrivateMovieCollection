@@ -67,7 +67,7 @@ public class AddMovieController implements Initializable {
     }
 
     @FXML
-    private void btnSaveMovie(ActionEvent event) {
+    private void btnSaveMovie(ActionEvent event) {       
     if(newMoviePath == null){
         txtMovieFilePath.setText("Please chose movie!");
     }
