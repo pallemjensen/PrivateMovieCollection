@@ -54,6 +54,7 @@ public class CategoryDAO {
 
             while (rs.next()) {
                 Category currentCategory = new Category();
+                currentCategory.setId(rs.getInt("category_id"));
                 currentCategory.setCategoryName(rs.getString("category_name"));
                 categories.add(currentCategory);
             }
@@ -64,12 +65,11 @@ public class CategoryDAO {
     public void remove(Category category){
         try (Connection con = cm.getConnection();) {
             Statement stmt = con.createStatement();
-            stmt.execute("DELETE FROM Category WHERE Category_id="+category.getId());
+            stmt.execute("DELETE FROM Category WHERE category_id="+category.getId());
         } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }

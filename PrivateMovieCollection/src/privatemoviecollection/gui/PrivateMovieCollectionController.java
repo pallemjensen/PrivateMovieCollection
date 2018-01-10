@@ -107,6 +107,7 @@ public class PrivateMovieCollectionController implements Initializable {
     private void btnDeleteCategory(ActionEvent event) throws SQLException {
         Category category = TVCategories.getSelectionModel().getSelectedItem();
         pmcModel.remove(category);
+        System.out.println("" + category.getId());
         pmcModel.loadCategories();
     }
 
