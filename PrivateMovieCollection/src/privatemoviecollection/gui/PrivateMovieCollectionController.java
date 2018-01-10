@@ -148,9 +148,16 @@ public class PrivateMovieCollectionController implements Initializable {
         long todayMilli = today.getTime();
         long twoYears = 6307200000000l;
         final double i = 6;
+        boolean b = false;
         for (Movie allMovy : allMovies) {
             if ((todayMilli-(allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i)) )
                     {
+            b = true;
+            break;
+                    }
+        }
+        if (b){
+            pmcModel.loadMovies();
             FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("MovieIsTooOldOrTooLowRating.fxml"));
             Parent root = (Parent) fxmlLoader1.load();
             MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
@@ -158,11 +165,11 @@ public class PrivateMovieCollectionController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
-                    }
+        }
             else
                 pmcModel.loadMovies();
-        }
-    }
+}
+    
 
     @FXML
     private void btnLoadCategories(ActionEvent event) throws SQLException {
