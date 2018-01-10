@@ -6,6 +6,7 @@
 package privatemoviecollection.gui;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ import privatemoviecollection.be.Movie;
  */
 public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     private PMCModel pmcModel;
+//    private PrivateMovieCollectionController pmcc = new PrivateMovieCollectionController();
     
     @FXML
     private TableView<Movie> TVOldOrBadMovies;
@@ -35,8 +37,10 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    
     oldOrBadColoumn.setCellValueFactory(
                 new PropertyValueFactory("movieName"));
+    
     }    
 
     @FXML

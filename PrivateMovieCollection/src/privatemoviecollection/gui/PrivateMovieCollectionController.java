@@ -142,8 +142,9 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnLoadMovies(ActionEvent event) throws SQLException, IOException {
+    public List<Movie> btnLoadMovies(ActionEvent event) throws SQLException, IOException {
         List<Movie> allMovies = pmcModel.getAllMovies();
+        List<Movie> oldAndBadMovies = new ArrayList<>();
         Date today = new Date();
         long todayMilli = today.getTime();
         long twoYears = 6307200000000l;
@@ -152,6 +153,7 @@ public class PrivateMovieCollectionController implements Initializable {
         for (Movie allMovy : allMovies) {
             if ((todayMilli-(allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i)) )
                     {
+            oldAndBadMovies.add(allMovy);
             b = true;
             break;
                     }
@@ -168,6 +170,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
             else
                 pmcModel.loadMovies();
+        return oldAndBadMovies;
 }
     
 
