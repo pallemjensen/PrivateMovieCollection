@@ -58,7 +58,7 @@ public class PMCModel {
             List<category> loadedCategories = bllManager.getAllCategories();
             categories.clear();
             categories.addAll(loadedCategories);
-            System.out.println(categories.get(3).getcategoryName());
+            System.out.println(categories.get(3).getCategoryName());
     }
 
     public ObservableList<movie> getMovies() {
