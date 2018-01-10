@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import privatemoviecollection.be.Category;
@@ -43,6 +44,10 @@ public class PrivateMovieCollectionController implements Initializable {
     private TableColumn<Movie, Double> movieImdbColumn;
     @FXML
     private TableColumn<Movie, Double> movieUserRatingColumn;
+    @FXML
+    private TextField txtTitleFilter;
+    @FXML
+    private TextField txtImdbFilter;
 
     /**
      * Initializes the controller class.
@@ -111,9 +116,6 @@ public class PrivateMovieCollectionController implements Initializable {
         pmcModel.loadCategories();
     }
 
-    @FXML
-    private void btnFilter(ActionEvent event) {
-    }
 
     @FXML
     private void btnClearFilter(ActionEvent event) {
@@ -127,5 +129,13 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnLoadCategories(ActionEvent event) throws SQLException {
         pmcModel.loadCategories();
+    }
+
+    @FXML
+    private void btnFilterOnMovieTitle(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnFilterOnImdbRating(ActionEvent event) {
     }
 }
