@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import privatemoviecollection.be.category;
+import privatemoviecollection.be.Category;
 import privatemoviecollection.be.movie;
 
 /**
@@ -24,7 +24,7 @@ public class CategoryDAO {
 
     ConnectionManager cm = new ConnectionManager();
 
-    public category createCategory(String categoryName) throws SQLException {
+    public Category createCategory(String categoryName) throws SQLException {
         
         try(Connection con = cm.getConnection()){
         String sql = "INSERT INTO Category VALUES(?);";
@@ -37,22 +37,22 @@ public class CategoryDAO {
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             int id = rs.getInt(1);
-            category newCategory = new category(id, categoryName);
+            Category newCategory = new Category(id, categoryName);
             return newCategory;
         }
         }
         return null;
     }
     
-    public List<category> getAllCategories() throws SQLServerException, SQLException {
-        List<category> categories = new ArrayList<>();
+    public List<Category> getAllCategories() throws SQLServerException, SQLException {
+        List<Category> categories = new ArrayList<>();
 
         try (Connection con = cm.getConnection()) {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Category");
 
             while (rs.next()) {
-                category currentCategory = new category();
+                Category currentCategory = new Category();
                 currentCategory.setCategoryName(rs.getString("category_name"));
                 categories.add(currentCategory);
             }

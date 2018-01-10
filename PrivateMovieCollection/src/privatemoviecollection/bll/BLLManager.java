@@ -8,7 +8,7 @@ package privatemoviecollection.bll;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.SQLException;
 import java.util.List;
-import privatemoviecollection.be.category;
+import privatemoviecollection.be.Category;
 import privatemoviecollection.be.movie;
 import privatemoviecollection.dal.CategoryDAO;
 import privatemoviecollection.dal.MovieDAO;
@@ -31,12 +31,12 @@ public class BLLManager {
         return movieDAO.getAllMovies();
     }
 
-    public category createCategory(String categoryName) throws SQLException {
-        category newCategory = categoryDAO.createCategory(categoryName);
+    public Category createCategory(String categoryName) throws SQLException {
+        Category newCategory = categoryDAO.createCategory(categoryName);
         return newCategory;
     }
 
-    public List<category> getAllCategories() throws SQLServerException, SQLException {
+    public List<Category> getAllCategories() throws SQLServerException, SQLException {
         return categoryDAO.getAllCategories();
     }
     

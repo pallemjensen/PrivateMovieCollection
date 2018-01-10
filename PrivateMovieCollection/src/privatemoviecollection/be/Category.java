@@ -9,22 +9,22 @@ package privatemoviecollection.be;
  *
  * @author pmj
  */
-public class category {
+public class Category {
 
     private String categoryName;
     private int id;
 
-//Constructor for category object with paramter category_name
-    public category(String categoryName) {
+//Constructor for Category object with paramter category_name
+    public Category(String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public category(int id, String categoryName) {
+    public Category(int id, String categoryName) {
         this.id = id;
         this.categoryName = categoryName;
     }
 
-    public category() {   
+    public Category() {   
     }
 
     public String getCategoryName() {

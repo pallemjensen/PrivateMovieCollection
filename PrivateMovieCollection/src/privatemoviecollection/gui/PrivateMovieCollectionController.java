@@ -19,7 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import privatemoviecollection.be.category;
+import privatemoviecollection.be.Category;
 import privatemoviecollection.be.movie;
 
 /**
@@ -32,9 +32,9 @@ public class PrivateMovieCollectionController implements Initializable {
     private final PMCModel pmcModel = new PMCModel();
 
     @FXML
-    private TableView<category> TVCategories;
+    private TableView<Category> TVCategories;
     @FXML
-    private TableColumn<category, String> categoryColumn;
+    private TableColumn<Category, String> categoryColumn;
     @FXML
     private TableView<movie> TVMovies;
     @FXML

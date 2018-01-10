@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import privatemoviecollection.be.category;
+import privatemoviecollection.be.Category;
 import privatemoviecollection.be.movie;
 import privatemoviecollection.bll.BLLManager;
 
@@ -27,7 +27,7 @@ public class PMCModel {
     private final ObservableList<movie> movies
             = FXCollections.observableArrayList();
 
-    private final ObservableList<category> categories
+    private final ObservableList<Category> categories
             = FXCollections.observableArrayList();
 
     public void addNewMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
@@ -35,8 +35,8 @@ public class PMCModel {
         movies.add(newMovie);
     }
     
-    public category createCategory(String categoryName) throws SQLException {
-        category newCategory = bllManager.createCategory(categoryName);
+    public Category createCategory(String categoryName) throws SQLException {
+        Category newCategory = bllManager.createCategory(categoryName);
         return newCategory;
     }
 
@@ -44,7 +44,7 @@ public class PMCModel {
         return bllManager.getAllMovies(); 
     }
     
-     public List<category> getAllCategories() throws SQLServerException, SQLException {
+     public List<Category> getAllCategories() throws SQLServerException, SQLException {
         return bllManager.getAllCategories();
     }
 
@@ -55,17 +55,16 @@ public class PMCModel {
     }
     
      public void loadCategories() throws SQLException {
-            List<category> loadedCategories = bllManager.getAllCategories();
+            List<Category> loadedCategories = bllManager.getAllCategories();
             categories.clear();
             categories.addAll(loadedCategories);
-            System.out.println(categories.get(3).getCategoryName());
     }
 
     public ObservableList<movie> getMovies() {
         return movies;
     }
 
-    public ObservableList<category> getCategories() {
+    public ObservableList<Category> getCategories() {
         return categories;
     }
 }
