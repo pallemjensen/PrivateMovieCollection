@@ -87,6 +87,16 @@ public class MovieDAO {
     }
 
     public void editPersonalRating(int id, double value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "UPDATE Movie SET private_movie_rating = ? WHERE movie_id = ?;";
+        try (Connection con = cm.getConnection()){
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+         preparedStmt.setDouble(1, value);
+         preparedStmt.setInt(2, id);
+         preparedStmt.executeUpdate();
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
