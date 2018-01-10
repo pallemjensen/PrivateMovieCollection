@@ -121,5 +121,4 @@ public class PrivateMovieCollectionController implements Initializable {
     private void btnLoadCategories(ActionEvent event) throws SQLException {
         pmcModel.loadCategories();
     }
-
 }
