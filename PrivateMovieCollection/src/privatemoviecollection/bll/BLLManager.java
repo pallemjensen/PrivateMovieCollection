@@ -32,7 +32,8 @@ public class BLLManager {
     }
 
     public category createCategory(String categoryName) throws SQLException {
-        return categoryDAO.createCategory(categoryName);
+        category newCategory = categoryDAO.createCategory(categoryName);
+        return newCategory;
     }
 
     public List<category> getAllCategories() throws SQLServerException, SQLException {

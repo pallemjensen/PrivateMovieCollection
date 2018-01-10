@@ -36,7 +36,8 @@ public class PMCModel {
     }
     
     public category createCategory(String categoryName) throws SQLException {
-        return bllManager.createCategory(categoryName);
+        category newCategory = bllManager.createCategory(categoryName);
+        return newCategory;
     }
 
     public List<movie> getAllMovies() throws SQLServerException, SQLException {
@@ -57,6 +58,7 @@ public class PMCModel {
             List<category> loadedCategories = bllManager.getAllCategories();
             categories.clear();
             categories.addAll(loadedCategories);
+            System.out.println(categories.get(3).getcategoryName());
     }
 
     public ObservableList<movie> getMovies() {
