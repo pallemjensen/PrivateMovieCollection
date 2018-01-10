@@ -6,16 +6,23 @@
 package privatemoviecollection.gui;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import privatemoviecollection.be.Movie;
 
 /**
  * FXML Controller class
@@ -67,10 +74,17 @@ public class AddMovieController implements Initializable {
     }
 
     @FXML
-    private void btnSaveMovie(ActionEvent event) {       
-    if(newMoviePath == null){
-        txtMovieFilePath.setText("Please chose movie!");
+    private void btnSaveMovie(ActionEvent event) throws SQLException, IOException {
+    List<Movie> movies = pmcModel.getAllMovies();
+        for (Movie filterMovy : movies) {
+            if(txtMovieTitle.getText().trim().equalsIgnoreCase(filterMovy.getMovieName().trim()) == true){
+                FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ErrorSameMovieName.fxml"));
+        Parent root = (Parent) fxmlLoader1.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
+
     else{
     String movieName = txtMovieTitle.getText();
     String imdbRatingAsString = txtMovieImdbRating.getText();
@@ -82,6 +96,7 @@ public class AddMovieController implements Initializable {
     long lastView = date.getTime();
     pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
     ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+    }
     }
     }
 
