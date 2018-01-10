@@ -99,6 +99,9 @@ public class PrivateMovieCollectionController implements Initializable {
     private void btnEditMovieRating(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("EditMovieRating.fxml"));
         Parent root = (Parent) fxmlLoader1.load();
+        EditMovieRatingController emrc = fxmlLoader1.getController();
+        emrc.setUp(pmcModel);
+        emrc.setValue(TVMovies.getSelectionModel().getSelectedItem().getPrivateRating());
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
