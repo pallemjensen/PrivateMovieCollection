@@ -104,7 +104,10 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnDeleteCategory(ActionEvent event) {
+    private void btnDeleteCategory(ActionEvent event) throws SQLException {
+        Category category = TVCategories.getSelectionModel().getSelectedItem();
+        pmcModel.remove(category);
+        pmcModel.loadCategories();
     }
 
     @FXML

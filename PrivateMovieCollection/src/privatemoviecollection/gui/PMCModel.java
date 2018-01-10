@@ -71,6 +71,9 @@ public class PMCModel {
     public void remove(Movie movie) {
         bllManager.remove(movie);
     }
+    public void remove(Category category) {
+        bllManager.remove(category);
+    }
     
     
 }

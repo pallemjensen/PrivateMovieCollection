@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
 
@@ -59,5 +61,16 @@ public class CategoryDAO {
         }
         return categories;
     }
+    
+    public void remove(Category category){
+        try (Connection con = cm.getConnection();) {
+            Statement stmt = con.createStatement();
+            stmt.execute("DELETE FROM Category WHERE Category_id="+category.getId());
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }
 }
