@@ -20,7 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import privatemoviecollection.be.Category;
-import privatemoviecollection.be.movie;
+import privatemoviecollection.be.Movie;
 
 /**
  * FXML Controller class
@@ -36,13 +36,13 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private TableColumn<Category, String> categoryColumn;
     @FXML
-    private TableView<movie> TVMovies;
+    private TableView<Movie> TVMovies;
     @FXML
-    private TableColumn<movie, String> movieTitleColumn;
+    private TableColumn<Movie, String> movieTitleColumn;
     @FXML
-    private TableColumn<movie, Double> movieImdbColumn;
+    private TableColumn<Movie, Double> movieImdbColumn;
     @FXML
-    private TableColumn<movie, Double> movieUserRatingColumn;
+    private TableColumn<Movie, Double> movieUserRatingColumn;
 
     /**
      * Initializes the controller class.
@@ -85,6 +85,8 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnDeleteMovie(ActionEvent event) {
+    Movie movie = TVMovies.getSelectionModel().getSelectedItem();
+    pmcModel.remove(movie);
     }
 
     @FXML

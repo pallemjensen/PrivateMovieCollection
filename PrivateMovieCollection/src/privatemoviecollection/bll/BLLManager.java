@@ -9,7 +9,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.SQLException;
 import java.util.List;
 import privatemoviecollection.be.Category;
-import privatemoviecollection.be.movie;
+import privatemoviecollection.be.Movie;
 import privatemoviecollection.dal.CategoryDAO;
 import privatemoviecollection.dal.MovieDAO;
 
@@ -22,12 +22,12 @@ public class BLLManager {
     MovieDAO movieDAO = new MovieDAO();
     CategoryDAO categoryDAO = new CategoryDAO();
 
-    public movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
-        movie newMovie = movieDAO.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+    public Movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
+        Movie newMovie = movieDAO.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
         return newMovie;
     }
 
-    public List<movie> getAllMovies() throws SQLServerException, SQLException {
+    public List<Movie> getAllMovies() throws SQLServerException, SQLException {
         return movieDAO.getAllMovies();
     }
 
@@ -38,6 +38,9 @@ public class BLLManager {
 
     public List<Category> getAllCategories() throws SQLServerException, SQLException {
         return categoryDAO.getAllCategories();
+    }
+    public void remove(Movie movie){
+        movieDAO.remove(movie);
     }
     
     

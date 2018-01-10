@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import privatemoviecollection.be.Category;
-import privatemoviecollection.be.movie;
+import privatemoviecollection.be.Movie;
 import privatemoviecollection.bll.BLLManager;
 
 /**
@@ -24,14 +24,14 @@ public class PMCModel {
 
     private final BLLManager bllManager = new BLLManager();
 
-    private final ObservableList<movie> movies
+    private final ObservableList<Movie> movies
             = FXCollections.observableArrayList();
 
     private final ObservableList<Category> categories
             = FXCollections.observableArrayList();
 
     public void addNewMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
-        movie newMovie = bllManager.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+        Movie newMovie = bllManager.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
         movies.add(newMovie);
     }
     
@@ -40,7 +40,7 @@ public class PMCModel {
         return newCategory;
     }
 
-    public List<movie> getAllMovies() throws SQLServerException, SQLException {
+    public List<Movie> getAllMovies() throws SQLServerException, SQLException {
         return bllManager.getAllMovies(); 
     }
     
@@ -49,7 +49,7 @@ public class PMCModel {
     }
 
     public void loadMovies() throws SQLException {
-        List<movie> loadedMovies = bllManager.getAllMovies();
+        List<Movie> loadedMovies = bllManager.getAllMovies();
         movies.clear();
         movies.addAll(loadedMovies);
     }
@@ -60,11 +60,17 @@ public class PMCModel {
             categories.addAll(loadedCategories);
     }
 
-    public ObservableList<movie> getMovies() {
+    public ObservableList<Movie> getMovies() {
         return movies;
     }
 
     public ObservableList<Category> getCategories() {
         return categories;
     }
+
+    public void remove(Movie movie) {
+        bllManager.remove(movie);
+    }
+    
+    
 }

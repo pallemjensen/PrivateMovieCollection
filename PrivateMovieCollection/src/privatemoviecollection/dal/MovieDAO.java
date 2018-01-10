@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import privatemoviecollection.be.movie;
+import privatemoviecollection.be.Movie;
 
 /**
  *
@@ -25,7 +25,7 @@ public class MovieDAO {
 
     ConnectionManager cm = new ConnectionManager();
 
-    public movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
+    public Movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
         try (Connection con = cm.getConnection()) {
             String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?, ?);";
 
@@ -42,7 +42,7 @@ public class MovieDAO {
                 ResultSet rs = statement.getGeneratedKeys();
                 rs.next();
                 int id = rs.getInt(1);
-                movie newMovie = new movie(id, movieName, imdbRating, privateRating, fileLink, lastView);
+                Movie newMovie = new Movie(id, movieName, imdbRating, privateRating, fileLink, lastView);
                 return newMovie;
             }
 
@@ -54,15 +54,15 @@ public class MovieDAO {
         return null;
     }
 
-    public List<movie> getAllMovies() throws SQLServerException, SQLException {
-        List<movie> movies = new ArrayList<>();
+    public List<Movie> getAllMovies() throws SQLServerException, SQLException {
+        List<Movie> movies = new ArrayList<>();
 
         try (Connection con = cm.getConnection()) {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Movie");
 
             while (rs.next()) {
-                movie currentMovie = new movie();
+                Movie currentMovie = new Movie();
                 currentMovie.setId(rs.getInt("movie_id"));
                 currentMovie.setMovieName(rs.getString("movie_title"));
                 currentMovie.setImdbRating(rs.getDouble("imdb_movie_rating"));
@@ -73,5 +73,16 @@ public class MovieDAO {
             }
         }
         return movies;
+    }
+    
+    public void remove(Movie movie){
+        try (Connection con = cm.getConnection();) {
+            Statement stmt = con.createStatement();
+            stmt.execute("DELETE FROM Movie WHERE Movie_id="+movie.getId());
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

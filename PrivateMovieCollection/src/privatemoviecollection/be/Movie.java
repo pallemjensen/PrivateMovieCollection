@@ -9,7 +9,7 @@ package privatemoviecollection.be;
  *
  * @author pmj
  */
-public class movie {
+public class Movie {
 
     private int id;
     private String movieName;
@@ -18,7 +18,7 @@ public class movie {
     String fileLink;
     long lastView;
 
-    public movie(int id, String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
+    public Movie(int id, String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
         this.id = id;
         this.movieName = movieName;
         this.imdbRating = imdbRating;
@@ -27,7 +27,7 @@ public class movie {
         this.lastView = lastView;
     }
 
-    public movie() {
+    public Movie() {
     }
 
     public int getId() {
