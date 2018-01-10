@@ -13,8 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import privatemoviecollection.be.Category;
-import privatemoviecollection.be.Movie;
 
 /**
  *
@@ -53,11 +54,22 @@ public class CategoryDAO {
 
             while (rs.next()) {
                 Category currentCategory = new Category();
+                currentCategory.setId(rs.getInt("category_id"));
                 currentCategory.setCategoryName(rs.getString("category_name"));
                 categories.add(currentCategory);
             }
         }
         return categories;
     }
-
+    
+    public void remove(Category category){
+        try (Connection con = cm.getConnection();) {
+            Statement stmt = con.createStatement();
+            stmt.execute("DELETE FROM Category WHERE category_id="+category.getId());
+        } catch (SQLServerException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

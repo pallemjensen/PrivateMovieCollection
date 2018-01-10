@@ -8,8 +8,6 @@ package privatemoviecollection.gui;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import privatemoviecollection.be.Category;
@@ -70,6 +68,9 @@ public class PMCModel {
 
     public void remove(Movie movie) {
         bllManager.remove(movie);
+    }
+    public void remove(Category category) {
+        bllManager.remove(category);
     }
     
     
