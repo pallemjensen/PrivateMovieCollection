@@ -43,6 +43,10 @@ public class BLLManager {
         movieDAO.remove(movie);
     }
     
+    public void remove(Category category){
+        categoryDAO.remove(category);
+    }
+    
     
     
 }
