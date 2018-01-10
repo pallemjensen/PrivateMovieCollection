@@ -78,24 +78,24 @@ public class AddMovieController implements Initializable {
     List<Movie> movies = pmcModel.getAllMovies();
         for (Movie filterMovy : movies) {
             if(txtMovieTitle.getText().trim().equalsIgnoreCase(filterMovy.getMovieName().trim()) == true){
-                FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ErrorSameMovieName.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ErrorSameMovieName.fxml"));
         Parent root = (Parent) fxmlLoader1.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    else{
-    String movieName = txtMovieTitle.getText();
-    String imdbRatingAsString = txtMovieImdbRating.getText();
-    Double imdbRating = Double.valueOf(imdbRatingAsString);
-    String privateRatingAsString = txtMoviePersonalRating.getText();
-    Double privateRating = Double.valueOf(privateRatingAsString);
-    String fileLink = newMoviePath;
-    Date date = new Date();
-    long lastView = date.getTime();
-    pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
-    ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+        else{
+        String movieName = txtMovieTitle.getText();
+        String imdbRatingAsString = txtMovieImdbRating.getText();
+        Double imdbRating = Double.valueOf(imdbRatingAsString);
+        String privateRatingAsString = txtMoviePersonalRating.getText();
+        Double privateRating = Double.valueOf(privateRatingAsString);
+        String fileLink = newMoviePath;
+        Date date = new Date();
+        long lastView = date.getTime();
+        pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+        ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
     }
     }
