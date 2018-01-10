@@ -38,5 +38,6 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     private void btnConfirmWarning(ActionEvent event) {
     }
 
-    
+    void setUp(PMCModel pmcModel) {
+    }     
 }
