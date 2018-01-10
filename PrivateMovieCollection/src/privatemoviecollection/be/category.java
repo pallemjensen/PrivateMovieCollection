@@ -11,7 +11,7 @@ package privatemoviecollection.be;
  */
 public class category {
 
-    String categoryName;
+    private String categoryName;
     private int id;
 
 //Constructor for category object with paramter category_name
@@ -27,11 +27,11 @@ public class category {
     public category() {   
     }
 
-    public String getcategoryName() {
+    public String getCategoryName() {
         return categoryName;
     }
 
-    public void setcategoryName(String categoryName) {
+    public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 

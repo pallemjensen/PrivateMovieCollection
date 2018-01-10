@@ -53,7 +53,7 @@ public class CategoryDAO {
 
             while (rs.next()) {
                 category currentCategory = new category();
-                currentCategory.setcategoryName(rs.getString("category_name"));
+                currentCategory.setCategoryName(rs.getString("category_name"));
                 categories.add(currentCategory);
             }
         }
