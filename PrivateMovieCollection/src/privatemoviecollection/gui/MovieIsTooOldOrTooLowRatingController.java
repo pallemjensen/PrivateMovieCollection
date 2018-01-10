@@ -10,9 +10,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import privatemoviecollection.be.Movie;
 
 /**
@@ -39,6 +41,7 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
 
     @FXML
     private void btnConfirmWarning(ActionEvent event) {
+        ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
     
     public void setUp(PMCModel model) {
