@@ -24,11 +24,8 @@ public class EditMovieRatingController implements Initializable {
 
     @FXML
     private TextField txtRating;
-    
     private PMCModel pmcModel;
     private Movie movie;
-    private int id;
-
     
     /**
      * Initializes the controller class.
@@ -40,25 +37,17 @@ public class EditMovieRatingController implements Initializable {
         
     }
     
-    public void setUp(PMCModel model) {
+    public void setUp(PMCModel model, Movie movie) {
        pmcModel = model;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    public void setValue(Double value){
-        txtRating.setText(value.toString());
-    }
-    
-    public void setMovie(Movie movie){
-        this.movie = movie;
+       this.movie = movie;
+       txtRating.setText(Double.toString(movie.getPrivateRating()));
     }
     
     @FXML
     private void btnSubmit(ActionEvent event) {
         double value = Double.parseDouble(txtRating.getText());
+        int id = movie.getId();
+        movie.setPrivateRating(value);
         pmcModel.editPersonalRating(id, value);
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
