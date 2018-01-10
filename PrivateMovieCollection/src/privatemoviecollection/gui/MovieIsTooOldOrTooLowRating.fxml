@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="652.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="privatemoviecollection.gui.MovieIsTooOldOrTooLowRatingController">
+   <children>
+      <TextArea editable="false" layoutX="80.0" layoutY="34.0" prefHeight="90.0" prefWidth="493.0" text="You own a movie with a personal rating lower than 6&#10;or you own a movie which has not been opened in more than 2 years. &#10;Do you want to delete it?">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextArea>
+      <Button layoutX="80.0" layoutY="207.0" mnemonicParsing="false" onAction="#confirmDeletionOfOldOrLowMovie" prefHeight="56.0" prefWidth="146.0" text="Yes">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Button>
+      <Button layoutX="436.0" layoutY="200.0" mnemonicParsing="false" onAction="#cancelDeletionOfOldOrLowMovie" prefHeight="61.0" prefWidth="137.0" text="NO">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

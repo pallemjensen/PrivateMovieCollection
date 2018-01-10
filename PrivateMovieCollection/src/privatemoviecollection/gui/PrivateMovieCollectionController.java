@@ -136,6 +136,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnLoadMovies(ActionEvent event) throws SQLException {
+        List<Movie> allMovies = pmcModel.getAllMovies();
         pmcModel.loadMovies();
     }
 
