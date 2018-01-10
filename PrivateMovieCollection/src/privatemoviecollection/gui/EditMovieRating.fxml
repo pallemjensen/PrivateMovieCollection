@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="231.0" prefWidth="331.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9" fx:controller="privatemoviecollection.gui.EditMovieRatingController">
+<AnchorPane id="AnchorPane" prefHeight="231.0" prefWidth="331.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.EditMovieRatingController">
    <children>
-      <TextField layoutX="93.0" layoutY="102.0" prefHeight="26.0" prefWidth="82.0" />
+      <TextField fx:id="txtRating" layoutX="93.0" layoutY="102.0" prefHeight="26.0" prefWidth="82.0" />
       <Label layoutX="65.0" layoutY="26.0" text="Private Movie Rating">
          <font>
             <Font size="22.0" />

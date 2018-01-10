@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -19,6 +20,9 @@ import javafx.stage.Stage;
  * @author Anders
  */
 public class EditMovieRatingController implements Initializable {
+
+    @FXML
+    private TextField txtRating;
 
     /**
      * Initializes the controller class.
@@ -30,6 +34,7 @@ public class EditMovieRatingController implements Initializable {
 
     @FXML
     private void btnSubmit(ActionEvent event) {
+        
     }
 
     @FXML
