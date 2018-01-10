@@ -39,6 +39,6 @@
       <Button layoutX="291.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnLoadMovies" prefHeight="25.0" prefWidth="104.0" text="Load all movies" />
       <Button layoutX="50.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnLoadCategories" prefHeight="25.0" prefWidth="207.0" text="Load categories" />
       <Button layoutX="290.0" layoutY="106.0" mnemonicParsing="false" onAction="#btnFilterOnImdbRating" prefHeight="25.0" prefWidth="207.0" text="Filter on  minimum imdb rating" />
-      <TextField fx:id="txtImdbFilter" layoutX="515.0" layoutY="106.0" prefHeight="25.0" prefWidth="272.0" />
+      <TextField fx:id="txtImdbFilter" layoutX="519.0" layoutY="106.0" prefHeight="25.0" prefWidth="33.0" text="0.0" />
    </children>
 </AnchorPane>

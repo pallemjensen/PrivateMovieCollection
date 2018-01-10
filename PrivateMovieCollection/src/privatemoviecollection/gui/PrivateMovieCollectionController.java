@@ -68,6 +68,7 @@ public class PrivateMovieCollectionController implements Initializable {
                 new PropertyValueFactory("privateRating"));
         TVMovies.setItems(pmcModel.getMovies());
         TVCategories.setItems(pmcModel.getCategories());
+        txtImdbFilter.setText("0.0");
     }
 
     @FXML
@@ -126,7 +127,11 @@ public class PrivateMovieCollectionController implements Initializable {
 
 
     @FXML
-    private void btnClearFilter(ActionEvent event) {
+    private void btnClearFilter(ActionEvent event) throws SQLException {
+        txtTitleFilter.setText("");
+        txtImdbFilter.setText("0.0");
+        pmcModel.loadMovies();
+        TVMovies.setItems(pmcModel.getMovies());
     }
 
     @FXML
@@ -154,6 +159,17 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnFilterOnImdbRating(ActionEvent event) {
+    private void btnFilterOnImdbRating(ActionEvent event) throws SQLException {
+    List<Movie> allMovies = pmcModel.getAllMovies(); 
+    ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
+    Double filter = Double.valueOf(txtImdbFilter.getText());
+        System.out.println("" + filter);
+        for (Movie filteredMovy : allMovies) {
+            if (filteredMovy.getImdbRating() >= filter)
+            {
+              filteredMovies.add(filteredMovy);
+            }
+         TVMovies.setItems(filteredMovies);   
+        }
     }
 }
