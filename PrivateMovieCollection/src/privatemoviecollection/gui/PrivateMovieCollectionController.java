@@ -115,6 +115,9 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnPlay(ActionEvent event) {
+        if(TVMovies.getSelectionModel().getSelectedItem() != null){
+            // do stuf
+        }
     }
 
     @FXML
