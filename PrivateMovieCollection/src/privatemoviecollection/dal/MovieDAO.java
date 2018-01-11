@@ -100,4 +100,19 @@ public class MovieDAO {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void updateLastView(Movie movie, long newView) {
+        int id = movie.getId();
+        String query = "UPDATE Movie SET lastview = ? WHERE movie_id = ?;";
+        try (Connection con = cm.getConnection()){
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+         preparedStmt.setLong(1, newView);
+         preparedStmt.setInt(2, id);
+         preparedStmt.executeUpdate();
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

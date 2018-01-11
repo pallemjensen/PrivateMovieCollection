@@ -50,6 +50,10 @@ public class BLLManager {
     public void editPersonalRating(int id, double value) {
         movieDAO.editPersonalRating(id, value);
     }
+
+    public void updateLastView(Movie movie, long newView) {
+        movieDAO.updateLastView(movie, newView);
+    }
     
     
     

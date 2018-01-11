@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -120,6 +121,7 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnPlay(ActionEvent event) throws IOException {
         if(TVMovies.getSelectionModel().getSelectedItem() != null){
+            pmcModel.updateLastView(TVMovies.getSelectionModel().getSelectedItem());
             File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
             desktop.open(file);
         }
@@ -205,5 +207,10 @@ public class PrivateMovieCollectionController implements Initializable {
             }
          TVMovies.setItems(filteredMovies);   
         }
+    }
+
+    @FXML
+    private void btnExit(ActionEvent event) {
+            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 }
