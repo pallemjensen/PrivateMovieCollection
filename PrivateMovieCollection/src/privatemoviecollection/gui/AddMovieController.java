@@ -76,8 +76,14 @@ public class AddMovieController implements Initializable {
     @FXML
     private void btnSaveMovie(ActionEvent event) throws SQLException, IOException {
     List<Movie> movies = pmcModel.getAllMovies();
+    boolean b = false;
         for (Movie filterMovy : movies) {
             if(txtMovieTitle.getText().trim().equalsIgnoreCase(filterMovy.getMovieName().trim()) == true){
+                b = true;
+                break;
+            }
+        }
+            if(b){
         FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ErrorSameMovieName.fxml"));
         Parent root = (Parent) fxmlLoader1.load();
         Stage stage = new Stage();
@@ -98,7 +104,7 @@ public class AddMovieController implements Initializable {
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
     }
-    }
+    
 
     @FXML
     private void btnCancelAddMovie(ActionEvent event) {
