@@ -27,7 +27,6 @@ import privatemoviecollection.be.Movie;
  */
 public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     private PMCModel pmcModel;
-//    private PrivateMovieCollectionController pmcc = new PrivateMovieCollectionController();
     
     @FXML
     private TableView<Movie> TVOldOrBadMovies;
@@ -52,8 +51,8 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
     
-    public void setUp(PMCModel model, List<Movie> movielist) {
-        pmcModel = model;
+    public void setUp(List<Movie> movielist) {
+       
         movies.addAll(movielist);
     }
 }
