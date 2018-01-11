@@ -120,6 +120,7 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnPlay(ActionEvent event) throws IOException {
         if(TVMovies.getSelectionModel().getSelectedItem() != null){
+            pmcModel.updateLastView(TVMovies.getSelectionModel().getSelectedItem());
             File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
             desktop.open(file);
         }
