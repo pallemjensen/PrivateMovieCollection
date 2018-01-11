@@ -155,7 +155,6 @@ public class PrivateMovieCollectionController implements Initializable {
                     {
             oldAndBadMovies.add(allMovy);
             b = true;
-            //break;
                     }
         }
         if (b){
