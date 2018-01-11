@@ -155,7 +155,7 @@ public class PrivateMovieCollectionController implements Initializable {
                     {
             oldAndBadMovies.add(allMovy);
             b = true;
-            break;
+            //break;
                     }
         }
         if (b){
@@ -163,7 +163,7 @@ public class PrivateMovieCollectionController implements Initializable {
             FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("MovieIsTooOldOrTooLowRating.fxml"));
             Parent root = (Parent) fxmlLoader1.load();
             MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
-            mist.setUp(pmcModel);
+            mist.setUp(pmcModel, oldAndBadMovies);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();

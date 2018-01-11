@@ -8,6 +8,8 @@ package privatemoviecollection.gui;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,6 +34,8 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     @FXML
     private TableColumn<Movie, String> oldOrBadColoumn;
 
+    private final ObservableList<Movie> movies
+            = FXCollections.observableArrayList();
     /**
      * Initializes the controller class.
      */
@@ -40,7 +44,7 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     
     oldOrBadColoumn.setCellValueFactory(
                 new PropertyValueFactory("movieName"));
-    
+    TVOldOrBadMovies.setItems(movies);
     }    
 
     @FXML
@@ -48,7 +52,8 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
     
-    public void setUp(PMCModel model) {
+    public void setUp(PMCModel model, List<Movie> movielist) {
         pmcModel = model;
+        movies.addAll(movielist);
     }
 }
