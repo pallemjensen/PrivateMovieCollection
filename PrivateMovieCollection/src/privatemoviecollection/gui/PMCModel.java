@@ -7,6 +7,7 @@ package privatemoviecollection.gui;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -78,5 +79,9 @@ public class PMCModel {
                 
     }
     
-    
+    public void updateLastView(Movie movie){
+        Date date = new Date();
+        long newView = date.getTime();
+        bllManager.updateLastView(movie, newView);
+    }
 }
