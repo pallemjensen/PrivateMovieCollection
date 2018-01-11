@@ -18,8 +18,9 @@ import java.util.logging.Logger;
 import privatemoviecollection.be.Movie;
 
 /**
- *
- * @author pmj
+ *Our Category class where we manage our calls to the DB
+ *We can create, load, delete and edit movies.
+ * 
  */
 public class MovieDAO {
 

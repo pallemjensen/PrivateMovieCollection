@@ -17,8 +17,8 @@ import privatemoviecollection.be.Movie;
 
 /**
  * FXML Controller class
+ * Class for editing the personal rating on a movie
  *
- * @author Anders
  */
 public class EditMovieRatingController implements Initializable {
 

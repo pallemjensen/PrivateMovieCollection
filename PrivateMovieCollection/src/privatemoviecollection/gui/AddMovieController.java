@@ -26,7 +26,7 @@ import privatemoviecollection.be.Movie;
 
 /**
  * FXML Controller class
- *
+ * Class for choosing and creating movies 
  * @author pmj
  */
 public class AddMovieController implements Initializable {
@@ -62,6 +62,9 @@ public class AddMovieController implements Initializable {
         txtMoviePersonalRating.setText("0.0");
     }    
 
+ /**
+ * Choose a movie, get the path and showing the path.
+ */
     @FXML
     private void btnChooseMovie(ActionEvent event) {
     FileChooser chooser = new FileChooser();
@@ -73,6 +76,10 @@ public class AddMovieController implements Initializable {
     txtMovieFilePath.setText(newMoviePath);
     }
 
+    
+ /**
+ *Create a movie after checking if it has the name
+ */
     @FXML
     private void btnSaveMovie(ActionEvent event) throws SQLException, IOException {
     List<Movie> movies = pmcModel.getAllMovies();
@@ -90,7 +97,6 @@ public class AddMovieController implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
         else{
         String movieName = txtMovieTitle.getText();
         String imdbRatingAsString = txtMovieImdbRating.getText();

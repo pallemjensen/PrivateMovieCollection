@@ -18,13 +18,20 @@ import java.util.logging.Logger;
 import privatemoviecollection.be.Category;
 
 /**
- *
- * @author pmj
+ *Our Category class where we manage our calls to the DB
+ *We can save, load and delete categories.
  */
 public class CategoryDAO {
 
     ConnectionManager cm = new ConnectionManager();
 
+ /**
+  * 
+ *Create a new category and return the new object
+     * @param categoryName
+     * @return 
+     * @throws java.sql.SQLException
+ */
     public Category createCategory(String categoryName) throws SQLException {
         
         try(Connection con = cm.getConnection()){
@@ -45,6 +52,12 @@ public class CategoryDAO {
         return null;
     }
     
+    
+ /**
+ *We load our categories
+     * @return 
+     * @throws com.microsoft.sqlserver.jdbc.SQLServerException
+ */
     public List<Category> getAllCategories() throws SQLServerException, SQLException {
         List<Category> categories = new ArrayList<>();
 
@@ -62,6 +75,10 @@ public class CategoryDAO {
         return categories;
     }
     
+ /**
+ *Delete a category
+     * @param category
+ */
     public void remove(Category category){
         try (Connection con = cm.getConnection();) {
             Statement stmt = con.createStatement();
