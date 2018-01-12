@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package privatemoviecollection.gui;
+package privatemoviecollection.gui.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
-import static privatemoviecollection.gui.PrivateMovieCollectionController.exceptionHandler;
+import privatemoviecollection.gui.Model.PMCModel;
+import static privatemoviecollection.gui.Controller.PrivateMovieCollectionController.exceptionHandler;
 
 /**
  * FXML Controller class
