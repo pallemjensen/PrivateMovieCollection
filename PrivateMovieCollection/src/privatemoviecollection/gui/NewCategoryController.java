@@ -5,6 +5,7 @@
  */
 package privatemoviecollection.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -16,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import privatemoviecollection.be.PMCException;
+import static privatemoviecollection.gui.PrivateMovieCollectionController.exceptionHandler;
 
 /**
  * FXML Controller class
@@ -37,9 +40,14 @@ public class NewCategoryController implements Initializable {
     }
 
     @FXML
-    private void btnSaveNewCategory(ActionEvent event) throws SQLException {
+    private void btnSaveNewCategory(ActionEvent event) throws IOException {
     String categoryName = txtAddNewCategory.getText();
-    pmcModel.createCategory(categoryName);
+        try {
+            pmcModel.createCategory(categoryName);
+        } catch (PMCException ex) {
+            Logger.getLogger(NewCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
+        }
      ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();   
     }
 

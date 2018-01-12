@@ -32,12 +32,12 @@ public class BLLManager {
         return movieDAO.getAllMovies();
     }
 
-    public Category createCategory(String categoryName) throws SQLException {
+    public Category createCategory(String categoryName) throws PMCException {
         Category newCategory = categoryDAO.createCategory(categoryName);
         return newCategory;
     }
 
-    public List<Category> getAllCategories() throws SQLServerException, SQLException {
+    public List<Category> getAllCategories() throws PMCException {
         return categoryDAO.getAllCategories();
     }
     public void remove(Movie movie){

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import privatemoviecollection.be.Category;
+import privatemoviecollection.be.PMCException;
 
 /**
  *Our Category class where we manage our calls to the DB
@@ -29,25 +30,46 @@ public class CategoryDAO {
   * 
  *Create a new category and return the new object
      * @param categoryName
-     * @return 
-     * @throws java.sql.SQLException
+     * @return
+     * @throws privatemoviecollection.be.PMCException
  */
-    public Category createCategory(String categoryName) throws SQLException {
+    public Category createCategory(String categoryName) throws PMCException {
         
         try(Connection con = cm.getConnection()){
         String sql = "INSERT INTO Category VALUES(?);";
         
-        PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        stmt.setString(1, categoryName);
+        PreparedStatement stmt = null;
+            try {
+                stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+                throw new PMCException("SQLException. Could not create a new category. Prepared statement.");
+            }
+            try {
+                stmt.setString(1, categoryName);
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+                throw new PMCException("SQLException. Could not create a new category. Categoryname.");
+            }
         
-        if (stmt.executeUpdate() == 1)
-        {
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            int id = rs.getInt(1);
-            Category newCategory = new Category(id, categoryName);
-            return newCategory;
-        }
+            try {
+                if (stmt.executeUpdate() == 1)
+                {
+                    ResultSet rs = stmt.getGeneratedKeys();
+                    rs.next();
+                    int id = rs.getInt(1);
+                    Category newCategory = new Category(id, categoryName);
+                    return newCategory;
+                }   } catch (SQLException ex) {
+                Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+                throw new PMCException("SQLException. Could not create a new category. Return new category.");
+            }
+        } catch (SQLServerException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("SQLServerException. Could not create a new category. Categoryname.");
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("SQLException. Could not connect to server. Check internet connection.");
         }
         return null;
     }
@@ -55,10 +77,10 @@ public class CategoryDAO {
     
  /**
  *We load our categories
-     * @return 
-     * @throws com.microsoft.sqlserver.jdbc.SQLServerException
+     * @return
+     * @throws privatemoviecollection.be.PMCException
  */
-    public List<Category> getAllCategories() throws SQLServerException, SQLException {
+    public List<Category> getAllCategories() throws PMCException {
         List<Category> categories = new ArrayList<>();
 
         try (Connection con = cm.getConnection()) {
@@ -71,6 +93,12 @@ public class CategoryDAO {
                 currentCategory.setCategoryName(rs.getString("category_name"));
                 categories.add(currentCategory);
             }
+        } catch (SQLServerException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("SQLServerException. Could not connect to server. Check internet connection.");
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+             throw new PMCException("SQLException. Could not load categories.");
         }
         return categories;
     }

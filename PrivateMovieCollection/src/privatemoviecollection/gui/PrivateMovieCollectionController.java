@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -130,18 +132,28 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnDeleteCategory(ActionEvent event) throws SQLException {
+    private void btnDeleteCategory(ActionEvent event) throws IOException {
         Category category = TVCategories.getSelectionModel().getSelectedItem();
         pmcModel.remove(category);
-        pmcModel.loadCategories();
+        try {
+            pmcModel.loadCategories();
+        } catch (PMCException ex) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
+        }
     }
 
 
     @FXML
-    private void btnClearFilter(ActionEvent event) throws PMCException {
+    private void btnClearFilter(ActionEvent event) throws IOException{
         txtTitleFilter.setText("");
         txtImdbFilter.setText("0.0");
-        pmcModel.loadMovies();
+        try {
+            pmcModel.loadMovies();
+        } catch (PMCException ex) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
+        }
         TVMovies.setItems(pmcModel.getMovies());
     }
 
@@ -177,8 +189,13 @@ public class PrivateMovieCollectionController implements Initializable {
     
 
     @FXML
-    private void btnLoadCategories(ActionEvent event) throws SQLException {
-        pmcModel.loadCategories();
+    private void btnLoadCategories(ActionEvent event) throws IOException  {
+        try {
+            pmcModel.loadCategories();
+        } catch (PMCException ex) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
+        }
     }
 
     @FXML

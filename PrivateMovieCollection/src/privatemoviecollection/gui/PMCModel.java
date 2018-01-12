@@ -5,8 +5,6 @@
  */
 package privatemoviecollection.gui;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -35,7 +33,7 @@ public class PMCModel {
         movies.add(newMovie);
     }
     
-    public Category createCategory(String categoryName) throws SQLException {
+    public Category createCategory(String categoryName) throws PMCException {
         Category newCategory = bllManager.createCategory(categoryName);
         return newCategory;
     }
@@ -44,7 +42,7 @@ public class PMCModel {
         return bllManager.getAllMovies(); 
     }
     
-     public List<Category> getAllCategories() throws SQLServerException, SQLException {
+     public List<Category> getAllCategories() throws PMCException {
         return bllManager.getAllCategories();
     }
 
@@ -54,7 +52,7 @@ public class PMCModel {
         movies.addAll(loadedMovies);
     }
     
-     public void loadCategories() throws SQLException {
+     public void loadCategories() throws PMCException {
             List<Category> loadedCategories = bllManager.getAllCategories();
             categories.clear();
             categories.addAll(loadedCategories);
