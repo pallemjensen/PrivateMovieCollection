@@ -5,12 +5,10 @@
  */
 package privatemoviecollection.gui;
 
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +63,8 @@ public class PrivateMovieCollectionController implements Initializable {
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -111,9 +111,16 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnEditMovieRating(ActionEvent event) throws PMCException, IOException {
+    private void btnEditMovieRating(ActionEvent event) throws PMCException{
         FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("EditMovieRating.fxml"));
-        Parent root = (Parent) fxmlLoader1.load();
+        Parent root = null;
+        try {
+            root = (Parent) fxmlLoader1.load();
+        } catch (IOException ex) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            PMCException pmce = new PMCException("IO Error - wrong user input - use a number - example '8.0'.");
+            exceptionHandler(pmce);
+        }
         EditMovieRatingController emrc = fxmlLoader1.getController();
         emrc.setUp(pmcModel, TVMovies.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
@@ -123,16 +130,22 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnPlay(ActionEvent event) throws IOException {
+    private void btnPlay(ActionEvent event)  {
         if(TVMovies.getSelectionModel().getSelectedItem() != null){
             pmcModel.updateLastView(TVMovies.getSelectionModel().getSelectedItem());
             File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
-            desktop.open(file);
+            try {
+                desktop.open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+                PMCException pmce = new PMCException("IO Error - filepath is wrong.");
+                exceptionHandler(pmce);
+            }
         }
     }
 
     @FXML
-    private void btnDeleteCategory(ActionEvent event) throws IOException {
+    private void btnDeleteCategory(ActionEvent event) {
         Category category = TVCategories.getSelectionModel().getSelectedItem();
         pmcModel.remove(category);
         try {
@@ -145,7 +158,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
 
     @FXML
-    private void btnClearFilter(ActionEvent event) throws IOException{
+    private void btnClearFilter(ActionEvent event) {
         txtTitleFilter.setText("");
         txtImdbFilter.setText("0.0");
         try {
@@ -239,15 +252,19 @@ public class PrivateMovieCollectionController implements Initializable {
     }
     
     @FXML
-    static void exceptionHandler(PMCException ex) throws IOException
+    static void exceptionHandler(Exception ex) 
     {
-      String errorMsg = ex.getMessage();
-      FXMLLoader fxmlLoader1 = new FXMLLoader(ExceptionMessengerController.class.getResource("exceptionMessenger.fxml"));
-      Parent root = (Parent) fxmlLoader1.load();
-      ExceptionMessengerController emc = fxmlLoader1.getController();
-      emc.setErrorMsg(errorMsg);
-      Stage stage = new Stage();
-      stage.setScene(new Scene(root));
-      stage.show();
+        try {
+            String errorMsg = ex.getMessage();
+            FXMLLoader fxmlLoader1 = new FXMLLoader(ExceptionMessengerController.class.getResource("exceptionMessenger.fxml"));
+            Parent root = (Parent) fxmlLoader1.load();
+            ExceptionMessengerController emc = fxmlLoader1.getController();
+            emc.setErrorMsg(errorMsg);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex1) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex1);
+        }
     }
 }
