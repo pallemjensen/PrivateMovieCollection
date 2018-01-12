@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
+import privatemoviecollection.be.PMCException;
 import privatemoviecollection.dal.CategoryDAO;
 import privatemoviecollection.dal.MovieDAO;
 
@@ -22,12 +23,12 @@ public class BLLManager {
     MovieDAO movieDAO = new MovieDAO();
     CategoryDAO categoryDAO = new CategoryDAO();
 
-    public Movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
+    public Movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) throws PMCException {
         Movie newMovie = movieDAO.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
         return newMovie;
     }
 
-    public List<Movie> getAllMovies() throws SQLServerException, SQLException {
+    public List<Movie> getAllMovies() throws PMCException {
         return movieDAO.getAllMovies();
     }
 

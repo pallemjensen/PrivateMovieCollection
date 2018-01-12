@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import privatemoviecollection.be.Movie;
+import privatemoviecollection.be.PMCException;
 
 /**
  *Our Category class where we manage our calls to the DB
@@ -26,7 +27,7 @@ public class MovieDAO {
 
     ConnectionManager cm = new ConnectionManager();
 
-    public Movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
+    public Movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) throws PMCException  {
         try (Connection con = cm.getConnection()) {
             String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?, ?);";
 
@@ -49,13 +50,15 @@ public class MovieDAO {
 
         } catch (SQLServerException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("SQLServerException. An error occurred. You cannot create a movie");
         } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("SQLException.An error occurred. You cannot create a movie");
         }
         return null;
     }
 
-    public List<Movie> getAllMovies() throws SQLServerException, SQLException {
+    public List<Movie> getAllMovies() throws PMCException {
         List<Movie> movies = new ArrayList<>();
 
         try (Connection con = cm.getConnection()) {
@@ -72,6 +75,12 @@ public class MovieDAO {
                 currentMovie.setLastView(rs.getLong("lastview"));
                 movies.add(currentMovie);
             }
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("SQLServerException. Error in connect to DB.");
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("SQLException. Error in getting all movies from DB.");
         }
         return movies;
     }

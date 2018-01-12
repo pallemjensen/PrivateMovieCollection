@@ -23,8 +23,8 @@ public class ConnectionManager {
      */
     public ConnectionManager() {
         ds.setDatabaseName("PrivateMovieCollection");
-        ds.setUser("CS2017A_28");
-        ds.setPassword("Ellap060174");
+        ds.setUser("CS2017A_28_java");
+        ds.setPassword("javajava");
         ds.setServerName("EASV-DB2");
         ds.setPortNumber(1433);
     }

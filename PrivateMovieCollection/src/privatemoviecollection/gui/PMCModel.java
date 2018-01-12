@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
+import privatemoviecollection.be.PMCException;
 import privatemoviecollection.bll.BLLManager;
 
 /**
@@ -29,7 +30,7 @@ public class PMCModel {
     private final ObservableList<Category> categories
             = FXCollections.observableArrayList();
 
-    public void addNewMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) {
+    public void addNewMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) throws PMCException {
         Movie newMovie = bllManager.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
         movies.add(newMovie);
     }
@@ -39,7 +40,7 @@ public class PMCModel {
         return newCategory;
     }
 
-    public List<Movie> getAllMovies() throws SQLServerException, SQLException {
+    public List<Movie> getAllMovies() throws PMCException {
         return bllManager.getAllMovies(); 
     }
     
@@ -47,7 +48,7 @@ public class PMCModel {
         return bllManager.getAllCategories();
     }
 
-    public void loadMovies() throws SQLException {
+    public void loadMovies() throws PMCException {
         List<Movie> loadedMovies = bllManager.getAllMovies();
         movies.clear();
         movies.addAll(loadedMovies);

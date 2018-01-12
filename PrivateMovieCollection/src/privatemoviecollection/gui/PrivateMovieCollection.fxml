@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="694.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.PrivateMovieCollectionController">
+<AnchorPane id="AnchorPane" prefHeight="694.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.PrivateMovieCollectionController">
    <children>
       <TableView fx:id="TVCategories" layoutX="51.0" layoutY="184.0" prefHeight="359.0" prefWidth="207.0">
         <columns>
@@ -41,5 +41,6 @@
       <Button layoutX="290.0" layoutY="106.0" mnemonicParsing="false" onAction="#btnFilterOnImdbRating" prefHeight="25.0" prefWidth="207.0" text="Filter on  minimum imdb rating" />
       <TextField fx:id="txtImdbFilter" layoutX="519.0" layoutY="106.0" prefHeight="25.0" prefWidth="33.0" text="0.0" />
       <Button layoutX="719.0" layoutY="618.0" mnemonicParsing="false" onAction="#btnExit" prefHeight="48.0" prefWidth="111.0" text="Exit" />
+      <Button layoutX="504.0" layoutY="605.0" mnemonicParsing="false" onAction="#btnAddCatToMovie" prefHeight="26.0" prefWidth="178.0" text="Add category to movie" />
    </children>
 </AnchorPane>

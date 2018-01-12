@@ -37,6 +37,12 @@ public class EditMovieRatingController implements Initializable {
         
     }
     
+    
+  /**
+     * 
+     * @param model
+     * @param movie
+  */
     public void setUp(PMCModel model, Movie movie) {
        pmcModel = model;
        this.movie = movie;

@@ -5,6 +5,7 @@
  */
 package privatemoviecollection.gui;
 
+import static com.sun.javafx.scene.control.skin.Utils.getResource;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
+import privatemoviecollection.be.PMCException;
 
 /**
  * FXML Controller class
@@ -100,14 +102,14 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnDeleteMovie(ActionEvent event) throws SQLException {
+    private void btnDeleteMovie(ActionEvent event) throws PMCException {
     Movie movie = TVMovies.getSelectionModel().getSelectedItem();
     pmcModel.remove(movie);
     pmcModel.loadMovies();
     }
 
     @FXML
-    private void btnEditMovieRating(ActionEvent event) throws IOException, SQLException {
+    private void btnEditMovieRating(ActionEvent event) throws PMCException, IOException {
         FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("EditMovieRating.fxml"));
         Parent root = (Parent) fxmlLoader1.load();
         EditMovieRatingController emrc = fxmlLoader1.getController();
@@ -136,7 +138,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
 
     @FXML
-    private void btnClearFilter(ActionEvent event) throws SQLException {
+    private void btnClearFilter(ActionEvent event) throws PMCException {
         txtTitleFilter.setText("");
         txtImdbFilter.setText("0.0");
         pmcModel.loadMovies();
@@ -144,7 +146,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    public void btnLoadMovies(ActionEvent event) throws SQLException, IOException {
+    public void btnLoadMovies(ActionEvent event) throws PMCException, IOException{
         List<Movie> allMovies = pmcModel.getAllMovies();
         List<Movie> oldAndBadMovies = new ArrayList<>();
         Date today = new Date();
@@ -170,8 +172,7 @@ public class PrivateMovieCollectionController implements Initializable {
             stage.show();
         }
             else
-                pmcModel.loadMovies();
-        
+                pmcModel.loadMovies();      
 }
     
 
@@ -181,7 +182,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnFilterOnMovieTitle(ActionEvent event) throws SQLException {
+    private void btnFilterOnMovieTitle(ActionEvent event) throws PMCException {
         List<Movie> allMovies = pmcModel.getAllMovies();
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
         String filter = txtTitleFilter.getText();
@@ -195,7 +196,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnFilterOnImdbRating(ActionEvent event) throws SQLException {
+    private void btnFilterOnImdbRating(ActionEvent event) throws PMCException {
     List<Movie> allMovies = pmcModel.getAllMovies(); 
     ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
     Double filter = Double.valueOf(txtImdbFilter.getText());
@@ -212,5 +213,24 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnExit(ActionEvent event) {
             ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+    }
+
+    @FXML
+    private void btnAddCatToMovie(ActionEvent event) {
+    Movie movie;
+    int i = TVMovies.getSelectionModel().getSelectedItem().getId();
+    }
+    
+    @FXML
+    static void exceptionHandler(PMCException ex) throws IOException
+    {
+      String errorMsg = ex.getMessage();
+      FXMLLoader fxmlLoader1 = new FXMLLoader(ExceptionMessengerController.class.getResource("exceptionMessenger.fxml"));
+      Parent root = (Parent) fxmlLoader1.load();
+      ExceptionMessengerController emc = fxmlLoader1.getController();
+      emc.setErrorMsg(errorMsg);
+      Stage stage = new Stage();
+      stage.setScene(new Scene(root));
+      stage.show();
     }
 }
