@@ -66,19 +66,19 @@ public class PMCModel {
         return categories;
     }
 
-    public void remove(Movie movie) {
+    public void remove(Movie movie) throws PMCException {
         bllManager.remove(movie);
     }
-    public void remove(Category category) {
+    public void remove(Category category) throws PMCException {
         bllManager.remove(category);
     }
 
-    public void editPersonalRating(int id, double value) {
+    public void editPersonalRating(int id, double value) throws PMCException {
         bllManager.editPersonalRating(id, value);
                 
     }
     
-    public void updateLastView(Movie movie){
+    public void updateLastView(Movie movie) throws PMCException{
         Date date = new Date();
         long newView = date.getTime();
         bllManager.updateLastView(movie, newView);

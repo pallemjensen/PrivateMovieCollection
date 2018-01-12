@@ -8,7 +8,6 @@ package privatemoviecollection.gui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -56,6 +55,8 @@ public class AddMovieController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -81,7 +82,7 @@ public class AddMovieController implements Initializable {
      * Create a movie after checking if it has the name
      */
     @FXML
-    private void btnSaveMovie(ActionEvent event) throws IOException {
+    private void btnSaveMovie(ActionEvent event){
         List<Movie> movies = null;
         try {
             movies = pmcModel.getAllMovies();
@@ -99,7 +100,13 @@ public class AddMovieController implements Initializable {
         if (b) {
             FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ErrorSameMovieName.fxml"));
             Parent root = null;
-            root = (Parent) fxmlLoader1.load();
+            try {
+                root = (Parent) fxmlLoader1.load();
+            } catch (IOException ex) {
+                PMCException pmce = new PMCException("IO Error - wrong user input");
+                exceptionHandler(pmce);
+                Logger.getLogger(AddMovieController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();

@@ -117,10 +117,20 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnDeleteMovie(ActionEvent event) throws PMCException {
+    private void btnDeleteMovie(ActionEvent event)  {
     Movie movie = TVMovies.getSelectionModel().getSelectedItem();
-    pmcModel.remove(movie);
-    pmcModel.loadMovies();
+        try {
+            pmcModel.remove(movie);
+        } catch (PMCException ex) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
+        }
+        try {
+            pmcModel.loadMovies();
+        } catch (PMCException ex) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
+        }
     }
 
     @FXML
@@ -145,7 +155,11 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnPlay(ActionEvent event)  {
         if(TVMovies.getSelectionModel().getSelectedItem() != null){
-            pmcModel.updateLastView(TVMovies.getSelectionModel().getSelectedItem());
+            try {
+                pmcModel.updateLastView(TVMovies.getSelectionModel().getSelectedItem());
+            } catch (PMCException ex) {
+                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
             try {
                 desktop.open(file);
@@ -160,7 +174,12 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnDeleteCategory(ActionEvent event) {
         Category category = TVCategories.getSelectionModel().getSelectedItem();
-        pmcModel.remove(category);
+        try {
+            pmcModel.remove(category);
+        } catch (PMCException ex) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
+        }
         try {
             pmcModel.loadCategories();
         } catch (PMCException ex) {

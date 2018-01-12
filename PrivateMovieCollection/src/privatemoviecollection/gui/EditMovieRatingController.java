@@ -7,6 +7,8 @@ package privatemoviecollection.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import privatemoviecollection.be.Movie;
+import privatemoviecollection.be.PMCException;
+import static privatemoviecollection.gui.PrivateMovieCollectionController.exceptionHandler;
 
 /**
  * FXML Controller class
@@ -53,7 +57,12 @@ public class EditMovieRatingController implements Initializable {
     private void btnSubmit(ActionEvent event) {
         double value = Double.parseDouble(txtRating.getText());
         int id = movie.getId();
-        pmcModel.editPersonalRating(id, value);
+        try {
+            pmcModel.editPersonalRating(id, value);
+        } catch (PMCException ex) {
+            Logger.getLogger(EditMovieRatingController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
+        }
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 

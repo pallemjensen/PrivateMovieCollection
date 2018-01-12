@@ -5,9 +5,7 @@
  */
 package privatemoviecollection.gui;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +31,8 @@ public class NewCategoryController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -40,7 +40,7 @@ public class NewCategoryController implements Initializable {
     }
 
     @FXML
-    private void btnSaveNewCategory(ActionEvent event) throws IOException {
+    private void btnSaveNewCategory(ActionEvent event) {
     String categoryName = txtAddNewCategory.getText();
         try {
             pmcModel.createCategory(categoryName);
