@@ -106,15 +106,18 @@ public class CategoryDAO {
  /**
  *Delete a category
      * @param category
+     * @throws privatemoviecollection.be.PMCException
  */
-    public void remove(Category category){
+    public void remove(Category category) throws PMCException{
         try (Connection con = cm.getConnection();) {
             Statement stmt = con.createStatement();
             stmt.execute("DELETE FROM Category WHERE category_id="+category.getId());
         } catch (SQLServerException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("SQLException. Could not connect to the database.");
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("SQLException. Could not delte the category.");
         }
     }
 }

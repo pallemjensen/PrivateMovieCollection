@@ -33,7 +33,7 @@ public class ConnectionManager {
      * @return our connection
      * @throws SQLServerException
      */
-    public Connection getConnection() throws SQLServerException {
+    public Connection getConnection() throws SQLServerException  {
         return ds.getConnection();
     }
 }

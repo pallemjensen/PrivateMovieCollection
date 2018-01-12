@@ -5,8 +5,6 @@
  */
 package privatemoviecollection.bll;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import java.sql.SQLException;
 import java.util.List;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
@@ -40,19 +38,19 @@ public class BLLManager {
     public List<Category> getAllCategories() throws PMCException {
         return categoryDAO.getAllCategories();
     }
-    public void remove(Movie movie){
+    public void remove(Movie movie) throws PMCException{
         movieDAO.remove(movie);
     }
     
-    public void remove(Category category){
+    public void remove(Category category) throws PMCException{
         categoryDAO.remove(category);
     }
 
-    public void editPersonalRating(int id, double value) {
+    public void editPersonalRating(int id, double value) throws PMCException {
         movieDAO.editPersonalRating(id, value);
     }
 
-    public void updateLastView(Movie movie, long newView) {
+    public void updateLastView(Movie movie, long newView) throws PMCException {
         movieDAO.updateLastView(movie, newView);
     }
     
