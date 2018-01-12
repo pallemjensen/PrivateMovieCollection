@@ -26,7 +26,6 @@ import privatemoviecollection.be.Movie;
  * @author pmj
  */
 public class MovieIsTooOldOrTooLowRatingController implements Initializable {
-    private PMCModel pmcModel;
     
     @FXML
     private TableView<Movie> TVOldOrBadMovies;
@@ -37,6 +36,8 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
             = FXCollections.observableArrayList();
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

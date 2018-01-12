@@ -59,7 +59,7 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private TextField txtImdbFilter;
 
-    private Desktop desktop = Desktop.getDesktop();
+    private final Desktop desktop = Desktop.getDesktop();
     
     /**
      * Initializes the controller class.
@@ -82,9 +82,15 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnAddCategory(ActionEvent event) throws IOException {
+    private void btnAddCategory(ActionEvent event) {
         FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("NewCategory.fxml"));
-        Parent root = (Parent) fxmlLoader1.load();
+        Parent root = null;
+        try {
+            root = (Parent) fxmlLoader1.load();
+        } catch (IOException ex) {
+        Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+        PMCException pmce = new PMCException("IO Error - wrong user input");
+        exceptionHandler(pmce);}
         NewCategoryController ncc = fxmlLoader1.getController();
         ncc.setUp(pmcModel);
         Stage stage = new Stage();
@@ -93,9 +99,16 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnAddMovie(ActionEvent event) throws IOException {
+    private void btnAddMovie(ActionEvent event) {
         FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("AddMovie.fxml"));
-        Parent root = (Parent) fxmlLoader1.load();
+        Parent root = null;
+        try {
+            root = (Parent) fxmlLoader1.load();
+        } catch (IOException ex) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            PMCException pmce = new PMCException("IO Error - wrong user input");
+            exceptionHandler(pmce);
+        }
         AddMovieController amc = fxmlLoader1.getController();
         amc.setUp(pmcModel);
         Stage stage = new Stage();
@@ -171,7 +184,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    public void btnLoadMovies(ActionEvent event) throws PMCException, IOException{
+    public void btnLoadMovies(ActionEvent event) throws PMCException{
         List<Movie> allMovies = pmcModel.getAllMovies();
         List<Movie> oldAndBadMovies = new ArrayList<>();
         Date today = new Date();
@@ -189,7 +202,14 @@ public class PrivateMovieCollectionController implements Initializable {
         if (b){
             pmcModel.loadMovies();
             FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("MovieIsTooOldOrTooLowRating.fxml"));
-            Parent root = (Parent) fxmlLoader1.load();
+            Parent root = null;
+            try {
+                root = (Parent) fxmlLoader1.load();
+            } catch (IOException ex) {
+                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+                PMCException pmce = new PMCException("IO Error - filepath is wrong.");
+                exceptionHandler(pmce);
+            }
             MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
             mist.setUp(oldAndBadMovies);
             Stage stage = new Stage();
@@ -202,7 +222,7 @@ public class PrivateMovieCollectionController implements Initializable {
     
 
     @FXML
-    private void btnLoadCategories(ActionEvent event) throws IOException  {
+    private void btnLoadCategories(ActionEvent event) {
         try {
             pmcModel.loadCategories();
         } catch (PMCException ex) {
@@ -247,8 +267,6 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnAddCatToMovie(ActionEvent event) {
-    Movie movie;
-    int i = TVMovies.getSelectionModel().getSelectedItem().getId();
     }
     
     @FXML
