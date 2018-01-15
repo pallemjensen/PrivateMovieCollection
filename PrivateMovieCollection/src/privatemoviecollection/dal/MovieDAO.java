@@ -48,9 +48,6 @@ public class MovieDAO {
                 return newMovie;
             }
 
-        } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLServerException. An error occurred. You cannot create a movie");
         } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("SQLException.An error occurred. You cannot create a movie");
@@ -75,9 +72,6 @@ public class MovieDAO {
                 currentMovie.setLastView(rs.getLong("lastview"));
                 movies.add(currentMovie);
             }
-        } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLServerException. Error in connect to DB.");
         } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("SQLException. Error in getting all movies from DB.");
@@ -89,10 +83,7 @@ public class MovieDAO {
         try (Connection con = cm.getConnection();) {
             Statement stmt = con.createStatement();
             stmt.execute("DELETE FROM Movie WHERE Movie_id="+movie.getId());
-        } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("Could not connect to database. Check you connection.");
-        } catch (SQLException ex) {
+        }  catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("SQLException. Error deleting the movie.");
         }
@@ -105,9 +96,6 @@ public class MovieDAO {
          preparedStmt.setDouble(1, value);
          preparedStmt.setInt(2, id);
          preparedStmt.executeUpdate();
-        } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLException. Error connecting to the database.");
         } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("SQLException. Error editing the rating.");
@@ -122,9 +110,6 @@ public class MovieDAO {
          preparedStmt.setLong(1, newView);
          preparedStmt.setInt(2, id);
          preparedStmt.executeUpdate();
-        } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLException. Could not connect to the database.");
         } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("SQLException. Could not update last view.");
