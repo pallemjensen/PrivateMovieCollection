@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package privatemoviecollection.gui;
+package privatemoviecollection.gui.Controller;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
+import privatemoviecollection.gui.Model.PMCModel;
 
 /**
  * FXML Controller class
@@ -83,7 +84,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnAddCategory(ActionEvent event) {
-        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("NewCategory.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/NewCategory.fxml"));
         Parent root = null;
         try {
             root = (Parent) fxmlLoader1.load();
@@ -100,7 +101,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnAddMovie(ActionEvent event) {
-        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("AddMovie.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/AddMovie.fxml"));
         Parent root = null;
         try {
             root = (Parent) fxmlLoader1.load();
@@ -135,7 +136,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnEditMovieRating(ActionEvent event) throws PMCException{
-        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("EditMovieRating.fxml"));
+        FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/EditMovieRating.fxml"));
         Parent root = null;
         try {
             root = (Parent) fxmlLoader1.load();
@@ -220,7 +221,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
         if (b){
             pmcModel.loadMovies();
-            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("MovieIsTooOldOrTooLowRating.fxml"));
+            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/MovieIsTooOldOrTooLowRating.fxml"));
             Parent root = null;
             try {
                 root = (Parent) fxmlLoader1.load();
@@ -293,7 +294,7 @@ public class PrivateMovieCollectionController implements Initializable {
     {
         try {
             String errorMsg = ex.getMessage();
-            FXMLLoader fxmlLoader1 = new FXMLLoader(ExceptionMessengerController.class.getResource("exceptionMessenger.fxml"));
+            FXMLLoader fxmlLoader1 = new FXMLLoader(ExceptionMessengerController.class.getResource("/privatemoviecollection/gui/View/exceptionMessenger.fxml"));
             Parent root = (Parent) fxmlLoader1.load();
             ExceptionMessengerController emc = fxmlLoader1.getController();
             emc.setErrorMsg(errorMsg);

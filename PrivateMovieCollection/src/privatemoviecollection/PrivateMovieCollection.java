@@ -19,7 +19,7 @@ public class PrivateMovieCollection extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxloader = new FXMLLoader(getClass().getResource("gui/PrivateMovieCollection.fxml"));
+        FXMLLoader fxloader = new FXMLLoader(getClass().getResource("gui/View/PrivateMovieCollection.fxml"));
         Parent root = fxloader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -29,7 +29,7 @@ public class PrivateMovieCollection extends Application {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

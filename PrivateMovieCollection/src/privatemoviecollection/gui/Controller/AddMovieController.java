@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package privatemoviecollection.gui;
+package privatemoviecollection.gui.Controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
-import static privatemoviecollection.gui.PrivateMovieCollectionController.exceptionHandler;
+import privatemoviecollection.gui.Model.PMCModel;
+import static privatemoviecollection.gui.Controller.PrivateMovieCollectionController.exceptionHandler;
 
 /**
  * FXML Controller class Class for choosing and creating movies
@@ -98,7 +99,7 @@ public class AddMovieController implements Initializable {
             }
         }
         if (b) {
-            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ErrorSameMovieName.fxml"));
+            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getClassLoader().getResource("../View/ErrorSameMovieName.fxml"));
             Parent root = null;
             try {
                 root = (Parent) fxmlLoader1.load();
