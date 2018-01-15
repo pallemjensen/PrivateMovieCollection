@@ -5,7 +5,6 @@
  */
 package privatemoviecollection.dal;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,7 +49,7 @@ public class MovieDAO {
 
         } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLException.An error occurred. You cannot create a movie");
+            throw new PMCException("An error occurred. You cannot create a movie");
         }
         return null;
     }
@@ -74,7 +73,7 @@ public class MovieDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLException. Error in getting all movies from DB.");
+            throw new PMCException("Error in getting all movies from DB.");
         }
         return movies;
     }
@@ -85,7 +84,7 @@ public class MovieDAO {
             stmt.execute("DELETE FROM Movie WHERE Movie_id="+movie.getId());
         }  catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLException. Error deleting the movie.");
+            throw new PMCException("Error deleting the movie.");
         }
     }
 
@@ -98,7 +97,7 @@ public class MovieDAO {
          preparedStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLException. Error editing the rating.");
+            throw new PMCException("Error editing the rating.");
         }
     }
 
@@ -112,7 +111,7 @@ public class MovieDAO {
          preparedStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLException. Could not update last view.");
+            throw new PMCException("Could not update last view.");
         }
     }
 }
