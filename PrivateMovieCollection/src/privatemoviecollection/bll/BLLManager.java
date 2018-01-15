@@ -5,13 +5,14 @@
  */
 package privatemoviecollection.bll;
 
+import java.util.ArrayList;
 import java.util.List;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
 import privatemoviecollection.dal.CategoryDAO;
 import privatemoviecollection.dal.MovieDAO;
-
+import privatemoviecollection.dal.movieIntoCategory;
 /**
  *
  * @author pmj
@@ -20,6 +21,7 @@ public class BLLManager {
 
     MovieDAO movieDAO = new MovieDAO();
     CategoryDAO categoryDAO = new CategoryDAO();
+    movieIntoCategory mic = new movieIntoCategory();
 
     public Movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) throws PMCException {
         Movie newMovie = movieDAO.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
@@ -54,6 +56,7 @@ public class BLLManager {
         movieDAO.updateLastView(movie, newView);
     }
     
-    
-    
+    public void addCategoryToMovie(ArrayList<Integer> list) throws PMCException{
+    mic.addCategoryToMovie(list);
+    }
 }

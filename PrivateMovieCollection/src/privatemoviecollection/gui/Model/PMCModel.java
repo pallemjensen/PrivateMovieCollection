@@ -5,6 +5,7 @@
  */
 package privatemoviecollection.gui.Model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -83,4 +84,8 @@ public class PMCModel {
         long newView = date.getTime();
         bllManager.updateLastView(movie, newView);
     }
+    
+    public void addMovieToCategory(ArrayList<Integer> list) throws PMCException{
+    bllManager.addCategoryToMovie(list);
+            }
 }
