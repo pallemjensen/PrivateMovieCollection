@@ -5,7 +5,6 @@
  */
 package privatemoviecollection.gui.Model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -33,17 +32,17 @@ public class PMCModel {
         Movie newMovie = bllManager.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);
         movies.add(newMovie);
     }
-    
+
     public void createCategory(String categoryName) throws PMCException {
         Category newCategory = bllManager.createCategory(categoryName);
         categories.add(newCategory);
     }
 
     public List<Movie> getAllMovies() throws PMCException {
-        return bllManager.getAllMovies(); 
+        return bllManager.getAllMovies();
     }
-    
-     public List<Category> getAllCategories() throws PMCException {
+
+    public List<Category> getAllCategories() throws PMCException {
         return bllManager.getAllCategories();
     }
 
@@ -52,11 +51,11 @@ public class PMCModel {
         movies.clear();
         movies.addAll(loadedMovies);
     }
-    
-     public void loadCategories() throws PMCException {
-            List<Category> loadedCategories = bllManager.getAllCategories();
-            categories.clear();
-            categories.addAll(loadedCategories);
+
+    public void loadCategories() throws PMCException {
+        List<Category> loadedCategories = bllManager.getAllCategories();
+        categories.clear();
+        categories.addAll(loadedCategories);
     }
 
     public ObservableList<Movie> getMovies() {
@@ -70,34 +69,33 @@ public class PMCModel {
     public void remove(Movie movie) throws PMCException {
         bllManager.remove(movie);
     }
+
     public void remove(Category category) throws PMCException {
         bllManager.remove(category);
     }
 
     public void editPersonalRating(int id, double value) throws PMCException {
         bllManager.editPersonalRating(id, value);
-                
+
     }
-    
-    public void updateLastView(Movie movie) throws PMCException{
+
+    public void updateLastView(Movie movie) throws PMCException {
         bllManager.updateLastView(movie);
     }
-    
-    public boolean doesMovieAlreadyExist(String name) throws PMCException{
+
+    public boolean doesMovieAlreadyExist(String name) throws PMCException {
         return bllManager.doesMovieAlreadyExist(name);
     }
 
     public List<Movie> chekForOldOrBadMovies() throws PMCException {
         return bllManager.chekForOldOrBadMovies();
     }
-    
-    public void addMovieToCategory(ArrayList<Integer> list) throws PMCException{
-    bllManager.addCategoryToMovie(list);
-            }
+
+    public void addMovieToCategory(ArrayList<Integer> list) throws PMCException {
+        bllManager.addCategoryToMovie(list);
+    }
 
     public ArrayList<Integer> getCategoriesToMovie(int category) throws PMCException {
         return bllManager.getCategoriesToMovie(category);
     }
-    
-    
 }
