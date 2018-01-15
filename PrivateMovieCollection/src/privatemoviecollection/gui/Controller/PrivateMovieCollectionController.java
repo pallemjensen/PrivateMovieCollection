@@ -236,7 +236,7 @@ public class PrivateMovieCollectionController implements Initializable {
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
         String filter = txtTitleFilter.getText();
         for (Movie allMovy : allMovies) {
-            if (allMovy.getMovieName().toLowerCase().trim().contains(filter.toLowerCase().trim()) == true) {
+            if (allMovy.getMovieName().toLowerCase().trim().contains(filter.toLowerCase().trim())) {
                 filteredMovies.add(allMovy);
             }
             TVMovies.setItems(filteredMovies);
