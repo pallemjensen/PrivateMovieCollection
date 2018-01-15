@@ -5,11 +5,9 @@
  */
 package privatemoviecollection.bll;
 
-<<<<<<< HEAD
+
 import java.util.ArrayList;
-=======
 import java.util.Date;
->>>>>>> 93100c6a128d4e05b4b675ad5467395ecf29790d
 import java.util.List;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
