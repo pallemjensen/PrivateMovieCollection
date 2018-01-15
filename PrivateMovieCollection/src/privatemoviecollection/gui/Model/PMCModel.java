@@ -5,7 +5,6 @@
  */
 package privatemoviecollection.gui.Model;
 
-import java.util.Date;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -79,9 +78,7 @@ public class PMCModel {
     }
     
     public void updateLastView(Movie movie) throws PMCException{
-        Date date = new Date();
-        long newView = date.getTime();
-        bllManager.updateLastView(movie, newView);
+        bllManager.updateLastView(movie);
     }
     
     public boolean doesMovieAlreadyExist(String name) throws PMCException{
