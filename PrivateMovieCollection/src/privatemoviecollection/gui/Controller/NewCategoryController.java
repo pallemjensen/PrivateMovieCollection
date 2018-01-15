@@ -46,7 +46,6 @@ public class NewCategoryController implements Initializable {
         try {
             pmcModel.createCategory(categoryName);
         } catch (PMCException ex) {
-            Logger.getLogger(NewCategoryController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
      ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();   
