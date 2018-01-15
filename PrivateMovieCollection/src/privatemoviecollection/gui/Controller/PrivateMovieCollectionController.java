@@ -70,18 +70,18 @@ public class PrivateMovieCollectionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-            categoryColumn.setCellValueFactory(
-                    new PropertyValueFactory("categoryName"));
-            movieTitleColumn.setCellValueFactory(
-                    new PropertyValueFactory("movieName"));
-            movieImdbColumn.setCellValueFactory(
-                    new PropertyValueFactory("imdbRating"));
-            movieUserRatingColumn.setCellValueFactory(
-                    new PropertyValueFactory("privateRating"));
-            TVMovies.setItems(pmcModel.getMovies());
-            TVCategories.setItems(pmcModel.getCategories());
-            txtImdbFilter.setText("0.0");
+
+        categoryColumn.setCellValueFactory(
+                new PropertyValueFactory("categoryName"));
+        movieTitleColumn.setCellValueFactory(
+                new PropertyValueFactory("movieName"));
+        movieImdbColumn.setCellValueFactory(
+                new PropertyValueFactory("imdbRating"));
+        movieUserRatingColumn.setCellValueFactory(
+                new PropertyValueFactory("privateRating"));
+        TVMovies.setItems(pmcModel.getMovies());
+        TVCategories.setItems(pmcModel.getCategories());
+        txtImdbFilter.setText("0.0");
         try {
             pmcModel.loadMovies();
             pmcModel.loadCategories();
@@ -197,46 +197,16 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     public void btnLoadMovies(ActionEvent event) {
         try {
-            List<Movie> allMovies = pmcModel.getAllMovies();
-            List<Movie> oldAndBadMovies = new ArrayList<>();
-            Date today = new Date();
-            long todayMilli = today.getTime();
-            long twoYears = 6307200000000l;
-            final double i = 6;
-            boolean b = false;
-            for (Movie allMovy : allMovies) {
-                if ((todayMilli - (allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i))) {
-                    oldAndBadMovies.add(allMovy);
-                    b = true;
-                }
-            }
-            if (b) {
-                pmcModel.loadMovies();
-                FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/MovieIsTooOldOrTooLowRating.fxml"));
-                Parent root = null;
-                try {
-                    root = (Parent) fxmlLoader1.load();
-                } catch (IOException ex) {
-                    PMCException pmce = new PMCException("IO Error - filepath is wrong.");
-                    exceptionHandler(pmce);
-                }
-                MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
-                mist.setUp(oldAndBadMovies);
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-            } else {
-                pmcModel.loadMovies();
-            }
+            pmcModel.loadMovies();
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
     }
-    
-    public void chekForOldOrBadMovies(){
+
+    public void chekForOldOrBadMovies() {
         try {
             List<Movie> oldAndBadMovies = pmcModel.chekForOldOrBadMovies();
-            if (!oldAndBadMovies.isEmpty()){
+            if (!oldAndBadMovies.isEmpty()) {
                 FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/MovieIsTooOldOrTooLowRating.fxml"));
                 Parent root = (Parent) fxmlLoader1.load();
                 MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
@@ -295,11 +265,11 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnAddCatToMovie(ActionEvent event) {
-       ArrayList<Integer> movieCatList = new ArrayList<>(); 
-       int movieId = TVMovies.getSelectionModel().getSelectedItem().getId();
-       int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
-       movieCatList.add(categoryId);
-       movieCatList.add(movieId);
+        ArrayList<Integer> movieCatList = new ArrayList<>();
+        int movieId = TVMovies.getSelectionModel().getSelectedItem().getId();
+        int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
+        movieCatList.add(categoryId);
+        movieCatList.add(movieId);
         try {
             pmcModel.addMovieToCategory(movieCatList);
         } catch (PMCException ex) {
