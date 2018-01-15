@@ -9,10 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +20,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
 import privatemoviecollection.gui.Model.PMCModel;
 import static privatemoviecollection.gui.Controller.PrivateMovieCollectionController.exceptionHandler;
@@ -96,7 +92,6 @@ public class AddMovieController implements Initializable {
                 } catch (IOException ex) {
                     PMCException pmce = new PMCException("IO Error - wrong user input");
                     exceptionHandler(pmce);
-                    Logger.getLogger(AddMovieController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
