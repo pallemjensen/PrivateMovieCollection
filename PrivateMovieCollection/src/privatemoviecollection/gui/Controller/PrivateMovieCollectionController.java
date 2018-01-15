@@ -88,6 +88,7 @@ public class PrivateMovieCollectionController implements Initializable {
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
+        chekForOldOrBadMovies();
     }
 
     @FXML
@@ -228,6 +229,25 @@ public class PrivateMovieCollectionController implements Initializable {
                 pmcModel.loadMovies();
             }
         } catch (PMCException ex) {
+            exceptionHandler(ex);
+        }
+    }
+    
+    public void chekForOldOrBadMovies(){
+        try {
+            List<Movie> oldAndBadMovies = pmcModel.chekForOldOrBadMovies();
+            if (!oldAndBadMovies.isEmpty()){
+                FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/MovieIsTooOldOrTooLowRating.fxml"));
+                Parent root = (Parent) fxmlLoader1.load();
+                MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
+                mist.setUp(oldAndBadMovies);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+            }
+        } catch (PMCException ex) {
+            exceptionHandler(ex);
+        } catch (IOException ex) {
             exceptionHandler(ex);
         }
     }

@@ -5,6 +5,7 @@
  */
 package privatemoviecollection.bll;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import privatemoviecollection.be.Category;
@@ -67,6 +68,21 @@ public class BLLManager {
             }
         }
         return b;
+    }
+
+    public List<Movie> chekForOldOrBadMovies() throws PMCException {
+        List<Movie> allMovies = movieDAO.getAllMovies();
+            List<Movie> oldAndBadMovies = new ArrayList<>();
+            Date today = new Date();
+            long todayMilli = today.getTime();
+            long twoYears = 6307200000000l;
+            final double i = 6;
+            for (Movie allMovy : allMovies) {
+                if ((todayMilli - (allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i))) {
+                    oldAndBadMovies.add(allMovy);
+                }
+            }
+            return allMovies;
     }
     
     
