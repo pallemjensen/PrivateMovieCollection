@@ -295,6 +295,17 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnAddCatToMovie(ActionEvent event) {
+       ArrayList<Integer> movieCatList = new ArrayList<>(); 
+       int movieId = TVMovies.getSelectionModel().getSelectedItem().getId();
+       int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
+       movieCatList.add(categoryId);
+       movieCatList.add(movieId);
+        try {
+            pmcModel.addMovieToCategory(movieCatList);
+        } catch (PMCException ex) {
+            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
+        }
     }
 
     @FXML

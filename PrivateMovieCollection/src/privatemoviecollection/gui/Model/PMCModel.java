@@ -5,6 +5,8 @@
  */
 package privatemoviecollection.gui.Model;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -88,4 +90,8 @@ public class PMCModel {
     public List<Movie> chekForOldOrBadMovies() throws PMCException {
         return bllManager.chekForOldOrBadMovies();
     }
+    
+    public void addMovieToCategory(ArrayList<Integer> list) throws PMCException{
+    bllManager.addCategoryToMovie(list);
+            }
 }
