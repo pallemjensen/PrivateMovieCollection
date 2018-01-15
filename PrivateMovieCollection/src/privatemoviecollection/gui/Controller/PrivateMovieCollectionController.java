@@ -89,7 +89,6 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             root = (Parent) fxmlLoader1.load();
         } catch (IOException ex) {
-        Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
         PMCException pmce = new PMCException("IO Error - wrong user input");
         exceptionHandler(pmce);}
         NewCategoryController ncc = fxmlLoader1.getController();
@@ -106,7 +105,6 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             root = (Parent) fxmlLoader1.load();
         } catch (IOException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             PMCException pmce = new PMCException("IO Error - wrong user input");
             exceptionHandler(pmce);
         }
@@ -123,13 +121,11 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             pmcModel.remove(movie);
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
         try {
             pmcModel.loadMovies();
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
     }
@@ -141,7 +137,6 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             root = (Parent) fxmlLoader1.load();
         } catch (IOException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             PMCException pmce = new PMCException("IO Error - wrong user input - use a number - example '8.0'.");
             exceptionHandler(pmce);
         }
@@ -159,13 +154,11 @@ public class PrivateMovieCollectionController implements Initializable {
             try {
                 pmcModel.updateLastView(TVMovies.getSelectionModel().getSelectedItem());
             } catch (PMCException ex) {
-                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             }
             File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
             try {
                 desktop.open(file);
             } catch (IOException ex) {
-                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
                 PMCException pmce = new PMCException("IO Error - filepath is wrong.");
                 exceptionHandler(pmce);
             }
@@ -178,13 +171,11 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             pmcModel.remove(category);
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
         try {
             pmcModel.loadCategories();
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
     }
@@ -197,7 +188,6 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             pmcModel.loadMovies();
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
         TVMovies.setItems(pmcModel.getMovies());
@@ -226,7 +216,6 @@ public class PrivateMovieCollectionController implements Initializable {
             try {
                 root = (Parent) fxmlLoader1.load();
             } catch (IOException ex) {
-                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
                 PMCException pmce = new PMCException("IO Error - filepath is wrong.");
                 exceptionHandler(pmce);
             }
@@ -246,7 +235,6 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             pmcModel.loadCategories();
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
     }
