@@ -117,17 +117,14 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnDeleteMovie(ActionEvent event)  {
-    Movie movie = TVMovies.getSelectionModel().getSelectedItem();
         try {
+            Movie movie = TVMovies.getSelectionModel().getSelectedItem();
             pmcModel.remove(movie);
-        } catch (PMCException ex) {
-            exceptionHandler(ex);
-        }
-        try {
             pmcModel.loadMovies();
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
+        
     }
 
     @FXML
