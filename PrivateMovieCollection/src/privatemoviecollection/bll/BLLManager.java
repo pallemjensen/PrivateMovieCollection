@@ -90,4 +90,10 @@ public class BLLManager {
     public void addCategoryToMovie(ArrayList<Integer> list) throws PMCException{
     mic.addCategoryToMovie(list);
     }
+
+    public ArrayList<Integer> getCategoriesToMovie(int category) throws PMCException {
+        return mic.getCategoriesToMovie(category);
+    }
+    
+    
 }

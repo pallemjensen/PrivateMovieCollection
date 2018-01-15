@@ -94,4 +94,10 @@ public class PMCModel {
     public void addMovieToCategory(ArrayList<Integer> list) throws PMCException{
     bllManager.addCategoryToMovie(list);
             }
+
+    public ArrayList<Integer> getCategoriesToMovie(int category) throws PMCException {
+        return bllManager.getCategoriesToMovie(category);
+    }
+    
+    
 }

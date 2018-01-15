@@ -8,11 +8,14 @@ package privatemoviecollection.dal;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
 
 /**
@@ -39,17 +42,31 @@ public class movieIntoCategory {
         }
     }
 
-    public void getCategoriesToMovie(int i) throws PMCException {
-        List<Integer> categories = new ArrayList<>();
-        String sql = "";
+    public ArrayList<Integer> getCategoriesToMovie(int category) throws PMCException {
+        ArrayList<Integer> listMoviesBelongsToCategory = new ArrayList<>();
+        String sqlJoin = "SELECT Movie.imdb_movie_rating, Movie.private_movie_rating, CatMovie.category_id,Category.category_name,Movie.movie_title "
+                + "FROM CatMovie INNER JOIN Movie ON CatMovie.movie_id=Movie.movie_id INNER JOIN Category ON Category.category_id=CatMovie.category_id";
         try (Connection con = cm.getConnection()) {
+            PreparedStatement preparedStmt = con.prepareStatement(sqlJoin);
+            preparedStmt.executeUpdate();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT movie_id FROM CatMovie WHERE category_id =" + category);
             
+            while (rs.next()) {
+                int movie_id = 0;
+                movie_id = listMoviesBelongsToCategory.get(rs.getInt(movie_id));
+                listMoviesBelongsToCategory.add(movie_id);  
+            }
+
         } catch (SQLServerException ex) {
             Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Could not connect to database. Check your connection");
         } catch (SQLException ex) {
             Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Failed to get categories.");
+             
         }
+       return listMoviesBelongsToCategory;
+        
     }
 }
