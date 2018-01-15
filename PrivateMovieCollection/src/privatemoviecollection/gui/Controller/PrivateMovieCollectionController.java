@@ -150,14 +150,13 @@ public class PrivateMovieCollectionController implements Initializable {
         if(TVMovies.getSelectionModel().getSelectedItem() != null){
             try {
                 pmcModel.updateLastView(TVMovies.getSelectionModel().getSelectedItem());
-            } catch (PMCException ex) {
-            }
-            File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
-            try {
+                File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
                 desktop.open(file);
+            } catch (PMCException ex) {
+                exceptionHandler(ex);
             } catch (IOException ex) {
-                PMCException pmce = new PMCException("IO Error - filepath is wrong.");
-                exceptionHandler(pmce);
+                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+                exceptionHandler(ex);
             }
         }
     }
