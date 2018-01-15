@@ -61,9 +61,10 @@ public class PrivateMovieCollectionController implements Initializable {
     private TextField txtImdbFilter;
 
     private final Desktop desktop = Desktop.getDesktop();
-    
+
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -89,8 +90,9 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             root = (Parent) fxmlLoader1.load();
         } catch (IOException ex) {
-        PMCException pmce = new PMCException("IO Error - wrong user input");
-        exceptionHandler(pmce);}
+            PMCException pmce = new PMCException("IO Error - wrong user input");
+            exceptionHandler(pmce);
+        }
         NewCategoryController ncc = fxmlLoader1.getController();
         ncc.setUp(pmcModel);
         Stage stage = new Stage();
@@ -116,7 +118,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnDeleteMovie(ActionEvent event)  {
+    private void btnDeleteMovie(ActionEvent event) {
         try {
             Movie movie = TVMovies.getSelectionModel().getSelectedItem();
             pmcModel.remove(movie);
@@ -124,11 +126,11 @@ public class PrivateMovieCollectionController implements Initializable {
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
-        
+
     }
 
     @FXML
-    private void btnEditMovieRating(ActionEvent event) throws PMCException{
+    private void btnEditMovieRating(ActionEvent event) throws PMCException {
         FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/EditMovieRating.fxml"));
         Parent root = null;
         try {
@@ -146,8 +148,8 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnPlay(ActionEvent event)  {
-        if(TVMovies.getSelectionModel().getSelectedItem() != null){
+    private void btnPlay(ActionEvent event) {
+        if (TVMovies.getSelectionModel().getSelectedItem() != null) {
             try {
                 pmcModel.updateLastView(TVMovies.getSelectionModel().getSelectedItem());
                 File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
@@ -163,19 +165,14 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnDeleteCategory(ActionEvent event) {
-        Category category = TVCategories.getSelectionModel().getSelectedItem();
         try {
+            Category category = TVCategories.getSelectionModel().getSelectedItem();
             pmcModel.remove(category);
-        } catch (PMCException ex) {
-            exceptionHandler(ex);
-        }
-        try {
             pmcModel.loadCategories();
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
     }
-
 
     @FXML
     private void btnClearFilter(ActionEvent event) {
@@ -190,7 +187,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    public void btnLoadMovies(ActionEvent event){
+    public void btnLoadMovies(ActionEvent event) {
         try {
             List<Movie> allMovies = pmcModel.getAllMovies();
             List<Movie> oldAndBadMovies = new ArrayList<>();
@@ -200,13 +197,12 @@ public class PrivateMovieCollectionController implements Initializable {
             final double i = 6;
             boolean b = false;
             for (Movie allMovy : allMovies) {
-                if ((todayMilli-(allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i)) )
-                {
+                if ((todayMilli - (allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i))) {
                     oldAndBadMovies.add(allMovy);
                     b = true;
                 }
             }
-            if (b){
+            if (b) {
                 pmcModel.loadMovies();
                 FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/MovieIsTooOldOrTooLowRating.fxml"));
                 Parent root = null;
@@ -221,14 +217,13 @@ public class PrivateMovieCollectionController implements Initializable {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
+            } else {
+                pmcModel.loadMovies();
             }
-            else
-                pmcModel.loadMovies();      
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
-}
-    
+    }
 
     @FXML
     private void btnLoadCategories(ActionEvent event) {
@@ -245,41 +240,38 @@ public class PrivateMovieCollectionController implements Initializable {
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
         String filter = txtTitleFilter.getText();
         for (Movie allMovy : allMovies) {
-        if (allMovy.getMovieName().toLowerCase().trim().contains(filter.toLowerCase().trim()) == true)
-        {
-            filteredMovies.add(allMovy);   
-        }
-        TVMovies.setItems(filteredMovies);
+            if (allMovy.getMovieName().toLowerCase().trim().contains(filter.toLowerCase().trim()) == true) {
+                filteredMovies.add(allMovy);
+            }
+            TVMovies.setItems(filteredMovies);
         }
     }
 
     @FXML
     private void btnFilterOnImdbRating(ActionEvent event) throws PMCException {
-    List<Movie> allMovies = pmcModel.getAllMovies(); 
-    ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
-    Double filter = Double.valueOf(txtImdbFilter.getText());
+        List<Movie> allMovies = pmcModel.getAllMovies();
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
+        Double filter = Double.valueOf(txtImdbFilter.getText());
         System.out.println("" + filter);
         for (Movie filteredMovy : allMovies) {
-            if (filteredMovy.getImdbRating() >= filter)
-            {
-              filteredMovies.add(filteredMovy);
+            if (filteredMovy.getImdbRating() >= filter) {
+                filteredMovies.add(filteredMovy);
             }
-         TVMovies.setItems(filteredMovies);   
+            TVMovies.setItems(filteredMovies);
         }
     }
 
     @FXML
     private void btnExit(ActionEvent event) {
-            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
     @FXML
     private void btnAddCatToMovie(ActionEvent event) {
     }
-    
+
     @FXML
-    static void exceptionHandler(Exception ex) 
-    {
+    static void exceptionHandler(Exception ex) {
         try {
             String errorMsg = ex.getMessage();
             FXMLLoader fxmlLoader1 = new FXMLLoader(ExceptionMessengerController.class.getResource("/privatemoviecollection/gui/View/exceptionMessenger.fxml"));
