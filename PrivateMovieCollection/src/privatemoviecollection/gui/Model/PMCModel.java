@@ -86,6 +86,10 @@ public class PMCModel {
     public boolean doesMovieAlreadyExist(String name) throws PMCException{
         return bllManager.doesMovieAlreadyExist(name);
     }
+
+    public List<Movie> chekForOldOrBadMovies() throws PMCException {
+        return bllManager.chekForOldOrBadMovies();
+    }
     
     public void addMovieToCategory(ArrayList<Integer> list) throws PMCException{
     bllManager.addCategoryToMovie(list);
