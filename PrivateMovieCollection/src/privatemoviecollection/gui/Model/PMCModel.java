@@ -32,9 +32,9 @@ public class PMCModel {
         movies.add(newMovie);
     }
     
-    public Category createCategory(String categoryName) throws PMCException {
+    public void createCategory(String categoryName) throws PMCException {
         Category newCategory = bllManager.createCategory(categoryName);
-        return newCategory;
+        categories.add(newCategory);
     }
 
     public List<Movie> getAllMovies() throws PMCException {
