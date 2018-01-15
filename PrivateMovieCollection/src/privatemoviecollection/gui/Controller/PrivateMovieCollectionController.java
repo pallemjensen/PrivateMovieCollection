@@ -70,17 +70,24 @@ public class PrivateMovieCollectionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        categoryColumn.setCellValueFactory(
-                new PropertyValueFactory("categoryName"));
-        movieTitleColumn.setCellValueFactory(
-                new PropertyValueFactory("movieName"));
-        movieImdbColumn.setCellValueFactory(
-                new PropertyValueFactory("imdbRating"));
-        movieUserRatingColumn.setCellValueFactory(
-                new PropertyValueFactory("privateRating"));
-        TVMovies.setItems(pmcModel.getMovies());
-        TVCategories.setItems(pmcModel.getCategories());
-        txtImdbFilter.setText("0.0");
+        
+            categoryColumn.setCellValueFactory(
+                    new PropertyValueFactory("categoryName"));
+            movieTitleColumn.setCellValueFactory(
+                    new PropertyValueFactory("movieName"));
+            movieImdbColumn.setCellValueFactory(
+                    new PropertyValueFactory("imdbRating"));
+            movieUserRatingColumn.setCellValueFactory(
+                    new PropertyValueFactory("privateRating"));
+            TVMovies.setItems(pmcModel.getMovies());
+            TVCategories.setItems(pmcModel.getCategories());
+            txtImdbFilter.setText("0.0");
+        try {
+            pmcModel.loadMovies();
+            pmcModel.loadCategories();
+        } catch (PMCException ex) {
+            exceptionHandler(ex);
+        }
     }
 
     @FXML
