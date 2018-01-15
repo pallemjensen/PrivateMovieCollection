@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -165,7 +164,6 @@ public class PrivateMovieCollectionController implements Initializable {
             } catch (PMCException ex) {
                 exceptionHandler(ex);
             } catch (IOException ex) {
-                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
                 exceptionHandler(ex);
             }
         }
@@ -186,12 +184,13 @@ public class PrivateMovieCollectionController implements Initializable {
     private void btnClearFilter(ActionEvent event) {
         txtTitleFilter.setText("");
         txtImdbFilter.setText("0.0");
+        TVMovies.setItems(pmcModel.getMovies());
         try {
             pmcModel.loadMovies();
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
-        TVMovies.setItems(pmcModel.getMovies());
+        
     }
 
     @FXML
