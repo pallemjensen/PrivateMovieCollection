@@ -84,6 +84,10 @@ public class AddMovieController implements Initializable {
      */
     @FXML
     private void btnSaveMovie(ActionEvent event){
+        if(txtMovieFilePath.getText().isEmpty()){
+            txtMovieFilePath.setText("PLEASE CHOSE MOVIE!");
+        }
+        else{
         List<Movie> movies = null;
         try {
             movies = pmcModel.getAllMovies();
@@ -99,7 +103,7 @@ public class AddMovieController implements Initializable {
             }
         }
         if (b) {
-            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getClassLoader().getResource("../View/ErrorSameMovieName.fxml"));
+            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/ErrorSameMovieName.fxml"));
             Parent root = null;
             try {
                 root = (Parent) fxmlLoader1.load();
@@ -110,7 +114,7 @@ public class AddMovieController implements Initializable {
             }
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.show();
+            stage.showAndWait();
         } else {
             String movieName = txtMovieTitle.getText();
             String imdbRatingAsString = txtMovieImdbRating.getText();
@@ -125,8 +129,10 @@ public class AddMovieController implements Initializable {
             } catch (PMCException ex) {
                 exceptionHandler(ex);
             }
+            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
         }
-        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        
+    }
     }
 
     @FXML
