@@ -5,6 +5,7 @@
  */
 package privatemoviecollection.bll;
 
+import java.util.Date;
 import java.util.List;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
@@ -50,7 +51,9 @@ public class BLLManager {
         movieDAO.editPersonalRating(id, value);
     }
 
-    public void updateLastView(Movie movie, long newView) throws PMCException {
+    public void updateLastView(Movie movie) throws PMCException {
+        Date date = new Date();
+        long newView = date.getTime();
         movieDAO.updateLastView(movie, newView);
     }
 

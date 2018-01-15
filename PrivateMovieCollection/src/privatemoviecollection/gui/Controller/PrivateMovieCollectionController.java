@@ -194,39 +194,43 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    public void btnLoadMovies(ActionEvent event) throws PMCException{
-        List<Movie> allMovies = pmcModel.getAllMovies();
-        List<Movie> oldAndBadMovies = new ArrayList<>();
-        Date today = new Date();
-        long todayMilli = today.getTime();
-        long twoYears = 6307200000000l;
-        final double i = 6;
-        boolean b = false;
-        for (Movie allMovy : allMovies) {
-            if ((todayMilli-(allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i)) )
-                    {
-            oldAndBadMovies.add(allMovy);
-            b = true;
-                    }
-        }
-        if (b){
-            pmcModel.loadMovies();
-            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/MovieIsTooOldOrTooLowRating.fxml"));
-            Parent root = null;
-            try {
-                root = (Parent) fxmlLoader1.load();
-            } catch (IOException ex) {
-                PMCException pmce = new PMCException("IO Error - filepath is wrong.");
-                exceptionHandler(pmce);
+    public void btnLoadMovies(ActionEvent event){
+        try {
+            List<Movie> allMovies = pmcModel.getAllMovies();
+            List<Movie> oldAndBadMovies = new ArrayList<>();
+            Date today = new Date();
+            long todayMilli = today.getTime();
+            long twoYears = 6307200000000l;
+            final double i = 6;
+            boolean b = false;
+            for (Movie allMovy : allMovies) {
+                if ((todayMilli-(allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i)) )
+                {
+                    oldAndBadMovies.add(allMovy);
+                    b = true;
+                }
             }
-            MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
-            mist.setUp(oldAndBadMovies);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        }
+            if (b){
+                pmcModel.loadMovies();
+                FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/MovieIsTooOldOrTooLowRating.fxml"));
+                Parent root = null;
+                try {
+                    root = (Parent) fxmlLoader1.load();
+                } catch (IOException ex) {
+                    PMCException pmce = new PMCException("IO Error - filepath is wrong.");
+                    exceptionHandler(pmce);
+                }
+                MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
+                mist.setUp(oldAndBadMovies);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
             else
                 pmcModel.loadMovies();      
+        } catch (PMCException ex) {
+            exceptionHandler(ex);
+        }
 }
     
 
