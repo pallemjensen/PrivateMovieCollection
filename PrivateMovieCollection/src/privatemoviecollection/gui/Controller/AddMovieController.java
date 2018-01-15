@@ -87,52 +87,41 @@ public class AddMovieController implements Initializable {
         if(txtMovieFilePath.getText().isEmpty()){
             txtMovieFilePath.setText("PLEASE CHOSE MOVIE!");
         }
-        else{
-        List<Movie> movies = null;
-        try {
-            movies = pmcModel.getAllMovies();
+        else try {
+            if(pmcModel.doesMovieAlreadyExist(txtMovieTitle.getText())){
+                FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/ErrorSameMovieName.fxml"));
+                Parent root = null;
+                try {
+                    root = (Parent) fxmlLoader1.load();
+                } catch (IOException ex) {
+                    PMCException pmce = new PMCException("IO Error - wrong user input");
+                    exceptionHandler(pmce);
+                    Logger.getLogger(AddMovieController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+            }
+            else {
+                String movieName = txtMovieTitle.getText();
+                String imdbRatingAsString = txtMovieImdbRating.getText();
+                Double imdbRating = Double.valueOf(imdbRatingAsString);
+                String privateRatingAsString = txtMoviePersonalRating.getText();
+                Double privateRating = Double.valueOf(privateRatingAsString);
+                String fileLink = newMoviePath;
+                Date date = new Date();
+                long lastView = date.getTime();
+                try {
+                    pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+                } catch (PMCException ex) {
+                    exceptionHandler(ex);
+                }
+                ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+            }
         } catch (PMCException ex) {
             exceptionHandler(ex);
-            Logger.getLogger(AddMovieController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        boolean b = false;
-        for (Movie filterMovy : movies) {
-            if (txtMovieTitle.getText().trim().equalsIgnoreCase(filterMovy.getMovieName().trim()) == true) {
-                b = true;
-                break;
-            }
-        }
-        if (b) {
-            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/ErrorSameMovieName.fxml"));
-            Parent root = null;
-            try {
-                root = (Parent) fxmlLoader1.load();
-            } catch (IOException ex) {
-                PMCException pmce = new PMCException("IO Error - wrong user input");
-                exceptionHandler(pmce);
-                Logger.getLogger(AddMovieController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-        } else {
-            String movieName = txtMovieTitle.getText();
-            String imdbRatingAsString = txtMovieImdbRating.getText();
-            Double imdbRating = Double.valueOf(imdbRatingAsString);
-            String privateRatingAsString = txtMoviePersonalRating.getText();
-            Double privateRating = Double.valueOf(privateRatingAsString);
-            String fileLink = newMoviePath;
-            Date date = new Date();
-            long lastView = date.getTime();
-            try {
-                pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
-            } catch (PMCException ex) {
-                exceptionHandler(ex);
-            }
-            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
         }
         
-    }
     }
 
     @FXML

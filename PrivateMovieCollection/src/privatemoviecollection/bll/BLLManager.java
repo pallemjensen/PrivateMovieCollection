@@ -53,6 +53,18 @@ public class BLLManager {
     public void updateLastView(Movie movie, long newView) throws PMCException {
         movieDAO.updateLastView(movie, newView);
     }
+
+    public boolean doesMovieAlreadyExist(String name) throws PMCException {
+        List<Movie> all = movieDAO.getAllMovies();
+        boolean b = false;
+        for (Movie movie : all) {
+            if (name.trim().equalsIgnoreCase(movie.getMovieName().trim())) {
+                b = true;
+                break;
+            }
+        }
+        return b;
+    }
     
     
     

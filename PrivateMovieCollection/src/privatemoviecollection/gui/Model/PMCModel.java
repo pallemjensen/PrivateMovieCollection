@@ -83,4 +83,8 @@ public class PMCModel {
         long newView = date.getTime();
         bllManager.updateLastView(movie, newView);
     }
+    
+    public boolean doesMovieAlreadyExist(String name) throws PMCException{
+        return bllManager.doesMovieAlreadyExist(name);
+    }
 }
