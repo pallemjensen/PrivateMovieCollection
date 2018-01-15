@@ -61,25 +61,33 @@ public class PrivateMovieCollectionController implements Initializable {
     private TextField txtImdbFilter;
 
     private final Desktop desktop = Desktop.getDesktop();
-    
+
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        categoryColumn.setCellValueFactory(
-                new PropertyValueFactory("categoryName"));
-        movieTitleColumn.setCellValueFactory(
-                new PropertyValueFactory("movieName"));
-        movieImdbColumn.setCellValueFactory(
-                new PropertyValueFactory("imdbRating"));
-        movieUserRatingColumn.setCellValueFactory(
-                new PropertyValueFactory("privateRating"));
-        TVMovies.setItems(pmcModel.getMovies());
-        TVCategories.setItems(pmcModel.getCategories());
-        txtImdbFilter.setText("0.0");
+        
+            categoryColumn.setCellValueFactory(
+                    new PropertyValueFactory("categoryName"));
+            movieTitleColumn.setCellValueFactory(
+                    new PropertyValueFactory("movieName"));
+            movieImdbColumn.setCellValueFactory(
+                    new PropertyValueFactory("imdbRating"));
+            movieUserRatingColumn.setCellValueFactory(
+                    new PropertyValueFactory("privateRating"));
+            TVMovies.setItems(pmcModel.getMovies());
+            TVCategories.setItems(pmcModel.getCategories());
+            txtImdbFilter.setText("0.0");
+        try {
+            pmcModel.loadMovies();
+            pmcModel.loadCategories();
+        } catch (PMCException ex) {
+            exceptionHandler(ex);
+        }
     }
 
     @FXML
@@ -89,9 +97,9 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             root = (Parent) fxmlLoader1.load();
         } catch (IOException ex) {
-        Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
-        PMCException pmce = new PMCException("IO Error - wrong user input");
-        exceptionHandler(pmce);}
+            PMCException pmce = new PMCException("IO Error - wrong user input");
+            exceptionHandler(pmce);
+        }
         NewCategoryController ncc = fxmlLoader1.getController();
         ncc.setUp(pmcModel);
         Stage stage = new Stage();
@@ -106,7 +114,6 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             root = (Parent) fxmlLoader1.load();
         } catch (IOException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             PMCException pmce = new PMCException("IO Error - wrong user input");
             exceptionHandler(pmce);
         }
@@ -118,30 +125,24 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnDeleteMovie(ActionEvent event)  {
-    Movie movie = TVMovies.getSelectionModel().getSelectedItem();
+    private void btnDeleteMovie(ActionEvent event) {
         try {
+            Movie movie = TVMovies.getSelectionModel().getSelectedItem();
             pmcModel.remove(movie);
-        } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
-            exceptionHandler(ex);
-        }
-        try {
             pmcModel.loadMovies();
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
+
     }
 
     @FXML
-    private void btnEditMovieRating(ActionEvent event) throws PMCException{
+    private void btnEditMovieRating(ActionEvent event) throws PMCException {
         FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/EditMovieRating.fxml"));
         Parent root = null;
         try {
             root = (Parent) fxmlLoader1.load();
         } catch (IOException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             PMCException pmce = new PMCException("IO Error - wrong user input - use a number - example '8.0'.");
             exceptionHandler(pmce);
         }
@@ -154,41 +155,31 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnPlay(ActionEvent event)  {
-        if(TVMovies.getSelectionModel().getSelectedItem() != null){
+    private void btnPlay(ActionEvent event) {
+        if (TVMovies.getSelectionModel().getSelectedItem() != null) {
             try {
                 pmcModel.updateLastView(TVMovies.getSelectionModel().getSelectedItem());
-            } catch (PMCException ex) {
-                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
-            try {
+                File file = new File(TVMovies.getSelectionModel().getSelectedItem().getFileLink());
                 desktop.open(file);
+            } catch (PMCException ex) {
+                exceptionHandler(ex);
             } catch (IOException ex) {
                 Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
-                PMCException pmce = new PMCException("IO Error - filepath is wrong.");
-                exceptionHandler(pmce);
+                exceptionHandler(ex);
             }
         }
     }
 
     @FXML
     private void btnDeleteCategory(ActionEvent event) {
-        Category category = TVCategories.getSelectionModel().getSelectedItem();
         try {
+            Category category = TVCategories.getSelectionModel().getSelectedItem();
             pmcModel.remove(category);
-        } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
-            exceptionHandler(ex);
-        }
-        try {
             pmcModel.loadCategories();
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
     }
-
 
     @FXML
     private void btnClearFilter(ActionEvent event) {
@@ -197,56 +188,55 @@ public class PrivateMovieCollectionController implements Initializable {
         try {
             pmcModel.loadMovies();
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
         TVMovies.setItems(pmcModel.getMovies());
     }
 
     @FXML
-    public void btnLoadMovies(ActionEvent event) throws PMCException{
-        List<Movie> allMovies = pmcModel.getAllMovies();
-        List<Movie> oldAndBadMovies = new ArrayList<>();
-        Date today = new Date();
-        long todayMilli = today.getTime();
-        long twoYears = 6307200000000l;
-        final double i = 6;
-        boolean b = false;
-        for (Movie allMovy : allMovies) {
-            if ((todayMilli-(allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i)) )
-                    {
-            oldAndBadMovies.add(allMovy);
-            b = true;
-                    }
-        }
-        if (b){
-            pmcModel.loadMovies();
-            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/MovieIsTooOldOrTooLowRating.fxml"));
-            Parent root = null;
-            try {
-                root = (Parent) fxmlLoader1.load();
-            } catch (IOException ex) {
-                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
-                PMCException pmce = new PMCException("IO Error - filepath is wrong.");
-                exceptionHandler(pmce);
+    public void btnLoadMovies(ActionEvent event) {
+        try {
+            List<Movie> allMovies = pmcModel.getAllMovies();
+            List<Movie> oldAndBadMovies = new ArrayList<>();
+            Date today = new Date();
+            long todayMilli = today.getTime();
+            long twoYears = 6307200000000l;
+            final double i = 6;
+            boolean b = false;
+            for (Movie allMovy : allMovies) {
+                if ((todayMilli - (allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i))) {
+                    oldAndBadMovies.add(allMovy);
+                    b = true;
+                }
             }
-            MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
-            mist.setUp(oldAndBadMovies);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            if (b) {
+                pmcModel.loadMovies();
+                FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/MovieIsTooOldOrTooLowRating.fxml"));
+                Parent root = null;
+                try {
+                    root = (Parent) fxmlLoader1.load();
+                } catch (IOException ex) {
+                    PMCException pmce = new PMCException("IO Error - filepath is wrong.");
+                    exceptionHandler(pmce);
+                }
+                MovieIsTooOldOrTooLowRatingController mist = fxmlLoader1.getController();
+                mist.setUp(oldAndBadMovies);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } else {
+                pmcModel.loadMovies();
+            }
+        } catch (PMCException ex) {
+            exceptionHandler(ex);
         }
-            else
-                pmcModel.loadMovies();      
-}
-    
+    }
 
     @FXML
     private void btnLoadCategories(ActionEvent event) {
         try {
             pmcModel.loadCategories();
         } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
     }
@@ -257,32 +247,30 @@ public class PrivateMovieCollectionController implements Initializable {
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
         String filter = txtTitleFilter.getText();
         for (Movie allMovy : allMovies) {
-        if (allMovy.getMovieName().toLowerCase().trim().contains(filter.toLowerCase().trim()) == true)
-        {
-            filteredMovies.add(allMovy);   
-        }
-        TVMovies.setItems(filteredMovies);
+            if (allMovy.getMovieName().toLowerCase().trim().contains(filter.toLowerCase().trim()) == true) {
+                filteredMovies.add(allMovy);
+            }
+            TVMovies.setItems(filteredMovies);
         }
     }
 
     @FXML
     private void btnFilterOnImdbRating(ActionEvent event) throws PMCException {
-    List<Movie> allMovies = pmcModel.getAllMovies(); 
-    ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
-    Double filter = Double.valueOf(txtImdbFilter.getText());
+        List<Movie> allMovies = pmcModel.getAllMovies();
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
+        Double filter = Double.valueOf(txtImdbFilter.getText());
         System.out.println("" + filter);
         for (Movie filteredMovy : allMovies) {
-            if (filteredMovy.getImdbRating() >= filter)
-            {
-              filteredMovies.add(filteredMovy);
+            if (filteredMovy.getImdbRating() >= filter) {
+                filteredMovies.add(filteredMovy);
             }
-         TVMovies.setItems(filteredMovies);   
+            TVMovies.setItems(filteredMovies);
         }
     }
 
     @FXML
     private void btnExit(ActionEvent event) {
-            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
     @FXML
@@ -299,10 +287,9 @@ public class PrivateMovieCollectionController implements Initializable {
             exceptionHandler(ex);
         }
     }
-    
+
     @FXML
-    static void exceptionHandler(Exception ex) 
-    {
+    static void exceptionHandler(Exception ex) {
         try {
             String errorMsg = ex.getMessage();
             FXMLLoader fxmlLoader1 = new FXMLLoader(ExceptionMessengerController.class.getResource("/privatemoviecollection/gui/View/exceptionMessenger.fxml"));

@@ -9,10 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +20,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
 import privatemoviecollection.gui.Model.PMCModel;
 import static privatemoviecollection.gui.Controller.PrivateMovieCollectionController.exceptionHandler;
@@ -84,49 +80,43 @@ public class AddMovieController implements Initializable {
      */
     @FXML
     private void btnSaveMovie(ActionEvent event){
-        List<Movie> movies = null;
-        try {
-            movies = pmcModel.getAllMovies();
+        if(txtMovieFilePath.getText().isEmpty()){
+            txtMovieFilePath.setText("PLEASE CHOSE MOVIE!");
+        }
+        else try {
+            if(pmcModel.doesMovieAlreadyExist(txtMovieTitle.getText())){
+                FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/ErrorSameMovieName.fxml"));
+                Parent root = null;
+                try {
+                    root = (Parent) fxmlLoader1.load();
+                } catch (IOException ex) {
+                    PMCException pmce = new PMCException("IO Error - wrong user input");
+                    exceptionHandler(pmce);
+                }
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+            }
+            else {
+                String movieName = txtMovieTitle.getText();
+                String imdbRatingAsString = txtMovieImdbRating.getText();
+                Double imdbRating = Double.valueOf(imdbRatingAsString);
+                String privateRatingAsString = txtMoviePersonalRating.getText();
+                Double privateRating = Double.valueOf(privateRatingAsString);
+                String fileLink = newMoviePath;
+                Date date = new Date();
+                long lastView = date.getTime();
+                try {
+                    pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
+                } catch (PMCException ex) {
+                    exceptionHandler(ex);
+                }
+                ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+            }
         } catch (PMCException ex) {
             exceptionHandler(ex);
-            Logger.getLogger(AddMovieController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        boolean b = false;
-        for (Movie filterMovy : movies) {
-            if (txtMovieTitle.getText().trim().equalsIgnoreCase(filterMovy.getMovieName().trim()) == true) {
-                b = true;
-                break;
-            }
-        }
-        if (b) {
-            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getClassLoader().getResource("../View/ErrorSameMovieName.fxml"));
-            Parent root = null;
-            try {
-                root = (Parent) fxmlLoader1.load();
-            } catch (IOException ex) {
-                PMCException pmce = new PMCException("IO Error - wrong user input");
-                exceptionHandler(pmce);
-                Logger.getLogger(AddMovieController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } else {
-            String movieName = txtMovieTitle.getText();
-            String imdbRatingAsString = txtMovieImdbRating.getText();
-            Double imdbRating = Double.valueOf(imdbRatingAsString);
-            String privateRatingAsString = txtMoviePersonalRating.getText();
-            Double privateRating = Double.valueOf(privateRatingAsString);
-            String fileLink = newMoviePath;
-            Date date = new Date();
-            long lastView = date.getTime();
-            try {
-                pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
-            } catch (PMCException ex) {
-                exceptionHandler(ex);
-            }
-        }
-        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        
     }
 
     @FXML

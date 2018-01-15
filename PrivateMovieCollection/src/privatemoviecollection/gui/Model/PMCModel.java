@@ -5,8 +5,11 @@
  */
 package privatemoviecollection.gui.Model;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
+=======
+>>>>>>> 93100c6a128d4e05b4b675ad5467395ecf29790d
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,9 +37,9 @@ public class PMCModel {
         movies.add(newMovie);
     }
     
-    public Category createCategory(String categoryName) throws PMCException {
+    public void createCategory(String categoryName) throws PMCException {
         Category newCategory = bllManager.createCategory(categoryName);
-        return newCategory;
+        categories.add(newCategory);
     }
 
     public List<Movie> getAllMovies() throws PMCException {
@@ -80,9 +83,11 @@ public class PMCModel {
     }
     
     public void updateLastView(Movie movie) throws PMCException{
-        Date date = new Date();
-        long newView = date.getTime();
-        bllManager.updateLastView(movie, newView);
+        bllManager.updateLastView(movie);
+    }
+    
+    public boolean doesMovieAlreadyExist(String name) throws PMCException{
+        return bllManager.doesMovieAlreadyExist(name);
     }
     
     public void addMovieToCategory(ArrayList<Integer> list) throws PMCException{

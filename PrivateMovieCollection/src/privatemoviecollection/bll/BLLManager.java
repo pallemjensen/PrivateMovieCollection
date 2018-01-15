@@ -5,7 +5,11 @@
  */
 package privatemoviecollection.bll;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import java.util.Date;
+>>>>>>> 93100c6a128d4e05b4b675ad5467395ecf29790d
 import java.util.List;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
@@ -52,8 +56,22 @@ public class BLLManager {
         movieDAO.editPersonalRating(id, value);
     }
 
-    public void updateLastView(Movie movie, long newView) throws PMCException {
+    public void updateLastView(Movie movie) throws PMCException {
+        Date date = new Date();
+        long newView = date.getTime();
         movieDAO.updateLastView(movie, newView);
+    }
+
+    public boolean doesMovieAlreadyExist(String name) throws PMCException {
+        List<Movie> all = movieDAO.getAllMovies();
+        boolean b = false;
+        for (Movie movie : all) {
+            if (name.trim().equalsIgnoreCase(movie.getMovieName().trim())) {
+                b = true;
+                break;
+            }
+        }
+        return b;
     }
     
     public void addCategoryToMovie(ArrayList<Integer> list) throws PMCException{
