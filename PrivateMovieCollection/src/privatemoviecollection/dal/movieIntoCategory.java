@@ -41,11 +41,11 @@ public class movieIntoCategory {
         }
     }
 
-    public void getCategoriesToMovie() throws PMCException {
+    public void getCategoriesToMovie(int i) throws PMCException {
         List<Integer> categories = new ArrayList<>();
         String sql = "";
         try (Connection con = cm.getConnection()) {
-
+            
         } catch (SQLServerException ex) {
             Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Could not connect to database. Check your connection");
