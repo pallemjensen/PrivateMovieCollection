@@ -277,7 +277,6 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    @FXML
     static void exceptionHandler(Exception ex) {
         try {
             String errorMsg = ex.getMessage();
@@ -291,5 +290,9 @@ public class PrivateMovieCollectionController implements Initializable {
         } catch (IOException ex1) {
             Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex1);
         }
+    }
+
+    @FXML
+    private void btnShowMoviesByCategory(ActionEvent event) {
     }
 }
