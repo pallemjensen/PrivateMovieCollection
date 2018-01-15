@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package privatemoviecollection.gui.Controller;
+package privatemoviecollection.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,18 +11,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
- * @author pmj
+ * @author Anders
  */
-public class ExceptionMessengerController implements Initializable {
-
-    @FXML
-    private TextArea txtErrorMsg;
+public class ErrorSameMovieNameController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -32,15 +28,11 @@ public class ExceptionMessengerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
-    private void btnAcceptError(ActionEvent event) {
-        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+    private void btnOk(ActionEvent event) {
+        ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
     
-    public void setErrorMsg(String errorMSg)
-    {
-        txtErrorMsg.setText(errorMSg);
-    }
 }
