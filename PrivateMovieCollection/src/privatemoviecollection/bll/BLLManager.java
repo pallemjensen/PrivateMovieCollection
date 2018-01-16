@@ -77,14 +77,14 @@ public class BLLManager {
             List<Movie> oldAndBadMovies = new ArrayList<>();
             Date today = new Date();
             long todayMilli = today.getTime();
-            long twoYears = 6307200000000l;
-            final double i = 6;
+            long twoYearsMilli = 6307200000l;
+            final double minimumRating = 6.0;
             for (Movie allMovy : allMovies) {
-                if ((todayMilli - (allMovy.getLastView()) > twoYears) || ((allMovy.getPrivateRating() < i))) {
+                if ((todayMilli - (allMovy.getLastView()) > twoYearsMilli) || ((allMovy.getPrivateRating() < minimumRating))) {
                     oldAndBadMovies.add(allMovy);
                 }
             }
-            return allMovies;
+            return oldAndBadMovies;
     }
     
     public void addCategoryToMovie(ArrayList<Integer> list) throws PMCException{
