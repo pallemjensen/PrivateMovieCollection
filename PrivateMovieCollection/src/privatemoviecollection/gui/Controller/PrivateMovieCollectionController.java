@@ -179,12 +179,6 @@ public class PrivateMovieCollectionController implements Initializable {
         txtTitleFilter.setText("");
         txtImdbFilter.setText("0.0");
         TVMovies.setItems(pmcModel.getMovies());
-        try {
-            pmcModel.loadMovies();
-        } catch (PMCException ex) {
-            exceptionHandler(ex);
-        }
-
     }
 
     @FXML
@@ -287,7 +281,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnShowMoviesByCategory(ActionEvent event) {
-     String a = null;
-        
+        String a = null;
+
     }
 }
