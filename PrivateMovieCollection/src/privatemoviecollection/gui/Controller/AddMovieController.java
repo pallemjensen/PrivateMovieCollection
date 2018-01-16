@@ -106,12 +106,8 @@ public class AddMovieController implements Initializable {
                 Double privateRating = Double.valueOf(privateRatingAsString);
                 String fileLink = newMoviePath;
                 Date date = new Date();
-                long lastView = date.getTime();
-                try {
-                    pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
-                } catch (PMCException ex) {
-                    exceptionHandler(ex);
-                }
+                long lastView = 0;//date.getTime();
+                pmcModel.addNewMovie(movieName, imdbRating, privateRating, fileLink, lastView);
                 ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
             }
         } catch (PMCException ex) {
