@@ -94,6 +94,4 @@ public class BLLManager {
     public ArrayList<Integer> getCategoriesToMovie(int category) throws PMCException {
         return mic.getCategoriesToMovie(category);
     }
-    
-    
 }

@@ -294,5 +294,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnShowMoviesByCategory(ActionEvent event) {
+     String a = null;
+        
     }
 }
