@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,9 +33,6 @@ import static privatemoviecollection.gui.Controller.PrivateMovieCollectionContro
  */
 public class AddMovieController implements Initializable {
 
-    private PMCModel pmcModel;
-    private Stage stage;
-
     @FXML
     private TextField txtMovieTitle;
     @FXML
@@ -48,8 +47,11 @@ public class AddMovieController implements Initializable {
     private Button btnSaveMovie;
     @FXML
     private Button btnCancelAddMovie;
-    String newMoviePath = null;
-
+    
+    private String newMoviePath = null;
+    private PMCModel pmcModel;
+    private Stage stage;
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -71,8 +73,10 @@ public class AddMovieController implements Initializable {
         FileChooser.ExtensionFilter filterMp4_mpeg4 = new FileChooser.ExtensionFilter("select media( .mp4 or .mpeg4)", "*.mp4", "*.mpeg4");
         chooser.getExtensionFilters().add(filterMp4_mpeg4);
         File file = chooser.showOpenDialog(this.stage);
+        if(file != null){
         newMoviePath = file.getAbsolutePath();
         txtMovieFilePath.setText(newMoviePath);
+        }
     }
 
     /**
@@ -80,19 +84,16 @@ public class AddMovieController implements Initializable {
      */
     @FXML
     private void btnSaveMovie(ActionEvent event){
-        if(txtMovieFilePath.getText().isEmpty()){
+        if(newMoviePath == null){
             txtMovieFilePath.setText("PLEASE CHOSE MOVIE!");
+        }
+        else if(txtMovieTitle.getText().isEmpty() || txtMovieTitle.getText().equalsIgnoreCase("PLEASE TYPE MOVIE NAME")){
+            txtMovieTitle.setText("PLEASE TYPE MOVIE NAME");
         }
         else try {
             if(pmcModel.doesMovieAlreadyExist(txtMovieTitle.getText())){
                 FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/ErrorSameMovieName.fxml"));
-                Parent root = null;
-                try {
-                    root = (Parent) fxmlLoader1.load();
-                } catch (IOException ex) {
-                    PMCException pmce = new PMCException("IO Error - wrong user input");
-                    exceptionHandler(pmce);
-                }
+                Parent root = (Parent) fxmlLoader1.load();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.showAndWait();
@@ -115,6 +116,8 @@ public class AddMovieController implements Initializable {
             }
         } catch (PMCException ex) {
             exceptionHandler(ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddMovieController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
