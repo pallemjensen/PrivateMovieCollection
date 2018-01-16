@@ -98,4 +98,8 @@ public class PMCModel {
     public ArrayList<Integer> getCategoriesToMovie(int category) throws PMCException {
         return bllManager.getCategoriesToMovie(category);
     }
+
+    public ObservableList<Movie> filterOnTitle(String filter) throws PMCException {
+        return bllManager.filterOnTitle(filter);
+    }
 }

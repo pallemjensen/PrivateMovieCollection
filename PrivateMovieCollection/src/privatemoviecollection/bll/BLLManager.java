@@ -5,16 +5,18 @@
  */
 package privatemoviecollection.bll;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import privatemoviecollection.be.Category;
 import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
 import privatemoviecollection.dal.CategoryDAO;
 import privatemoviecollection.dal.MovieDAO;
 import privatemoviecollection.dal.movieIntoCategory;
+
 /**
  *
  * @author pmj
@@ -42,11 +44,12 @@ public class BLLManager {
     public List<Category> getAllCategories() throws PMCException {
         return categoryDAO.getAllCategories();
     }
-    public void remove(Movie movie) throws PMCException{
+
+    public void remove(Movie movie) throws PMCException {
         movieDAO.remove(movie);
     }
-    
-    public void remove(Category category) throws PMCException{
+
+    public void remove(Category category) throws PMCException {
         categoryDAO.remove(category);
     }
 
@@ -74,24 +77,34 @@ public class BLLManager {
 
     public List<Movie> chekForOldOrBadMovies() throws PMCException {
         List<Movie> allMovies = movieDAO.getAllMovies();
-            List<Movie> oldAndBadMovies = new ArrayList<>();
-            Date today = new Date();
-            long todayMilli = today.getTime();
-            long twoYearsMilli = 6307200000l;
-            final double minimumRating = 6.0;
-            for (Movie allMovy : allMovies) {
-                if ((todayMilli - (allMovy.getLastView()) > twoYearsMilli) || ((allMovy.getPrivateRating() < minimumRating))) {
-                    oldAndBadMovies.add(allMovy);
-                }
+        List<Movie> oldAndBadMovies = new ArrayList<>();
+        Date today = new Date();
+        long todayMilli = today.getTime();
+        long twoYearsMilli = 6307200000l;
+        final double minimumRating = 6.0;
+        for (Movie allMovy : allMovies) {
+            if ((todayMilli - (allMovy.getLastView()) > twoYearsMilli) || ((allMovy.getPrivateRating() < minimumRating))) {
+                oldAndBadMovies.add(allMovy);
             }
-            return oldAndBadMovies;
+        }
+        return oldAndBadMovies;
     }
-    
-    public void addCategoryToMovie(ArrayList<Integer> list) throws PMCException{
-    mic.addCategoryToMovie(list);
+
+    public void addCategoryToMovie(ArrayList<Integer> list) throws PMCException {
+        mic.addCategoryToMovie(list);
     }
 
     public ArrayList<Integer> getCategoriesToMovie(int category) throws PMCException {
         return mic.getCategoriesToMovie(category);
+    }
+
+    public ObservableList<Movie> filterOnTitle(String filter) throws PMCException {
+        List<Movie> allMovies = movieDAO.getAllMovies();
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
+        for (Movie movy : allMovies) {
+            if(movy.getMovieName().toUpperCase().contains(filter.toUpperCase()))
+                filteredMovies.add(movy);
+        }
+        return filteredMovies;
     }
 }
