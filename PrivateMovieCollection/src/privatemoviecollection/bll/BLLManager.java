@@ -107,4 +107,14 @@ public class BLLManager {
         }
         return filteredMovies;
     }
+
+    public ObservableList<Movie> filterOnRating(Double filter) throws PMCException {
+        List<Movie> allMovies = movieDAO.getAllMovies();
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
+        for (Movie allMovy : allMovies) {
+            if(allMovy.getImdbRating() >= filter)
+                filteredMovies.add(allMovy);
+        }
+        return filteredMovies;
+    }
 }
