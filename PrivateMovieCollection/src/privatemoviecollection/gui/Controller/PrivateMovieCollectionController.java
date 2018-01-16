@@ -228,8 +228,6 @@ public class PrivateMovieCollectionController implements Initializable {
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
-        
-        
     }
 
     @FXML
