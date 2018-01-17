@@ -80,8 +80,10 @@ public class MovieDAO {
     
     public void remove(Movie movie) throws PMCException{
         try (Connection con = cm.getConnection();) {
-            Statement stmt = con.createStatement();
-            stmt.execute("DELETE FROM Movie WHERE Movie_id="+movie.getId());
+            Statement stmt1 = con.createStatement();
+            stmt1.execute("DELETE FROM CatMovie WHERE Mov_id="+ movie.getId());
+            Statement stmt2 = con.createStatement();
+            stmt2.execute("DELETE FROM Movie WHERE Movie_id="+movie.getId());
         }  catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Error deleting the movie.");

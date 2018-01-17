@@ -69,4 +69,14 @@ public class movieIntoCategory {
         }
        return movies;
     }
+    
+    public void removeCatOnMovie(int id) throws PMCException{
+        try (Connection con = cm.getConnection();) {
+            Statement stmt = con.createStatement();
+            stmt.execute("DELETE FROM CatMovie WHERE Mov_id="+ id);
+        }  catch (SQLException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PMCException("Error deleting the movie category.");
+        }
+    }
 }

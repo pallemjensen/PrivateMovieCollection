@@ -89,7 +89,7 @@ public class PrivateMovieCollectionController implements Initializable {
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
-        
+
     }
 
     @FXML
@@ -251,8 +251,8 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnAddCatToMovie(ActionEvent event) throws IOException {
-        
-        if(!TVMovies.getSelectionModel().isEmpty()) {
+
+        if (!TVMovies.getSelectionModel().isEmpty()) {
             FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/AddCategoryToMovie.fxml"));
             Parent root = (Parent) fxmlLoader1.load();
             AddCategoryToMovieController actmc = fxmlLoader1.getController();
@@ -261,7 +261,7 @@ public class PrivateMovieCollectionController implements Initializable {
             stage.setScene(new Scene(root));
             stage.showAndWait();
         }
-        
+
 //        ArrayList<Integer> movieCatList = new ArrayList<>();
 //        int movieId = TVMovies.getSelectionModel().getSelectedItem().getId();
 //        int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
@@ -289,10 +289,10 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-   @FXML
+    @FXML
     private void btnShowMoviesByCategory(ActionEvent event) {
         ObservableList movCat = FXCollections.observableArrayList();
-     int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
+        int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
         try {
             movCat = pmcModel.getCategoriesToMovie(categoryId);
             TVMovies.setItems(movCat);
@@ -300,9 +300,8 @@ public class PrivateMovieCollectionController implements Initializable {
             Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
-    }  
-    
-    
+    }
+
     @FXML
     private void btnsearchOnImdb(ActionEvent event) {
         String movieName = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
@@ -323,4 +322,4 @@ public class PrivateMovieCollectionController implements Initializable {
             }
         }
     }
-}   
+}
