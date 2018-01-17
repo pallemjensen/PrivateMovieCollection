@@ -31,18 +31,15 @@ import privatemoviecollection.gui.Model.PMCModel;
  * @author Anders
  */
 public class AddCategoryToMovieController implements Initializable {
-    
 
-    
     private PMCModel pmcModel;
     private Movie pmcSelectedMovie;
     private ObservableList<Category> categories
             = FXCollections.observableArrayList();
-    
+
     @FXML
     private TableView<Category> TVCategories;
-//    @FXML
-//    private TableColumn<Category,String> categoryName;
+
     @FXML
     private TableColumn<Category, String> categoryColumn;
 
@@ -54,17 +51,21 @@ public class AddCategoryToMovieController implements Initializable {
         categoryColumn.setCellValueFactory(
                 new PropertyValueFactory("categoryName"));
         TVCategories.setItems(categories);
-    }    
-
+    }
+    /**
+     * Saves category to movie
+     * @param event 
+     */
     @FXML
     private void btnSave(ActionEvent event) {
-        if(!TVCategories.getSelectionModel().isEmpty()){
-        try {
-            pmcModel.addCategoryToMovie(TVCategories.getSelectionModel().getSelectedItem().getId(), pmcSelectedMovie.getId());
-        } catch (PMCException ex) {
-            exceptionHandler(ex);
-        }
-        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        if (!TVCategories.getSelectionModel().isEmpty()) {
+            try {
+                pmcModel.addCategoryToMovie(TVCategories.getSelectionModel().getSelectedItem().getId(), pmcSelectedMovie.getId());
+            } catch (PMCException ex) {
+                exceptionHandler(ex);
+            }
+            categories.remove(TVCategories.getSelectionModel().getSelectedItem());
+//            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
         }
     }
 
@@ -72,11 +73,15 @@ public class AddCategoryToMovieController implements Initializable {
     private void btnCancel(ActionEvent event) {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
-    
+    /**
+     * 
+     * @param model
+     * @param selectedMovie 
+     */
     public void setUp(PMCModel model, Movie selectedMovie) {
         pmcModel = model;
         pmcSelectedMovie = selectedMovie;
         categories.addAll(pmcModel.getCategories());
     }
-    
+
 }
