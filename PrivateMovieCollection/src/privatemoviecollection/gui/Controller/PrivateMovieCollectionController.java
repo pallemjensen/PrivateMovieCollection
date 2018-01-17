@@ -187,6 +187,7 @@ public class PrivateMovieCollectionController implements Initializable {
     public void btnLoadMovies(ActionEvent event) {
         try {
             pmcModel.loadMovies();
+            TVMovies.setItems(pmcModel.getMovies());
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
