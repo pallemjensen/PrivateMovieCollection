@@ -63,6 +63,10 @@ public class PrivateMovieCollectionController implements Initializable {
     private final Desktop desktop = Desktop.getDesktop();
     @FXML
     private TextField txtLevenResult;
+    @FXML
+    private TextField txtLevenOne;
+    @FXML
+    private TextField txtLevenTwo;
     
 
     /**
@@ -332,11 +336,19 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnLevenMovieOne(ActionEvent event) {
     levenOne = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
+    StringBuilder sb = new StringBuilder(levenOne.length());
+    sb.append(levenOne);
+    String a = sb.toString();
+    txtLevenOne.setText(a);
     }
 
     @FXML
     private void btnLevenMovieTwo(ActionEvent event) {
     levenTwo = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
+    StringBuilder sb = new StringBuilder(levenTwo.length());
+    sb.append(levenTwo);
+    String a = sb.toString();
+    txtLevenTwo.setText(a);
     }
     
     private static int minimum(int a, int b, int c) {                            
