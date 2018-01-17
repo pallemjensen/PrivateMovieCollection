@@ -86,7 +86,6 @@ public class BLLManager {
             if ((todayMilli - (allMovy.getLastView()) > twoYearsMilli) || ((allMovy.getPrivateRating() < minimumRating))) {
                 oldAndBadMovies.add(allMovy);
             }
-            System.out.println(allMovy.getDateLastviewed());
         }
         return oldAndBadMovies;
     }
