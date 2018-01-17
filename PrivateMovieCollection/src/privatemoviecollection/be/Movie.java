@@ -5,6 +5,9 @@
  */
 package privatemoviecollection.be;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 /**
  *
  * @author pmj
@@ -76,6 +79,12 @@ public class Movie {
 
     public void setLastView(Long lastView) {
         this.lastView = lastView;
+    }
+    
+    public String getDateLastviewed(){
+        Date date = new Date(lastView);
+        String s = DateFormat.getDateInstance().format(date);
+        return s;
     }
 
 }
