@@ -31,7 +31,11 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     private TableView<Movie> TVOldOrBadMovies;
     @FXML
     private TableColumn<Movie, String> oldOrBadColoumn;
-
+    @FXML
+    private TableColumn<Movie, String> lastViewColumn;
+    @FXML
+    private TableColumn<Movie, String> ratingColumn;
+    
     private final ObservableList<Movie> movies
             = FXCollections.observableArrayList();
     /**
@@ -44,6 +48,10 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     
     oldOrBadColoumn.setCellValueFactory(
                 new PropertyValueFactory("movieName"));
+    lastViewColumn.setCellValueFactory(
+                new PropertyValueFactory("dateLastviewed"));
+    ratingColumn.setCellValueFactory(
+                new PropertyValueFactory("privateRating"));
     TVOldOrBadMovies.setItems(movies);
     }    
 
