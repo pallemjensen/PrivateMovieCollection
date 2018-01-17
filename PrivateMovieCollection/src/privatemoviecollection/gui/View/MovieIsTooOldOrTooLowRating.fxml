@@ -21,7 +21,9 @@
       </Button>
       <TableView fx:id="TVOldOrBadMovies" layoutX="150.0" layoutY="117.0" prefHeight="340.0" prefWidth="309.0">
         <columns>
-          <TableColumn fx:id="oldOrBadColoumn" prefWidth="308.0" text="Old or bad movies" />
+          <TableColumn fx:id="oldOrBadColoumn" prefWidth="188.3333740234375" text="Old or bad movies" />
+            <TableColumn fx:id="lastViewColumn" prefWidth="78.6666259765625" text="Last viewed" />
+            <TableColumn fx:id="ratingColumn" prefWidth="42.66668701171875" text="Rating" />
         </columns>
       </TableView>
    </children>

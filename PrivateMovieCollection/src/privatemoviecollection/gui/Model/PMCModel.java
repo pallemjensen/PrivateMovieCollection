@@ -163,7 +163,7 @@ public class PMCModel {
      * @return
      * @throws PMCException 
      */
-    public ArrayList<Integer> getCategoriesToMovie(int category) throws PMCException {
+    public ObservableList<Movie> getCategoriesToMovie(int category) throws PMCException {
         return bllManager.getCategoriesToMovie(category);
     }
     /**
@@ -172,8 +172,8 @@ public class PMCModel {
      * @return
      * @throws PMCException 
      */
-    public ObservableList<Movie> filterOnTitle(String filter) throws PMCException {
-        return bllManager.filterOnTitle(filter);
+    public ObservableList<Movie> filterOnTitle(String categoryId) throws PMCException {
+        return bllManager.filterOnTitle(categoryId);
     }
     /**
      * 
