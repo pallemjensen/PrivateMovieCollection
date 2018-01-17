@@ -95,16 +95,10 @@ public class BLLManager {
     }
 
     public ObservableList<Movie> getCategoriesToMovie(int categoryId) throws PMCException {
-        ObservableList<Integer> catMoviesInt = mic.getCategoriesToMovie(categoryId);
-        ObservableList<Movie> catMovies = FXCollections.observableArrayList();
-        Movie movie = new Movie();
-        for (int i = 0; i <= catMoviesInt.size(); i++){
-        movie.setId(catMoviesInt.get(i));
-        catMovies.add(movie);
-    }
-       return catMovies;  
+        return mic.getCategoriesToMovie(categoryId);
     }
 
+    
     public ObservableList<Movie> filterOnTitle(String filter) throws PMCException {
         List<Movie> allMovies = movieDAO.getAllMovies();
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();

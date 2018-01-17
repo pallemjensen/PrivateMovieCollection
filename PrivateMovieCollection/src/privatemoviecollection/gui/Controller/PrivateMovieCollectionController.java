@@ -278,14 +278,15 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnShowMoviesByCategory(ActionEvent event) {
-     int categoyId = TVCategories.getSelectionModel().getSelectedItem().getId();
+        ObservableList movCat = FXCollections.observableArrayList();
+     int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
         try {
-            ObservableList<Movie> moviesToCategory = FXCollections.observableArrayList();
-            moviesToCategory = pmcModel.getCategoriesToMovie(categoyId);
-            TVMovies.setItems(moviesToCategory);
+            movCat = pmcModel.getCategoriesToMovie(categoryId);
+            TVMovies.setItems(movCat);
         } catch (PMCException ex) {
-            exceptionHandler(ex);
             Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(ex);
         }
-    }
-}
+     
+    }    
+}   
