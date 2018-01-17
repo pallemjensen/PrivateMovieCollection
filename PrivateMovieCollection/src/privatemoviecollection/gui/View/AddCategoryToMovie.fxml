@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="357.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.Controller.AddCategoryToMovieController">
+   <children>
+      <Label layoutX="40.0" layoutY="33.0" text="Add a category to your movie">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button layoutX="72.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnSave" prefHeight="32.0" prefWidth="81.0" text="Save" />
+      <Button layoutX="215.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnCancel" prefHeight="32.0" prefWidth="82.0" text="Cancel" />
+      <TableView fx:id="TVCategories" layoutX="72.0" layoutY="77.0" prefHeight="286.0" prefWidth="226.0">
+        <columns>
+          <TableColumn fx:id="categoryName" prefWidth="225.5999740600586" text="Categories" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
