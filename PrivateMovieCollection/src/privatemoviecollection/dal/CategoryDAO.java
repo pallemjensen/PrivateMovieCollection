@@ -110,6 +110,8 @@ public class CategoryDAO {
  */
     public void remove(Category category) throws PMCException{
         try (Connection con = cm.getConnection();) {
+            Statement stmt1 = con.createStatement();
+            stmt1.execute("DELETE FROM CatMovie WHERE cat_id="+ category.getId());
             Statement stmt = con.createStatement();
             stmt.execute("DELETE FROM Category WHERE category_id="+category.getId());
         } catch (SQLServerException ex) {
