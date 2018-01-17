@@ -12,10 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import privatemoviecollection.be.Movie;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import privatemoviecollection.be.PMCException;
 
 /**
@@ -42,15 +42,14 @@ public class movieIntoCategory {
         }
     }
 
-    public ArrayList<Integer> getCategoriesToMovie(int category) throws PMCException {
-        ArrayList<Integer> listMoviesBelongsToCategory = new ArrayList<>();
-        String sqlJoin = "SELECT Movie.imdb_movie_rating, Movie.private_movie_rating, CatMovie.category_id,Category.category_name,Movie.movie_title "
-                + "FROM CatMovie INNER JOIN Movie ON CatMovie.movie_id=Movie.movie_id INNER JOIN Category ON Category.category_id=CatMovie.category_id";
+    public ObservableList<Integer> getCategoriesToMovie(int categoryId) throws PMCException {
+        ObservableList<Integer> listMoviesBelongsToCategory = FXCollections.observableArrayList();
+        String sqlJoin = "SELECT Movie.imdb_movie_rating, Movie.private_movie_rating, CatMovie.category_id,Category.category_name,Movie.movie_title FROM CatMovie INNER JOIN Movie ON CatMovie.movie_id=Movie.movie_id INNER JOIN Category ON Category.category_id=CatMovie.category_id";
         try (Connection con = cm.getConnection()) {
             PreparedStatement preparedStmt = con.prepareStatement(sqlJoin);
-            preparedStmt.executeUpdate();
+            preparedStmt.executeQuery();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT movie_id FROM CatMovie WHERE category_id =" + category);
+            ResultSet rs = stmt.executeQuery("SELECT movie_id FROM CatMovie WHERE category_id =" + categoryId);
             
             while (rs.next()) {
                 int movie_id = 0;
