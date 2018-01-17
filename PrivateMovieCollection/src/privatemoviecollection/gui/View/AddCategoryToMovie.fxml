@@ -18,7 +18,7 @@
       <Button layoutX="215.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnCancel" prefHeight="32.0" prefWidth="82.0" text="Cancel" />
       <TableView fx:id="TVCategories" layoutX="72.0" layoutY="77.0" prefHeight="286.0" prefWidth="226.0">
         <columns>
-          <TableColumn fx:id="categoryName" prefWidth="225.5999740600586" text="Categories" />
+          <TableColumn fx:id="categoryColumn" prefWidth="225.5999740600586" text="Categories" />
         </columns>
       </TableView>
    </children>

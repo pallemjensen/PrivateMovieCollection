@@ -63,6 +63,7 @@ public class PrivateMovieCollectionController implements Initializable {
     private final Desktop desktop = Desktop.getDesktop();
     @FXML
     private TextField txtLevenResult;
+    
 
     /**
      * Initializes the controller class.
@@ -261,7 +262,7 @@ public class PrivateMovieCollectionController implements Initializable {
             FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/AddCategoryToMovie.fxml"));
             Parent root = (Parent) fxmlLoader1.load();
             AddCategoryToMovieController actmc = fxmlLoader1.getController();
-            actmc.setUp(pmcModel);
+            actmc.setUp(pmcModel, TVMovies.getSelectionModel().getSelectedItem());
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.showAndWait();

@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import privatemoviecollection.be.Category;
+import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
 import static privatemoviecollection.gui.Controller.PrivateMovieCollectionController.exceptionHandler;
 import privatemoviecollection.gui.Model.PMCModel;
@@ -30,6 +31,8 @@ public class AddCategoryToMovieController implements Initializable {
 
     
     private PMCModel pmcModel;
+    private Movie pmcSelectedMovie;
+    
     @FXML
     private TableView<Category> TVCategories;
     @FXML
@@ -42,7 +45,6 @@ public class AddCategoryToMovieController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        TableView.TableViewSelectionModel<?> category = TVCategories.getSelectionModel();
         categoryColumn.setCellValueFactory(
                 new PropertyValueFactory("categoryName"));
         TVCategories.setItems(pmcModel.getCategories());
@@ -63,8 +65,9 @@ public class AddCategoryToMovieController implements Initializable {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
     
-    public void setUp(PMCModel model) {
+    public void setUp(PMCModel model, Movie selectedMovie) {
         pmcModel = model;
+        pmcSelectedMovie = selectedMovie;
     }
     
 }
