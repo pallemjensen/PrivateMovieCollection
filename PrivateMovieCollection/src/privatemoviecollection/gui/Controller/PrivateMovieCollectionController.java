@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -306,7 +305,7 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnsearchOnImdb(ActionEvent event) {
         String movieName = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
-        String urlMap = "http://www.imdb.com/find?ref_=nv_sr_fn&q="+ movieName +"&s=all";
+        String urlMap = "http://www.imdb.com/find?ref_=nv_sr_fn&q=" + movieName.replace(" ", "%20") + "&s=all";
         if (Desktop.isDesktopSupported()) {
             Desktop desktop = Desktop.getDesktop();
             try {
