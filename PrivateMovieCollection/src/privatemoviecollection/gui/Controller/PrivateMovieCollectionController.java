@@ -42,7 +42,7 @@ import privatemoviecollection.gui.Model.PMCModel;
 public class PrivateMovieCollectionController implements Initializable {
 
     private final PMCModel pmcModel = new PMCModel();
-    
+
     @FXML
     private TableView<Category> TVCategories;
     @FXML
@@ -66,8 +66,9 @@ public class PrivateMovieCollectionController implements Initializable {
     private TextField txtLevenOne;
     @FXML
     private TextField txtLevenTwo;
-    private static int minimum(int a, int b, int c) {                            
-        return Math.min(Math.min(a, b), c);  
+
+    private static int minimum(int a, int b, int c) {
+        return Math.min(Math.min(a, b), c);
     }
 
     /**
@@ -101,7 +102,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
     private CharSequence levenOne;
     private CharSequence levenTwo;
-    
+
     @FXML
     private void btnAddCategory(ActionEvent event) {
         try {
@@ -302,14 +303,16 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnShowMoviesByCategory(ActionEvent event) {
-        ObservableList movCat = FXCollections.observableArrayList();
-        int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
-        try {
-            movCat = pmcModel.getCategoriesToMovie(categoryId);
-            TVMovies.setItems(movCat);
-        } catch (PMCException ex) {
-            Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
-            exceptionHandler(ex);
+        if (!TVCategories.getSelectionModel().isEmpty()) {
+            ObservableList movCat = FXCollections.observableArrayList();
+            int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
+            try {
+                movCat = pmcModel.getCategoriesToMovie(categoryId);
+                TVMovies.setItems(movCat);
+            } catch (PMCException ex) {
+                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+                exceptionHandler(ex);
+            }
         }
     }
 
@@ -336,42 +339,46 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnLevenMovieOne(ActionEvent event) {
-    levenOne = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
-    StringBuilder sb = new StringBuilder(levenOne.length());
-    sb.append(levenOne);
-    String a = sb.toString();
-    txtLevenOne.setText(a);
+        levenOne = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
+        StringBuilder sb = new StringBuilder(levenOne.length());
+        sb.append(levenOne);
+        String a = sb.toString();
+        txtLevenOne.setText(a);
     }
 
     @FXML
     private void btnLevenMovieTwo(ActionEvent event) {
-    levenTwo = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
-    StringBuilder sb = new StringBuilder(levenTwo.length());
-    sb.append(levenTwo);
-    String a = sb.toString();
-    txtLevenTwo.setText(a);
+        levenTwo = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
+        StringBuilder sb = new StringBuilder(levenTwo.length());
+        sb.append(levenTwo);
+        String a = sb.toString();
+        txtLevenTwo.setText(a);
     }
-    
+
     @FXML
-    private void btnCalcLeven(ActionEvent event){
-     calc(levenOne, levenTwo);
-    } 
-    
-    public void calc(CharSequence lhs, CharSequence rhs){
-        int[][] distance = new int[lhs.length() + 1][rhs.length() + 1];        
-                                                                                 
-        for (int i = 0; i <= lhs.length(); i++)                                 
-            distance[i][0] = i;                                                  
-        for (int j = 1; j <= rhs.length(); j++)                                 
-            distance[0][j] = j;                                                  
-                                                                                 
-        for (int i = 1; i <= lhs.length(); i++)                                 
-            for (int j = 1; j <= rhs.length(); j++)                             
-                distance[i][j] = minimum(                                        
-                        distance[i - 1][j] + 1,                                  
-                        distance[i][j - 1] + 1,                                  
+    private void btnCalcLeven(ActionEvent event) {
+        calc(levenOne, levenTwo);
+    }
+
+    public void calc(CharSequence lhs, CharSequence rhs) {
+        int[][] distance = new int[lhs.length() + 1][rhs.length() + 1];
+
+        for (int i = 0; i <= lhs.length(); i++) {
+            distance[i][0] = i;
+        }
+        for (int j = 1; j <= rhs.length(); j++) {
+            distance[0][j] = j;
+        }
+
+        for (int i = 1; i <= lhs.length(); i++) {
+            for (int j = 1; j <= rhs.length(); j++) {
+                distance[i][j] = minimum(
+                        distance[i - 1][j] + 1,
+                        distance[i][j - 1] + 1,
                         distance[i - 1][j - 1] + ((lhs.charAt(i - 1) == rhs.charAt(j - 1)) ? 0 : 1));
-         
-        txtLevenResult.setText("" + distance[lhs.length()][rhs.length()]);   
+            }
+        }
+
+        txtLevenResult.setText("" + distance[lhs.length()][rhs.length()]);
     }
 }
