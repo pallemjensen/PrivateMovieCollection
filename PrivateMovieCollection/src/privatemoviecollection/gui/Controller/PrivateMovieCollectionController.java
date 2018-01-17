@@ -59,7 +59,6 @@ public class PrivateMovieCollectionController implements Initializable {
     private TextField txtTitleFilter;
     @FXML
     private TextField txtImdbFilter;
-
     private final Desktop desktop = Desktop.getDesktop();
     @FXML
     private TextField txtLevenResult;
@@ -67,7 +66,9 @@ public class PrivateMovieCollectionController implements Initializable {
     private TextField txtLevenOne;
     @FXML
     private TextField txtLevenTwo;
-    
+    private static int minimum(int a, int b, int c) {                            
+        return Math.min(Math.min(a, b), c);  
+    }
 
     /**
      * Initializes the controller class.
@@ -349,10 +350,6 @@ public class PrivateMovieCollectionController implements Initializable {
     sb.append(levenTwo);
     String a = sb.toString();
     txtLevenTwo.setText(a);
-    }
-    
-    private static int minimum(int a, int b, int c) {                            
-        return Math.min(Math.min(a, b), c);  
     }
     
     @FXML
