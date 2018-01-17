@@ -8,6 +8,8 @@ package privatemoviecollection.gui.Controller;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +21,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import privatemoviecollection.be.Movie;
+import privatemoviecollection.be.PMCException;
+import static privatemoviecollection.gui.Controller.PrivateMovieCollectionController.exceptionHandler;
+import privatemoviecollection.gui.Model.PMCModel;
 
 /**
  * FXML Controller class
@@ -35,7 +40,7 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
     private TableColumn<Movie, String> lastViewColumn;
     @FXML
     private TableColumn<Movie, String> ratingColumn;
-    
+    private PMCModel model;
     private final ObservableList<Movie> movies
             = FXCollections.observableArrayList();
     /**
@@ -60,8 +65,20 @@ public class MovieIsTooOldOrTooLowRatingController implements Initializable {
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }
     
-    public void setUp(List<Movie> movielist) {
-       
+    public void setUp(List<Movie> movielist, PMCModel model) {
+        this.model = model;
         movies.addAll(movielist);
+    }
+
+    @FXML
+    private void btnDeleteMovie(ActionEvent event) {
+        if(!TVOldOrBadMovies.getSelectionModel().isEmpty()){
+            try {
+                model.remove(TVOldOrBadMovies.getSelectionModel().getSelectedItem());
+                movies.remove(TVOldOrBadMovies.getSelectionModel().getSelectedItem());
+            } catch (PMCException ex) {
+                exceptionHandler(ex);
+            }
+        }
     }
 }
