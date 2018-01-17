@@ -22,9 +22,9 @@
           <TableColumn fx:id="movieUserRatingColumn" prefWidth="99.2000732421875" text="User Rating" />
         </columns>
       </TableView>
-      <TextField fx:id="txtTitleFilter" layoutX="515.0" layoutY="66.0" prefHeight="26.0" prefWidth="272.0" />
+      <TextField fx:id="txtTitleFilter" layoutX="515.0" layoutY="66.0" prefHeight="26.0" prefWidth="315.0" />
       <Button layoutX="291.0" layoutY="66.0" mnemonicParsing="false" onAction="#btnFilterOnMovieTitle" prefHeight="26.0" prefWidth="207.0" text="Filter on movie title" />
-      <Button layoutX="703.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnClearFilter" prefHeight="26.0" prefWidth="84.0" text="Clear filters" />
+      <Button layoutX="751.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnClearFilter" prefHeight="26.0" prefWidth="84.0" text="Clear filters" />
       <Button layoutX="50.0" layoutY="559.0" mnemonicParsing="false" onAction="#btnAddCategory" prefHeight="25.0" prefWidth="104.0" text="Add Category" />
       <Button layoutX="284.0" layoutY="559.0" mnemonicParsing="false" onAction="#btnAddMovie" prefHeight="26.0" prefWidth="97.0" text="Add Movie" />
       <Button layoutX="284.0" layoutY="592.0" mnemonicParsing="false" onAction="#btnDeleteMovie" prefHeight="25.0" prefWidth="97.0" text="Delete Movie" />
