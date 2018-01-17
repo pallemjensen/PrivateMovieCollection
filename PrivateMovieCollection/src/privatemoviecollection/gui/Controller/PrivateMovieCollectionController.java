@@ -248,17 +248,28 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnAddCatToMovie(ActionEvent event) {
-        ArrayList<Integer> movieCatList = new ArrayList<>();
-        int movieId = TVMovies.getSelectionModel().getSelectedItem().getId();
-        int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
-        movieCatList.add(categoryId);
-        movieCatList.add(movieId);
-        try {
-            pmcModel.addMovieToCategory(movieCatList);
-        } catch (PMCException ex) {
-            exceptionHandler(ex);
+    private void btnAddCatToMovie(ActionEvent event) throws IOException {
+        
+        if(!TVMovies.getSelectionModel().isEmpty()) {
+            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/AddCategoryToMovie.fxml"));
+            Parent root = (Parent) fxmlLoader1.load();
+            AddCategoryToMovieController actmc = fxmlLoader1.getController();
+            actmc.setUp(pmcModel);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
         }
+        
+//        ArrayList<Integer> movieCatList = new ArrayList<>();
+//        int movieId = TVMovies.getSelectionModel().getSelectedItem().getId();
+//        int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
+//        movieCatList.add(categoryId);
+//        movieCatList.add(movieId);
+//        try {
+//            pmcModel.addMovieToCategory(movieCatList);
+//        } catch (PMCException ex) {
+//            exceptionHandler(ex);
+//        }
     }
 
     static void exceptionHandler(Exception ex) {
