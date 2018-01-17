@@ -233,9 +233,10 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnFilterOnImdbRating(ActionEvent event) {
         try {
-            Double filter = Double.valueOf(txtImdbFilter.getText());
-            ObservableList<Movie> filteredMovies = pmcModel.filterOnRating(filter);
-            TVMovies.setItems(filteredMovies);
+//            Double filter = Double.valueOf(txtImdbFilter.getText());
+//            ObservableList<Movie> filteredMovies = pmcModel.filterOnRating(filter);
+//            TVMovies.setItems(filteredMovies);
+            TVMovies.setItems(pmcModel.filterOnRating(Double.valueOf(txtImdbFilter.getText())));
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
