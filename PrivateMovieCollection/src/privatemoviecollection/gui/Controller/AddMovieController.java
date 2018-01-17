@@ -117,12 +117,16 @@ public class AddMovieController implements Initializable {
         }
         
     }
-
+    
     @FXML
     private void btnCancelAddMovie(ActionEvent event) {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
+    /**
+     * 
+     * @param model 
+     */
     public void setUp(PMCModel model) {
         pmcModel = model;
     }
