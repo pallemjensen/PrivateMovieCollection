@@ -28,9 +28,9 @@ public class movieIntoCategory {
 
     ConnectionManager cm = new ConnectionManager();
 
-    public void addCategoryToMovie(ArrayList<Integer> list) throws PMCException {
-        int categoryId = list.get(0);
-        int movieId = list.get(1);
+    public void addCategoryToMovie(int categoryId, int movieId) throws PMCException {
+//        int categoryId = list.get(0);
+//        int movieId = list.get(1);
         String sql = "INSERT INTO CatMovie VALUES(" + categoryId + ", " + movieId + ");";
         try (Connection con = cm.getConnection()) {
             PreparedStatement preparedStmt = con.prepareStatement(sql);

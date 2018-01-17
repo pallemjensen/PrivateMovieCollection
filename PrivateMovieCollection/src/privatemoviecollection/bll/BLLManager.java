@@ -91,8 +91,8 @@ public class BLLManager {
         return oldAndBadMovies;
     }
 
-    public void addCategoryToMovie(ArrayList<Integer> list) throws PMCException {
-        mic.addCategoryToMovie(list);
+    public void addCategoryToMovie(int categoryId, int movieId) throws PMCException {
+        mic.addCategoryToMovie(categoryId, movieId);
     }
 
     public ObservableList<Movie> getCategoriesToMovie(int categoryId) throws PMCException {

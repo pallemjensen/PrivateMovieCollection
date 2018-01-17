@@ -154,8 +154,8 @@ public class PMCModel {
      * @param list
      * @throws PMCException 
      */
-    public void addMovieToCategory(ArrayList<Integer> list) throws PMCException {
-        bllManager.addCategoryToMovie(list);
+    public void addCategoryToMovie(int categoryId, int movieId) throws PMCException {
+        bllManager.addCategoryToMovie(categoryId, movieId);
     }
     /**
      * 

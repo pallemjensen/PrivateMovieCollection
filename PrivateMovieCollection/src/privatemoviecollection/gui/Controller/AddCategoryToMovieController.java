@@ -7,6 +7,10 @@ package privatemoviecollection.gui.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,11 +36,13 @@ public class AddCategoryToMovieController implements Initializable {
     
     private PMCModel pmcModel;
     private Movie pmcSelectedMovie;
+    private ObservableList<Category> categories
+            = FXCollections.observableArrayList();
     
     @FXML
     private TableView<Category> TVCategories;
-    @FXML
-    private TableColumn<Category,String> categoryName;
+//    @FXML
+//    private TableColumn<Category,String> categoryName;
     @FXML
     private TableColumn<Category, String> categoryColumn;
 
@@ -47,17 +53,19 @@ public class AddCategoryToMovieController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         categoryColumn.setCellValueFactory(
                 new PropertyValueFactory("categoryName"));
-        TVCategories.setItems(pmcModel.getCategories());
-        try {
-            pmcModel.loadCategories();
-        } catch (PMCException ex) {
-            exceptionHandler(ex);
-        }
+        TVCategories.setItems(categories);
     }    
 
     @FXML
     private void btnSave(ActionEvent event) {
-        
+        if(!TVCategories.getSelectionModel().isEmpty()){
+        try {
+            pmcModel.addCategoryToMovie(TVCategories.getSelectionModel().getSelectedItem().getId(), pmcSelectedMovie.getId());
+        } catch (PMCException ex) {
+            exceptionHandler(ex);
+        }
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        }
     }
 
     @FXML
@@ -68,6 +76,7 @@ public class AddCategoryToMovieController implements Initializable {
     public void setUp(PMCModel model, Movie selectedMovie) {
         pmcModel = model;
         pmcSelectedMovie = selectedMovie;
+        categories.addAll(pmcModel.getCategories());
     }
     
 }
