@@ -8,6 +8,8 @@ package privatemoviecollection.gui.Controller;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -288,7 +290,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    @FXML
+   @FXML
     private void btnShowMoviesByCategory(ActionEvent event) {
         ObservableList movCat = FXCollections.observableArrayList();
      int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
@@ -299,6 +301,27 @@ public class PrivateMovieCollectionController implements Initializable {
             Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
             exceptionHandler(ex);
         }
-     
-    }    
+    }  
+    
+    
+    @FXML
+    private void btnsearchOnImdb(ActionEvent event) {
+        String movieName = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
+        String urlMap = "http://www.imdb.com/find?ref_=nv_sr_fn&q="+ movieName +"&s=all";
+        if (Desktop.isDesktopSupported()) {
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.browse(new URI(urlMap));
+            } catch (IOException | URISyntaxException e) {
+                exceptionHandler(e);
+            }
+        } else {
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                runtime.exec("xdg-open " + urlMap);
+            } catch (IOException e) {
+                exceptionHandler(e);
+            }
+        }
+    }
 }   

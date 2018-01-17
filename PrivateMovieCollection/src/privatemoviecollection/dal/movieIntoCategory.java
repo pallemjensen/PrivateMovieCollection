@@ -59,8 +59,7 @@ public class movieIntoCategory {
                 currentMovieWithCat.setFileLink(rs.getString("filelink"));
                 currentMovieWithCat.setLastView(rs.getLong("lastview"));
                 movies.add(currentMovieWithCat);
-            }
-                
+            }  
         } catch (SQLServerException ex) {
             Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Could not connect to database. Check your connection");

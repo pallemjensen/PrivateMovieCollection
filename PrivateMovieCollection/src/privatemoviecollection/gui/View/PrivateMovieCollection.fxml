@@ -43,5 +43,6 @@
       <Button layoutX="719.0" layoutY="618.0" mnemonicParsing="false" onAction="#btnExit" prefHeight="48.0" prefWidth="111.0" text="Exit" />
       <Button layoutX="504.0" layoutY="605.0" mnemonicParsing="false" onAction="#btnAddCatToMovie" prefHeight="26.0" prefWidth="178.0" text="Add category to movie" />
       <Button layoutX="51.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnShowMoviesByCategory" prefHeight="25.0" prefWidth="207.0" text="Show movies by category" />
+      <Button layoutX="291.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnsearchOnImdb" prefHeight="25.0" prefWidth="207.0" text="Search for movie on imdb" />
    </children>
 </AnchorPane>
