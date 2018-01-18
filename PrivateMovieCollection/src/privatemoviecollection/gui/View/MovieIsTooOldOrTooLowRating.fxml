@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.Controller.MovieIsTooOldOrTooLowRatingController">
    <children>
-      <TextArea editable="false" layoutX="41.0" layoutY="23.0" prefHeight="81.0" prefWidth="576.0" text="You own movies with a personal rating lower than 6&#10;or you own movies which has not been opened in more than 2 years. &#10;Remember to delete them!">
+      <TextArea editable="false" layoutX="41.0" layoutY="23.0" prefHeight="110.0" prefWidth="576.0" text="You have movies in your collection, which:&#10;- Possess a personal rating lower than 6.&#10;- You have not opened for atleast 2 years. &#10;- Here you can choose to keep or delete them.">
          <font>
             <Font size="15.0" />
          </font>
@@ -19,7 +19,7 @@
             <Font size="38.0" />
          </font>
       </Button>
-      <TableView fx:id="TVOldOrBadMovies" layoutX="43.0" layoutY="117.0" prefHeight="340.0" prefWidth="576.0">
+      <TableView fx:id="TVOldOrBadMovies" layoutX="32.0" layoutY="160.0" prefHeight="293.0" prefWidth="576.0">
         <columns>
           <TableColumn fx:id="oldOrBadColoumn" prefWidth="312.0" text="Old or bad movies" />
             <TableColumn fx:id="lastViewColumn" prefWidth="139.0" text="Last viewed" />
