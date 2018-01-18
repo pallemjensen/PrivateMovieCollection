@@ -99,13 +99,13 @@ public class BLLManager {
         return mic.getCategoriesToMovie(categoryId);
     }
 
-    
     public ObservableList<Movie> filterOnTitle(String filter) throws PMCException {
         List<Movie> allMovies = movieDAO.getAllMovies();
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
         for (Movie movy : allMovies) {
-            if(movy.getMovieName().toUpperCase().contains(filter.toUpperCase()))
+            if (movy.getMovieName().toUpperCase().contains(filter.toUpperCase())) {
                 filteredMovies.add(movy);
+            }
         }
         return filteredMovies;
     }
@@ -114,9 +114,21 @@ public class BLLManager {
         List<Movie> allMovies = movieDAO.getAllMovies();
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
         for (Movie allMovy : allMovies) {
-            if(allMovy.getImdbRating() >= filter)
+            if (allMovy.getImdbRating() >= filter) {
                 filteredMovies.add(allMovy);
+            }
         }
         return filteredMovies;
     }
+
+    public ObservableList<Movie> filter(ObservableList<Movie> inList, String word, Double filter) throws PMCException {
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
+        for (Movie movie : inList) {
+            if (movie.getMovieName().toUpperCase().contains(word.toUpperCase()) && movie.getImdbRating() >= filter) {
+                filteredMovies.add(movie);
+            }
+        }
+        return filteredMovies;
+    }
+
 }
