@@ -46,7 +46,7 @@ public class BLLManager {
     }
 
     public void remove(Movie movie) throws PMCException {
-//        mic.removeCatOnMovie(movie.getId());
+        mic.removeCatOnMovie(movie.getId());
         movieDAO.remove(movie);
     }
 
