@@ -255,6 +255,7 @@ public class PrivateMovieCollectionController implements Initializable {
             exceptionHandler(ex);
         }
     }
+    
     @FXML
     private void btnFilter(ActionEvent event) {
         ObservableList<Movie> inMovies = TVMovies.getItems();
