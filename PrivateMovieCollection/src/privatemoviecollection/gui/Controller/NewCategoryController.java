@@ -41,12 +41,14 @@ public class NewCategoryController implements Initializable {
     @FXML
     private void btnSaveNewCategory(ActionEvent event) {
     String categoryName = txtAddNewCategory.getText();
+    if(!categoryName.isEmpty()){
         try {
             pmcModel.createCategory(categoryName);
         } catch (PMCException ex) {
             exceptionHandler(ex);
         }
      ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();   
+    }
     }
 
     @FXML
