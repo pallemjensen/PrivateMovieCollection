@@ -243,7 +243,7 @@ public class PrivateMovieCollectionController implements Initializable {
         Double rating = Double.valueOf(txtImdbFilter.getText());
         TVMovies.setItems(pmcModel.filter(inMovies, word, rating));
     }
-    
+
     @FXML
     private void btnExit(ActionEvent event) {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
@@ -267,9 +267,11 @@ public class PrivateMovieCollectionController implements Initializable {
             }
         }
     }
+
     /**
      * Method to show a exception message window
-     * @param ex 
+     *
+     * @param ex
      */
     static void exceptionHandler(Exception ex) {
         try {
@@ -300,21 +302,23 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private void btnsearchOnImdb(ActionEvent event) {
-        String movieName = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
-        String urlMap = "http://www.imdb.com/find?ref_=nv_sr_fn&q=" + movieName.replace(" ", "%20") + "&s=all";
-        if (Desktop.isDesktopSupported()) {
-            Desktop desktop = Desktop.getDesktop();
-            try {
-                desktop.browse(new URI(urlMap));
-            } catch (IOException | URISyntaxException e) {
-                exceptionHandler(e);
-            }
-        } else {
-            Runtime runtime = Runtime.getRuntime();
-            try {
-                runtime.exec("xdg-open " + urlMap);
-            } catch (IOException e) {
-                exceptionHandler(e);
+        if (!TVMovies.getSelectionModel().isEmpty()) {
+            String movieName = TVMovies.getSelectionModel().getSelectedItem().getMovieName();
+            String urlMap = "http://www.imdb.com/find?ref_=nv_sr_fn&q=" + movieName.replace(" ", "%20") + "&s=all";
+            if (Desktop.isDesktopSupported()) {
+                Desktop desktop = Desktop.getDesktop();
+                try {
+                    desktop.browse(new URI(urlMap));
+                } catch (IOException | URISyntaxException e) {
+                    exceptionHandler(e);
+                }
+            } else {
+                Runtime runtime = Runtime.getRuntime();
+                try {
+                    runtime.exec("xdg-open " + urlMap);
+                } catch (IOException e) {
+                    exceptionHandler(e);
+                }
             }
         }
     }
