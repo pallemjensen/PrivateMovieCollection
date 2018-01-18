@@ -27,11 +27,17 @@ public class movieIntoCategory {
     ConnectionManager cm = new ConnectionManager();
 
     public void addCategoryToMovie(int categoryId, int movieId) throws PMCException {
-        String sqlInsert = "INSERT INTO CatMovie VALUES(" + categoryId + ", " + movieId + ");";
         String sqlSelect = "SELECT * FROM CatMovie WHERE cat_id = ? AND mov_id = ?";
+        String sqlInsert = "INSERT INTO CatMovie VALUES(" + categoryId + ", " + movieId + ");";
         try (Connection con = cm.getConnection()) {
-            PreparedStatement preparedStmt = con.prepareStatement(sqlInsert);
-            preparedStmt.executeUpdate();
+            PreparedStatement preparedStmt1 = con.prepareStatement(sqlSelect);
+            preparedStmt1.setInt(1, categoryId);
+            preparedStmt1.setInt(2, movieId);
+            ResultSet rs = preparedStmt1.executeQuery();
+            if(!rs.next()){
+            PreparedStatement preparedStmt2 = con.prepareStatement(sqlInsert);
+            preparedStmt2.executeUpdate();
+            }
         } catch (SQLServerException ex) {
             Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Could not connect to database.");
@@ -44,7 +50,7 @@ public class movieIntoCategory {
     public ObservableList<Movie> getCategoriesToMovie(int categoryId) throws PMCException {
         ObservableList<Movie> movies = FXCollections.observableArrayList();
         try (Connection con = cm.getConnection()) {
-           String sqlJoin = "SELECT CatMovie.mov_id, Movie.movie_title, Movie.imdb_movie_rating, Movie.private_movie_rating, Movie.filelink, Movie.lastview FROM CatMovie INNER JOIN Movie ON CatMovie.mov_id=Movie.movie_id INNER JOIN Category ON Category.category_id=CatMovie.cat_id WHERE cat_id =" + categoryId; 
+            String sqlJoin = "SELECT CatMovie.mov_id, Movie.movie_title, Movie.imdb_movie_rating, Movie.private_movie_rating, Movie.filelink, Movie.lastview FROM CatMovie INNER JOIN Movie ON CatMovie.mov_id=Movie.movie_id INNER JOIN Category ON Category.category_id=CatMovie.cat_id WHERE cat_id =" + categoryId;
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sqlJoin);
             while (rs.next()) {
@@ -56,22 +62,22 @@ public class movieIntoCategory {
                 currentMovieWithCat.setFileLink(rs.getString("filelink"));
                 currentMovieWithCat.setLastView(rs.getLong("lastview"));
                 movies.add(currentMovieWithCat);
-            }  
+            }
         } catch (SQLServerException ex) {
             Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Could not connect to database. Check your connection");
         } catch (SQLException ex) {
             Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("Failed to get categories.");  
+            throw new PMCException("Failed to get categories.");
         }
-       return movies;
+        return movies;
     }
-    
-    public void removeAllCatOnMovie(int id) throws PMCException{
+
+    public void removeAllCatOnMovie(int id) throws PMCException {
         try (Connection con = cm.getConnection();) {
             Statement stmt = con.createStatement();
-            stmt.execute("DELETE FROM CatMovie WHERE Mov_id="+ id);
-        }  catch (SQLException ex) {
+            stmt.execute("DELETE FROM CatMovie WHERE Mov_id=" + id);
+        } catch (SQLException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Error deleting the movie category.");
         }
