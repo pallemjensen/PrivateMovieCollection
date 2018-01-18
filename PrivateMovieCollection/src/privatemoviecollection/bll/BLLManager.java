@@ -15,7 +15,7 @@ import privatemoviecollection.be.Movie;
 import privatemoviecollection.be.PMCException;
 import privatemoviecollection.dal.CategoryDAO;
 import privatemoviecollection.dal.MovieDAO;
-import privatemoviecollection.dal.movieIntoCategory;
+import privatemoviecollection.dal.MovieIntoCategoryDAO;
 
 /**
  *
@@ -25,7 +25,7 @@ public class BLLManager {
 
     MovieDAO movieDAO = new MovieDAO();
     CategoryDAO categoryDAO = new CategoryDAO();
-    movieIntoCategory mic = new movieIntoCategory();
+    MovieIntoCategoryDAO mic = new MovieIntoCategoryDAO();
 
     public Movie createMovie(String movieName, double imdbRating, double privateRating, String fileLink, long lastView) throws PMCException {
         Movie newMovie = movieDAO.createMovie(movieName, imdbRating, privateRating, fileLink, lastView);

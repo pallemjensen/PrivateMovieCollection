@@ -22,7 +22,7 @@ import privatemoviecollection.be.PMCException;
  *
  * @author pmj
  */
-public class movieIntoCategory {
+public class MovieIntoCategoryDAO {
 
     ConnectionManager cm = new ConnectionManager();
 
@@ -39,10 +39,10 @@ public class movieIntoCategory {
             preparedStmt2.executeUpdate();
             }
         } catch (SQLServerException ex) {
-            Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieIntoCategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Could not connect to database.");
         } catch (SQLException ex) {
-            Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieIntoCategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Could not add category to movie.");
         }
     }
@@ -64,10 +64,10 @@ public class movieIntoCategory {
                 movies.add(currentMovieWithCat);
             }
         } catch (SQLServerException ex) {
-            Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieIntoCategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Could not connect to database. Check your connection");
         } catch (SQLException ex) {
-            Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieIntoCategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PMCException("Failed to get categories.");
         }
         return movies;
