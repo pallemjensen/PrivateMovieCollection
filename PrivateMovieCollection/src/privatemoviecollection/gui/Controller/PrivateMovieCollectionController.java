@@ -233,30 +233,6 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnFilterOnMovieTitle(ActionEvent event) {
-        try {
-//            String filter = txtTitleFilter.getText();
-//            ObservableList<Movie> filteredMovies = pmcModel.filterOnTitle(filter);
-//            TVMovies.setItems(filteredMovies);
-            TVMovies.setItems(pmcModel.filterOnTitle(txtTitleFilter.getText()));
-        } catch (PMCException ex) {
-            exceptionHandler(ex);
-        }
-    }
-
-    @FXML
-    private void btnFilterOnImdbRating(ActionEvent event) {
-        try {
-//            Double filter = Double.valueOf(txtImdbFilter.getText());
-//            ObservableList<Movie> filteredMovies = pmcModel.filterOnRating(filter);
-//            TVMovies.setItems(filteredMovies);
-            TVMovies.setItems(pmcModel.filterOnRating(Double.valueOf(txtImdbFilter.getText())));
-        } catch (PMCException ex) {
-            exceptionHandler(ex);
-        }
-    }
-    
-    @FXML
     private void btnFilter(ActionEvent event) {
         ObservableList<Movie> inMovies = TVMovies.getItems();
         String word = txtTitleFilter.getText();
