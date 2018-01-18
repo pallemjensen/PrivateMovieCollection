@@ -114,6 +114,7 @@ public class AddMovieController implements Initializable {
             exceptionHandler(ex);
         } catch (IOException ex) {
             Logger.getLogger(AddMovieController.class.getName()).log(Level.SEVERE, null, ex);
+            exceptionHandler(new PMCException("Can't open window, sorry!"));
         }
         
     }

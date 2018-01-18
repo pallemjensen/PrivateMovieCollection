@@ -283,7 +283,6 @@ public class PrivateMovieCollectionController implements Initializable {
             stage.show();
         } catch (IOException ex1) {
             Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex1);
-            exceptionHandler(new PMCException("Can't open window, sorry!"));
         }
     }
 
