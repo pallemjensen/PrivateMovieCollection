@@ -283,6 +283,7 @@ public class PrivateMovieCollectionController implements Initializable {
                 stage.showAndWait();
             } catch (IOException ex) {
                 Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+                exceptionHandler(ex);
             }
         }
     }
