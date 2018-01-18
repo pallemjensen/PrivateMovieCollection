@@ -262,30 +262,26 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     @FXML
-    private void btnAddCatToMovie(ActionEvent event) throws IOException {
+    private void btnAddCatToMovie(ActionEvent event) {
 
         if (!TVMovies.getSelectionModel().isEmpty()) {
-            FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/AddCategoryToMovie.fxml"));
-            Parent root = (Parent) fxmlLoader1.load();
-            AddCategoryToMovieController actmc = fxmlLoader1.getController();
-            actmc.setUp(pmcModel, TVMovies.getSelectionModel().getSelectedItem());
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
+            try {
+                FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("/privatemoviecollection/gui/View/AddCategoryToMovie.fxml"));
+                Parent root = (Parent) fxmlLoader1.load();
+                AddCategoryToMovieController actmc = fxmlLoader1.getController();
+                actmc.setUp(pmcModel, TVMovies.getSelectionModel().getSelectedItem());
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+            } catch (IOException ex) {
+                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
-//        ArrayList<Integer> movieCatList = new ArrayList<>();
-//        int movieId = TVMovies.getSelectionModel().getSelectedItem().getId();
-//        int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
-//        movieCatList.add(categoryId);
-//        movieCatList.add(movieId);
-//        try {
-//            pmcModel.addMovieToCategory(movieCatList);
-//        } catch (PMCException ex) {
-//            exceptionHandler(ex);
-//        }
     }
-
+    /**
+     * Method to show a exception message window
+     * @param ex 
+     */
     static void exceptionHandler(Exception ex) {
         try {
             String errorMsg = ex.getMessage();
@@ -305,11 +301,9 @@ public class PrivateMovieCollectionController implements Initializable {
     private void btnShowMoviesByCategory(ActionEvent event) {
         if (!TVCategories.getSelectionModel().isEmpty()) {
             try {
-                ObservableList movCat = pmcModel.getCategoriesToMovie(
-                        TVCategories.getSelectionModel().getSelectedItem().getId());
+                ObservableList movCat = pmcModel.getCategoriesToMovie(TVCategories.getSelectionModel().getSelectedItem().getId());
                 TVMovies.setItems(movCat);
             } catch (PMCException ex) {
-                Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
                 exceptionHandler(ex);
             }
         }
