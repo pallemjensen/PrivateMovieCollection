@@ -27,9 +27,10 @@ public class movieIntoCategory {
     ConnectionManager cm = new ConnectionManager();
 
     public void addCategoryToMovie(int categoryId, int movieId) throws PMCException {
-        String sql = "INSERT INTO CatMovie VALUES(" + categoryId + ", " + movieId + ");";
+        String sqlInsert = "INSERT INTO CatMovie VALUES(" + categoryId + ", " + movieId + ");";
+        String sqlSelect = "SELECT * FROM CatMovie WHERE cat_id = ? AND mov_id = ?";
         try (Connection con = cm.getConnection()) {
-            PreparedStatement preparedStmt = con.prepareStatement(sql);
+            PreparedStatement preparedStmt = con.prepareStatement(sqlInsert);
             preparedStmt.executeUpdate();
         } catch (SQLServerException ex) {
             Logger.getLogger(movieIntoCategory.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,7 +67,7 @@ public class movieIntoCategory {
        return movies;
     }
     
-    public void removeCatOnMovie(int id) throws PMCException{
+    public void removeAllCatOnMovie(int id) throws PMCException{
         try (Connection con = cm.getConnection();) {
             Statement stmt = con.createStatement();
             stmt.execute("DELETE FROM CatMovie WHERE Mov_id="+ id);
