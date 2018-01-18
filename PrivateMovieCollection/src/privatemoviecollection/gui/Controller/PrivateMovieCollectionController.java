@@ -255,7 +255,14 @@ public class PrivateMovieCollectionController implements Initializable {
             exceptionHandler(ex);
         }
     }
-
+    @FXML
+    private void btnFilter(ActionEvent event) {
+        ObservableList<Movie> inMovies = TVMovies.getItems();
+        String word = txtTitleFilter.getText();
+        Double rating = Double.valueOf(txtImdbFilter.getText());
+        TVMovies.setItems(pmcModel.filter(inMovies, word, rating));
+    }
+    
     @FXML
     private void btnExit(ActionEvent event) {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
@@ -374,4 +381,5 @@ public class PrivateMovieCollectionController implements Initializable {
 
         txtLevenResult.setText("" + distance[lhs.length()][rhs.length()]);
     }
+
 }

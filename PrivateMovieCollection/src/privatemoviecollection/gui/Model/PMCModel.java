@@ -184,4 +184,8 @@ public class PMCModel {
     public ObservableList<Movie> filterOnRating(Double filter) throws PMCException {
         return bllManager.filterOnRating(filter);
     }
+
+    public ObservableList<Movie> filter(ObservableList<Movie> inMovies, String word, Double rating) {
+        return bllManager.filter(inMovies, word, rating);
+    }
 }

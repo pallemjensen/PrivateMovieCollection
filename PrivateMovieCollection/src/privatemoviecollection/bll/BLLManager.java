@@ -121,7 +121,7 @@ public class BLLManager {
         return filteredMovies;
     }
 
-    public ObservableList<Movie> filter(ObservableList<Movie> inList, String word, Double filter) throws PMCException {
+    public ObservableList<Movie> filter(ObservableList<Movie> inList, String word, Double filter) {
         ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
         for (Movie movie : inList) {
             if (movie.getMovieName().toUpperCase().contains(word.toUpperCase()) && movie.getImdbRating() >= filter) {
