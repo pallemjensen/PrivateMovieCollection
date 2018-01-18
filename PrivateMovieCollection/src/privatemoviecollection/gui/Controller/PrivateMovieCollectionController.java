@@ -304,10 +304,9 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private void btnShowMoviesByCategory(ActionEvent event) {
         if (!TVCategories.getSelectionModel().isEmpty()) {
-            ObservableList movCat = FXCollections.observableArrayList();
             int categoryId = TVCategories.getSelectionModel().getSelectedItem().getId();
             try {
-                movCat = pmcModel.getCategoriesToMovie(categoryId);
+                ObservableList movCat = pmcModel.getCategoriesToMovie(categoryId);
                 TVMovies.setItems(movCat);
             } catch (PMCException ex) {
                 Logger.getLogger(PrivateMovieCollectionController.class.getName()).log(Level.SEVERE, null, ex);
