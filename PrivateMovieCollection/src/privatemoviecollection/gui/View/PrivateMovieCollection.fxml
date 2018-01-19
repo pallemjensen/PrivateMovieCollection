@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="834.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.Controller.PrivateMovieCollectionController">
+<AnchorPane id="AnchorPane" prefHeight="834.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="privatemoviecollection.gui.Controller.PrivateMovieCollectionController">
    <children>
       <TableView fx:id="TVCategories" layoutX="51.0" layoutY="184.0" prefHeight="359.0" prefWidth="207.0">
         <columns>
@@ -35,9 +35,9 @@
       <Button layoutX="504.0" layoutY="559.0" mnemonicParsing="false" onAction="#btnEditMovieRating" prefHeight="26.0" prefWidth="178.0" text="Edit movie user rating" />
       <Button layoutX="719.0" layoutY="561.0" mnemonicParsing="false" onAction="#btnPlay" prefHeight="48.0" prefWidth="111.0" text="Play" />
       <Button layoutX="50.0" layoutY="591.0" mnemonicParsing="false" onAction="#btnDeleteCategory" prefHeight="26.0" prefWidth="104.0" text="Delete Category" />
-      <Button layoutX="7.0" layoutY="79.0" mnemonicParsing="false" onAction="#btnLoadMovies" prefHeight="25.0" prefWidth="207.0" text="Load all movies" />
-      <Button layoutX="7.0" layoutY="45.0" mnemonicParsing="false" onAction="#btnLoadCategories" prefHeight="25.0" prefWidth="207.0" text="Load categories" />
-      <TextField fx:id="txtImdbFilter" layoutX="515.0" layoutY="80.0" prefHeight="25.0" prefWidth="33.0" text="0.0" />
+      <Button layoutX="51.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnLoadMovies" prefHeight="25.0" prefWidth="207.0" text="Load all movies" />
+      <Button layoutX="51.0" layoutY="71.0" mnemonicParsing="false" onAction="#btnLoadCategories" prefHeight="25.0" prefWidth="207.0" text="Load categories" />
+      <TextField fx:id="txtImdbFilter" layoutX="515.0" layoutY="104.0" prefHeight="25.0" prefWidth="33.0" text="0.0" />
       <Button layoutX="719.0" layoutY="618.0" mnemonicParsing="false" onAction="#btnExit" prefHeight="48.0" prefWidth="111.0" text="Exit" />
       <Button layoutX="504.0" layoutY="605.0" mnemonicParsing="false" onAction="#btnAddCatToMovie" prefHeight="26.0" prefWidth="178.0" text="Add category to movie" />
       <Button layoutX="51.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnShowMoviesByCategory" prefHeight="25.0" prefWidth="207.0" text="Show movies by category" />
@@ -53,13 +53,13 @@
       <Button layoutX="51.0" layoutY="757.0" mnemonicParsing="false" onAction="#btnCalcLeven" prefHeight="25.0" prefWidth="119.0" text="Calculate" />
       <TextField fx:id="txtLevenOne" layoutX="189.0" layoutY="667.0" prefHeight="25.0" prefWidth="236.0" />
       <TextField fx:id="txtLevenTwo" layoutX="189.0" layoutY="712.0" prefHeight="25.0" prefWidth="236.0" />
-      <Label layoutX="26.0" layoutY="14.0" prefHeight="37.0" prefWidth="207.0" text="SAP Movie Collection">
+      <Label layoutX="51.0" layoutY="14.0" prefHeight="37.0" prefWidth="207.0" text="SAP Movie Collection">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <Button layoutX="291.0" layoutY="45.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="25.0" prefWidth="207.0" text="Filter" />
       <Label layoutX="515.0" layoutY="24.0" text="Filter on title" />
-      <Label layoutX="515.0" layoutY="111.0" text="Filter on IMDB rating" />
+      <Label layoutX="515.0" layoutY="83.0" text="Filter on IMDB rating" />
    </children>
 </AnchorPane>
