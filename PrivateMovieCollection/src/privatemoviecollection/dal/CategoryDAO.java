@@ -119,7 +119,7 @@ public class CategoryDAO {
             throw new PMCException("SQLException. Could not connect to the database.");
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PMCException("SQLException. Could not delte the category.");
+            throw new PMCException("SQLException. Could not delete the category.");
         }
     }
 }
